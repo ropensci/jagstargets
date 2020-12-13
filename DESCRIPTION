@@ -51,8 +51,6 @@ Suggests:
   visNetwork (>= 2.0.9),
   withr (>= 2.1.2)
 Remotes:
-  stan-dev/cmdstanr,
-  stan-dev/posterior,
   wlandau/targets,
   wlandau/tarchetypes
 SystemRequirements: JAGS 4.x.y (http://mcmc-jags.sourceforge.net)
