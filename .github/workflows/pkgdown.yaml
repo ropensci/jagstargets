@@ -35,6 +35,7 @@ jobs:
 
       - name: Install Mac system dependencies
         run: |
+          rm '/usr/local/bin/gfortran'
           brew install jags
 
       - name: Install dependencies
