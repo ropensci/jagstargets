@@ -1,5 +1,3 @@
-# Some of this workflow was borrowed from https://github.com/stan-dev/cmdstanr/blob/master/.github/workflows
-# under the BSD 3-Clause License: https://github.com/stan-dev/cmdstanr/blob/master/LICENSE.md.
 on:
   push:
     branches: main
@@ -43,11 +41,6 @@ jobs:
           install.packages("remotes")
           remotes::install_deps(dependencies = TRUE, type = ifelse(tolower(Sys.info()["sysname"]) == "linux", "source", "binary"))
           remotes::install_dev("pkgdown")
-        shell: Rscript {0}
-
-      - name: Install cmdstan
-        run: |
-          cmdstanr::install_cmdstan(cores = 2, overwrite = TRUE, release_url = "https://github.com/stan-dev/cmdstan/releases/download/v2.25.0/cmdstan-2.25.0.tar.gz")
         shell: Rscript {0}
 
       - name: Install package
