@@ -84,6 +84,7 @@ jobs:
           sudo -s apt-get install libnode-dev
 
       - name: Install Mac system dependencies
+        if: runner.os == 'macOS'
         run: |
           rm '/usr/local/bin/gfortran'
           brew install jags
