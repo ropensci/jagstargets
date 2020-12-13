@@ -18,6 +18,8 @@
 #' @importFrom targets tar_cue tar_dir tar_load tar_option_get tar_path
 #'   tar_pipeline tar_read tar_script tar_target tar_target_raw
 #' @importFrom tarchetypes tar_combine tar_map
+#' @importFrom tibble as_tibble tibble
+#' @importFrom tools file_path_sans_ext
 NULL
 
 utils::globalVariables(
