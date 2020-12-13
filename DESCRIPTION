@@ -1,0 +1,64 @@
+Package: jagstargets
+Title: Targets for JAGS Workflows
+Description: The 'jagstargets' R package is an extension to
+  'targets' and 'rjags' for Bayesian data analysis.
+  'jagstargets' makes it super easy to set up useful scalable
+  JAGS pipelines that automatically parallelize the computation
+  and skip expensive steps when the results are already up to date.
+  Minimal custom code is required, and there is no need to manually
+  configure branching, so usage is much easier than 'targets' alone.
+  For the underlying methodology, please refer
+  to the documentation of 'targets'
+  (Landau 2021) <https://github.com/wlandau/targets> and 'JAGS'
+  (Plummer 2003) <https://www.r-project.org/conferences/DSC-2003/Proceedings/Plummer.pdf>.
+Version: 0.0.0.9000
+License: MIT + file LICENSE
+URL: https://wlandau.github.io/jagstargets/, https://github.com/wlandau/jagstargets
+BugReports: https://github.com/wlandau/jagstargets/issues
+Authors@R: c(
+  person(
+    given = c("William", "Michael"),
+    family = "Landau",
+    role = c("aut", "cre"),
+    email = "will.landau@gmail.com",
+    comment = c(ORCID = "0000-0003-1878-3253")
+  ),
+  person(
+    family = "Eli Lilly and Company",
+    role = "cph"
+  ))
+Depends:
+  R (>= 3.5.0)
+Imports:
+  cmdstanr (>= 0.2.0),
+  fst (>= 0.9.4),
+  posterior (>= 0.1.2),
+  purrr (>= 0.3.4),
+  qs (>= 0.14.1),
+  rlang (>= 0.4.8),
+  stats,
+  targets (>= 0.0.0.9003),
+  tarchetypes (>= 0.0.0.9000),
+  tibble (>= 3.0.4),
+  tools
+Suggests:
+  dplyr (>= 1.0.2),
+  fs (>= 1.5.0),
+  knitr (>= 1.28),
+  rmarkdown (>= 2.1),
+  testthat (>= 3.0.0),
+  tidyr (>= 1.1.2),
+  visNetwork (>= 2.0.9),
+  withr (>= 2.1.2)
+Remotes:
+  stan-dev/cmdstanr,
+  stan-dev/posterior,
+  wlandau/targets,
+  wlandau/tarchetypes
+SystemRequirements: CmdStan >= 2.25.0
+Encoding: UTF-8
+Language: en-US
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1.9000
+VignetteBuilder: knitr
+Config/testthat/edition: 3
