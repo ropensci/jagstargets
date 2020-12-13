@@ -1,6 +1,6 @@
 destination: docs/
 navbar:
-  title: stantargets
+  title: jagstargets
   type: default
   left:
   - icon: fa-home fa-lg
@@ -11,46 +11,29 @@ navbar:
     href: articles/index.html
   - text: targets
     href: https://wlandau.github.io/targets
-  - text: cmdstanr
-    href: https://mc-stan.org/cmdstanr/index.html
+  - text: rjags
+    href: https://CRAN.R-project.org/package=rjags
+  - text: JAGS
+    href: http://mcmc-jags.sourceforge.net
   - text: News
     href: news/index.html
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/wlandau/stantargets
+    href: https://github.com/wlandau/jagstargets
 reference:
 - title: Help
   contents:
-  - '`stantargets-package`'
+  - '`jagstargets-package`'
 - title: Examples
   contents:
-  - '`tar_stan_example_data`'
-  - '`tar_stan_example_file`'
+  - '`tar_jags_example_data`'
+  - '`tar_jags_example_file`'
 - title: MCMC
   contents:
-  - '`tar_stan_mcmc`'
-  - '`tar_stan_mcmc_rep_diagnostics`'
-  - '`tar_stan_mcmc_rep_draws`'
-  - '`tar_stan_mcmc_rep_summary`'
-- title: Generated quantities
-  contents:
-  - '`tar_stan_gq`'
-  - '`tar_stan_gq_rep_draws`'
-  - '`tar_stan_gq_rep_summary`'
-- title: Variational Bayes
-  contents:
-  - '`tar_stan_vb`'
-  - '`tar_stan_vb_rep_draws`'
-  - '`tar_stan_vb_rep_summary`'
-- title: Optimization
-  contents:
-  - '`tar_stan_mle`'
-  - '`tar_stan_mle_rep_draws`'
-  - '`tar_stan_mle_rep_summary`'
-- title: Other targets
-  contents:
-  - '`tar_stan_compile`'
-  - '`tar_stan_summary`'
+  - '`tar_jags_mcmc`'
+  - '`tar_jags_mcmc_rep_diagnostics`'
+  - '`tar_jags_mcmc_rep_draws`'
+  - '`tar_jags_mcmc_rep_summary`'
 articles:
   - title: MCMC
     desc: >

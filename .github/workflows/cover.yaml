@@ -30,6 +30,10 @@ jobs:
           key: macOS-r-4.0-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: macOS-r-4.0-1-
 
+      - name: Install Mac system dependencies
+        run: |
+          brew install jags
+
       - name: Install packages
         run: |
           install.packages("remotes")
