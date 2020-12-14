@@ -1,6 +1,7 @@
 
 # jagstargets <img src='man/figures/logo.png' align="right" height="139"/>
 
+[![targetopia](https://img.shields.io/badge/targetopia-member-000062?style=flat&labelColor=gray)](https://wlandau.github.io/targetopia.html)
 [![cran](http://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)
 [![active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/wlandau/jagstargets/workflows/check/badge.svg)](https://github.com/wlandau/jagstargets/actions?query=workflow%3Acheck)
