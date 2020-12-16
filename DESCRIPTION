@@ -30,11 +30,11 @@ Authors@R: c(
 Depends:
   R (>= 3.5.0)
 Imports:
-  rjags (>= 4.10),
   fst (>= 0.9.4),
   posterior (>= 0.1.2),
   purrr (>= 0.3.4),
   qs (>= 0.14.1),
+  rjags (>= 4.10),
   rlang (>= 0.4.8),
   stats,
   targets (>= 0.0.0.9003),
@@ -58,6 +58,6 @@ SystemRequirements: JAGS 4.x.y (http://mcmc-jags.sourceforge.net)
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1.9000
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 Config/testthat/edition: 3

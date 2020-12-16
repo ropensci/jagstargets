@@ -31,7 +31,7 @@ reference:
 - title: MCMC
   contents:
   - '`tar_jags_mcmc`'
-  - '`tar_jags_mcmc_rep_diagnostics`'
+  - '`tar_jags_mcmc_rep_dic`'
   - '`tar_jags_mcmc_rep_draws`'
   - '`tar_jags_mcmc_rep_summary`'
 articles:
