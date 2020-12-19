@@ -19,8 +19,7 @@
 #'     Omitted if `dic = FALSE`.
 #'  If you supply multiple models, you will get more (model-specific) targets.
 #'  All the models share the same dataset.
-#' @inheritParams R2jags::jags
-#' @inheritParams R2jags::jags.parallel
+#' @inheritParams tar_jags_mcmc_run
 #' @inheritParams targets::tar_target
 #' @param name Symbol, base name for the collection of targets.
 #'   Serves as a prefix for target names.
@@ -63,7 +62,7 @@ tar_jags_mcmc <- function(
   n.burn = floor(n.iter / 2),
   n.thin = max(1, floor((n.iter - n.burnin) / 1000)),
   DIC = TRUE,
-  jags.module = c("glm","dic"),
+  jags.module = c("glm", "dic"),
   RNGname = c(
     "Wichmann-Hill",
     "Marsaglia-Multicarry",
@@ -261,118 +260,73 @@ tar_jags_mcmc <- function(
   out
 }
 
-#' @title Compile and run a JAGS model and return the `CmdJAGSFit` object.
+#' @title Run a JAGS model and return the whole output object.
 #' @export
 #' @keywords internal
 #' @description Not a user-side function. Do not invoke directly.
-#' @return A `CmdJAGSFit` object.
-#' @inheritParams cmdJAGSr::cmdJAGS_model
-#' @inheritParams cmdJAGSr::`model-method-sample`
-#' @param compile Character of length 1. If `"original"`, then
-#'   `cmdJAGS` will compile the source file right before running
-#'   it (or skip compilation if the binary is up to date). This
-#'   assumes the worker has access to the file. If the worker
-#'   is running on a remote computer that does not have access
-#'   to the model file, set to `"copy"` instead. `compile = "copy"`
-#'   means the pipeline will read the lines of the original JAGS model file
-#'   and send them to the worker. The worker writes the lines
-#'   to a local copy and compiles the model from there, so it
-#'   no longer needs access to the original JAGS model file on your
-#'   local machine. However, as a result, the JAGS model re-compiles
-#'   every time the main target reruns.
+#' @return An `R2jags` output object.
+#' @inheritParams R2jags::jags
+#' @inheritParams R2jags::jags.parallel
+#' @param jags_file Character vector of lines from a JAGS model file.
 tar_jags_mcmc_run <- function(
   jags_file,
+  parameters.to.save,
   data,
-  compile,
+  inits,
+  n.cluster,
+  n.chains,
+  n.iter,
+  n.burn,
+  n.thin,
+  DIC,
+  jags.module,
+  RNGname,
+  jags.seed,
   quiet,
-  dir,
-  include_paths,
-  cpp_options,
-  JAGSc_options,
-  force_recompile,
-  seed,
-  refresh,
-  init,
-  save_latent_dynamics,
-  output_dir,
-  chains,
-  parallel_chains,
-  chain_ids,
-  threads_per_chain,
-  iter_warmup,
-  iter_sampling,
-  save_warmup,
-  thin,
-  max_treedepth,
-  adapt_engaged,
-  adapt_delta,
-  step_size,
-  metric,
-  metric_file,
-  inv_metric,
-  init_buffer,
-  term_buffer,
-  window,
-  fixed_param,
-  sig_figs,
-  validate_csv,
-  show_messages,
-  variables,
-  inc_warmup
+  progress.bar,
+  refresh
 ) {
-  file <- jags_file
-  if (identical(compile, "copy")) {
-    tmp <- tempfile(fileext = ".JAGS")
-    writeLines(jags_file, tmp)
-    file <- tmp
-  }
-  model <- cmdJAGSr::cmdJAGS_model(
-    jags_file = file,
-    compile = TRUE,
-    quiet = quiet,
-    dir = dir,
-    include_paths = include_paths,
-    cpp_options = cpp_options,
-    JAGSc_options = JAGSc_options,
-    force_recompile = force_recompile
+  tmp <- tempfile()
+  dir.create(tmp)
+  withr::local_dir(tmp)
+  file <- tempfile()
+  writeLines(jags_file, file)
+  envir <- environment()
+  trn(
+    n.cluster > 1L,
+    R2jags::jags(
+      data = data,
+      inits = inits,
+      parameters.to.save = parameters.to.save,
+      model.file = file,
+      n.chains = n.chains,
+      n.iter = n.iter,
+      n.burn = n.burn,
+      n.thin = n.thin,
+      DIC = DIC,
+      jags.seed = jags.seed,
+      refresh = refresh,
+      progress.bar = progress.bar,
+      RNGname = RNGname,
+      jags.module = jags.module
+    ),
+    R2jags::jags.parallel(
+      data = data,
+      inits = inits,
+      parameters.to.save = parameters.to.save,
+      model.file = file,
+      n.chains = n.chains,
+      n.iter = n.iter,
+      n.burn = n.burn,
+      n.thin = n.thin,
+      n.cluster = n.cluster,
+      DIC = DIC,
+      jags.seed = jags.seed,
+      refresh = refresh,
+      progress.bar = progress.bar,
+      RNGname = RNGname,
+      jags.module = jags.module,
+      envir = envir
+    )
   )
-  if (is.null(seed)) {
-    seed <- abs(targets::tar_seed()) + 1L
-  }
-  fit <- model$sample(
-    data = data,
-    seed = seed,
-    refresh = refresh,
-    init = init,
-    save_latent_dynamics = save_latent_dynamics,
-    output_dir = output_dir,
-    chains = chains,
-    parallel_chains = parallel_chains,
-    chain_ids = chain_ids,
-    threads_per_chain = threads_per_chain,
-    iter_warmup = iter_warmup,
-    iter_sampling = iter_sampling,
-    save_warmup = save_warmup,
-    thin = thin,
-    max_treedepth = max_treedepth,
-    adapt_engaged = adapt_engaged,
-    adapt_delta = adapt_delta,
-    step_size = step_size,
-    metric = metric,
-    metric_file = metric_file,
-    inv_metric = inv_metric,
-    init_buffer = init_buffer,
-    term_buffer = term_buffer,
-    window = window,
-    fixed_param = fixed_param,
-    sig_figs = sig_figs,
-    validate_csv = validate_csv,
-    show_messages = show_messages
-  )
-  # Load all the data and return the whole unserialized fit object:
-  # https://github.com/JAGS-dev/cmdJAGSr/blob/d27994f804c493ff3047a2a98d693fa90b83af98/R/fit.R#L16-L18 # nolint
-  fit$draws() # Do not specify variables or inc_warmup.
-  try(fit$sampler_diagnostics(), silent = TRUE)
-  try(fit$init(), silent = TRUE)
-  fit
 }

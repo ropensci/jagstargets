@@ -41,7 +41,8 @@ Imports:
   tarchetypes (>= 0.0.0.9000),
   tibble (>= 3.0.4),
   tools,
-  utils
+  utils,
+  withr (>= 2.3.0),
 Suggests:
   dplyr (>= 1.0.2),
   fs (>= 1.5.0),

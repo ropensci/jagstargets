@@ -11,7 +11,7 @@ targets::tar_test("tar_jags_example_file()", {
       parameters.to.save = "beta",
       model.file = tmp,
       n.chains = 3,
-      n.iter = 200L, 
+      n.iter = 200L,
       n.burn = 100L,
       progress.bar = "none"
     )
