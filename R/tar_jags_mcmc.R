@@ -59,8 +59,8 @@ tar_jags_mcmc <- function(
   n.cluster = 1,
   n.chains = 3,
   n.iter = 2e3,
-  n.burn = floor(n.iter / 2),
-  n.thin = max(1, floor((n.iter - n.burnin) / 1000)),
+  n.burn = as.integer(n.iter / 2),
+  n.thin = 1,
   DIC = TRUE,
   jags.module = c("glm", "dic"),
   RNGname = c(
@@ -72,7 +72,7 @@ tar_jags_mcmc <- function(
   jags.seed = 123,
   quiet = TRUE,
   progress.bar = "text",
-  refresh = n.iter / 50,
+  refresh = 0,
   target_draws = TRUE,
   target_summary = TRUE,
   target_dic = TRUE,
@@ -92,6 +92,11 @@ tar_jags_mcmc <- function(
   envir <- tar_option_get("envir")
   assert_chr(jags_files)
   assert_unique(jags_files)
+  assert_in(
+    as.integer(n.cluster),
+    as.integer(c(1L, n.chains)),
+    msg = "due to R2jags constraints, n.cluster must be 1 or n.chains."
+  )
   name <- deparse_language(substitute(name))
   name_jags <- produce_jags_names(jags_files)
   name_file <- paste0(name, "_file")
@@ -100,7 +105,7 @@ tar_jags_mcmc <- function(
   name_mcmc <- paste0(name, "_mcmc")
   name_draws <- paste0(name, "_draws")
   name_summary <- paste0(name, "_summary")
-  name_diagnostics <- paste0(name, "_dic")
+  name_dic <- paste0(name, "_dic")
   sym_jags <- rlang::syms(name_jags)
   sym_file <- rlang::sym(name_file)
   sym_lines <- rlang::sym(name_lines)
@@ -120,15 +125,15 @@ tar_jags_mcmc <- function(
     env = list(fit = sym_mcmc)
   )
   command_summary <- substitute(
-    tibble::as_tibble(fit$BUGSoutput$summary, .name_repair = make.names),
+    jagstargets::tar_jags_summary_tibble(fit$BUGSoutput$summary),
     env = list(fit = sym_mcmc)
   )
   command_dic <- substitute(
     tibble::tibble(
-      DIC = fit$BUGSoutput$DIC,
+      dic = fit$BUGSoutput$DIC,
       pD = fit$BUGSoutput$pD
     ),
-    env = list(.targets_mcmc = sym_mcmc)
+    env = list(fit = sym_mcmc)
   )
   args_mcmc <- list(
     call_ns("jagstargets", "tar_jags_mcmc_run"),
@@ -243,7 +248,7 @@ tar_jags_mcmc <- function(
     target_object_mcmc,
     trn(identical(target_draws, TRUE), target_object_draws, NULL),
     trn(identical(target_summary, TRUE), target_object_summary, NULL),
-    trn(identical(target_diagnostics, TRUE), target_object_diagnostics, NULL)
+    trn(identical(target_dic, TRUE), target_object_dic, NULL)
   )
   out <- list_nonempty(out)
   values <- list(
@@ -256,7 +261,7 @@ tar_jags_mcmc <- function(
     unlist = TRUE,
     out
   )
-  out[[name_data]] <- target_data
+  out[[name_data]] <- target_object_data
   out
 }
 
@@ -294,6 +299,22 @@ tar_jags_mcmc_run <- function(
   envir <- environment()
   trn(
     n.cluster > 1L,
+    R2jags::jags.parallel(
+      data = data,
+      inits = inits,
+      parameters.to.save = parameters.to.save,
+      model.file = file,
+      n.chains = n.chains,
+      n.iter = n.iter,
+      n.burn = n.burn,
+      n.thin = n.thin,
+      n.cluster = n.cluster,
+      DIC = DIC,
+      jags.seed = jags.seed,
+      RNGname = RNGname,
+      jags.module = jags.module,
+      envir = envir
+    ),
     R2jags::jags(
       data = data,
       inits = inits,
@@ -309,24 +330,16 @@ tar_jags_mcmc_run <- function(
       progress.bar = progress.bar,
       RNGname = RNGname,
       jags.module = jags.module
-    ),
-    R2jags::jags.parallel(
-      data = data,
-      inits = inits,
-      parameters.to.save = parameters.to.save,
-      model.file = file,
-      n.chains = n.chains,
-      n.iter = n.iter,
-      n.burn = n.burn,
-      n.thin = n.thin,
-      n.cluster = n.cluster,
-      DIC = DIC,
-      jags.seed = jags.seed,
-      refresh = refresh,
-      progress.bar = progress.bar,
-      RNGname = RNGname,
-      jags.module = jags.module,
-      envir = envir
     )
   )
+}
+
+#' @title Clean up the summary data frame from `R2jags`.
+#' @export
+#' @keywords internal
+#' @description Not a user-side function. Do not call directly.
+#'   Exported for infrastructure reasons only.
+tar_jags_summary_tibble <- function(x) {
+  out <- cbind(variable = rownames(x), x)
+  tibble::as_tibble(out, .name_repair = make.names)
 }

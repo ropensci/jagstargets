@@ -4,6 +4,12 @@ assert_chr <- function(x, msg = NULL) {
   }
 }
 
+assert_in <- function(x, choices, msg = NULL) {
+  if (!all(x %in% choices)) {
+    throw_validate(msg %||% paste(deparse(x), "is in", deparse(choices)))
+  }
+}
+
 assert_not_in <- function(x, choices, msg = NULL) {
   if (any(x %in% choices)) {
     throw_validate(msg %||% paste(deparse(x), "is in", deparse(choices)))
