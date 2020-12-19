@@ -5,7 +5,7 @@ targets::tar_test("tar_jags_example_file()", {
   expect_true(file.exists(tmp))
   data <- tar_jags_example_data()
   data$true_beta <- NULL
-  tmp <- capture.output(
+  msg <- capture.output(
     out <- R2jags::jags(
       data = data,
       parameters.to.save = "beta",
