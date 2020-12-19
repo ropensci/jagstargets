@@ -40,7 +40,8 @@ Imports:
   targets (>= 0.0.0.9003),
   tarchetypes (>= 0.0.0.9000),
   tibble (>= 3.0.4),
-  tools
+  tools,
+  utils
 Suggests:
   dplyr (>= 1.0.2),
   fs (>= 1.5.0),

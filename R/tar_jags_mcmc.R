@@ -31,8 +31,10 @@
 #'   `tools::file_path_sans_ext(basename(jags_files))` will be used
 #'   as target name suffixes. If `jags_files` is a named vector,
 #'   the suffixed will come from `names(jags_files)`.
+#' @param quiet Logical, whether to suppress the output stream. Does not
+#'   suppress messages, warnings, or errors.
 #' @param target_draws Logical, whether to create a target for posterior draws.
-#'   Saves `posterior::as_draws_df(fit$draws())` to a compressed `tibble`.
+#'   Saves draws as a compressed `posterior::as_draws_df()` `tibble`.
 #'   Convenient, but duplicates storage.
 #' @param target_summary Logical, whether to create a target to store a small
 #'   data frame of posterior summary statistics and convergence diagnostics.
@@ -61,7 +63,7 @@ tar_jags_mcmc <- function(
   n.burn = floor(n.iter / 2),
   n.thin = max(1, floor((n.iter - n.burnin) / 1000)),
   DIC = TRUE,
-  jags.module = c("glm","dic")
+  jags.module = c("glm","dic"),
   RNGname = c(
     "Wichmann-Hill",
     "Marsaglia-Multicarry",
@@ -69,11 +71,12 @@ tar_jags_mcmc <- function(
     "Mersenne-Twister"
   ),
   jags.seed = 123,
-  refresh = n.iter / 50,
+  quiet = TRUE,
   progress.bar = "text",
-  draws = TRUE,
-  summary = TRUE,
-  dic = TRUE,
+  refresh = n.iter / 50,
+  target_draws = TRUE,
+  target_summary = TRUE,
+  target_dic = TRUE,
   tidy_eval = targets::tar_option_get("tidy_eval"),
   packages = targets::tar_option_get("packages"),
   library = targets::tar_option_get("library"),
@@ -91,15 +94,15 @@ tar_jags_mcmc <- function(
   assert_chr(jags_files)
   assert_unique(jags_files)
   name <- deparse_language(substitute(name))
-  name_JAGS <- produce_JAGS_names(jags_files)
+  name_jags <- produce_jags_names(jags_files)
   name_file <- paste0(name, "_file")
   name_lines <- paste0(name, "_lines")
   name_data <- paste0(name, "_data")
   name_mcmc <- paste0(name, "_mcmc")
   name_draws <- paste0(name, "_draws")
   name_summary <- paste0(name, "_summary")
-  name_diagnostics <- paste0(name, "_diagnostics")
-  sym_JAGS <- rlang::syms(name_JAGS)
+  name_diagnostics <- paste0(name, "_dic")
+  sym_jags <- rlang::syms(name_jags)
   sym_file <- rlang::sym(name_file)
   sym_lines <- rlang::sym(name_lines)
   sym_data <- rlang::sym(name_data)
@@ -114,75 +117,43 @@ tar_jags_mcmc <- function(
     tidy_eval = tidy_eval
   )
   command_draws <- substitute(
-    tibble::as_tibble(posterior::as_draws_df(
-      fit$draws(variables = variables, inc_warmup = inc_warmup)
-    )),
-    env = list(
-      fit = sym_mcmc,
-      variables = variables,
-      inc_warmup = inc_warmup
-    )
+    tibble::as_tibble(posterior::as_draws_df(fit$BUGSoutput$sims.array)),
+    env = list(fit = sym_mcmc)
   )
-  method_summary <- call_function("$", list(sym_mcmc, rlang::sym("summary")))
-  args_summary <- list(method_summary)
-  summaries <- as.list(substitute(summaries)[-1])
-  for (index in seq_along(summaries)) {
-    args_summary[[index + 1]] <- summaries[[index]]
-  }
-  args_summary$variables <- variables %||% quote(identity(NULL))
-  args_summary$.args <- substitute(summary_args)
-  command_summary <- as.expression(as.call(args_summary))
-  command_diagnostics <- substitute(
-    tibble::as_tibble(
-      posterior::as_draws_df(.targets_mcmc$sampler_diagnostics())
+  command_summary <- substitute(
+    tibble::as_tibble(fit$BUGSoutput$summary, .name_repair = make.names),
+    env = list(fit = sym_mcmc)
+  )
+  command_dic <- substitute(
+    tibble::tibble(
+      DIC = fit$BUGSoutput$DIC,
+      pD = fit$BUGSoutput$pD
     ),
     env = list(.targets_mcmc = sym_mcmc)
   )
   args_mcmc <- list(
-    call_ns("JAGStargets", "tar_jags_mcmc_run"),
-    JAGS_file = trn(identical(compile, "original"), sym_file, sym_lines),
+    call_ns("jagstargets", "tar_jags_mcmc_run"),
+    jags_file = sym_lines,
+    parameters.to.save = parameters.to.save,
     data = sym_data,
-    compile = compile,
+    inits = inits,
+    n.cluster = n.cluster,
+    n.chains = n.chains,
+    n.iter = n.iter,
+    n.burn = n.burn,
+    n.thin = n.thin,
+    DIC = DIC,
+    jags.module = jags.module,
+    RNGname = RNGname,
+    jags.seed = jags.seed,
     quiet = quiet,
-    dir = dir,
-    include_paths = include_paths,
-    cpp_options = cpp_options,
-    JAGSc_options = JAGSc_options,
-    force_recompile = force_recompile,
-    seed = seed,
-    refresh = refresh,
-    init = init,
-    save_latent_dynamics = save_latent_dynamics,
-    output_dir = output_dir,
-    chains = chains,
-    parallel_chains = parallel_chains,
-    chain_ids = chain_ids,
-    threads_per_chain = threads_per_chain,
-    iter_warmup = iter_warmup,
-    iter_sampling = iter_sampling,
-    save_warmup = save_warmup,
-    thin = thin,
-    max_treedepth = max_treedepth,
-    adapt_engaged = adapt_engaged,
-    adapt_delta = adapt_delta,
-    step_size = step_size,
-    metric = metric,
-    metric_file = metric_file,
-    inv_metric = inv_metric,
-    init_buffer = init_buffer,
-    term_buffer = term_buffer,
-    window = window,
-    fixed_param = fixed_param,
-    sig_figs = sig_figs,
-    validate_csv = validate_csv,
-    show_messages = show_messages,
-    variables = variables,
-    inc_warmup = inc_warmup
+    progress.bar = progress.bar,
+    refresh = refresh
   )
   command_mcmc <- as.expression(as.call(args_mcmc))
-  target_file <- targets::tar_target_raw(
+  target_object_file <- targets::tar_target_raw(
     name = name_file,
-    command = quote(._JAGStargets_file_50e43091),
+    command = quote(._jagstargets_file_50e43091),
     packages = character(0),
     format = "file",
     error = error,
@@ -192,7 +163,7 @@ tar_jags_mcmc <- function(
     priority = priority,
     cue = cue
   )
-  target_lines <- targets::tar_target_raw(
+  target_object_lines <- targets::tar_target_raw(
     name = name_lines,
     command = command_lines,
     packages = character(0),
@@ -203,7 +174,7 @@ tar_jags_mcmc <- function(
     priority = priority,
     cue = cue
   )
-  target_data <- targets::tar_target_raw(
+  target_object_data <- targets::tar_target_raw(
     name = name_data,
     command = command_data,
     packages = packages,
@@ -216,7 +187,7 @@ tar_jags_mcmc <- function(
     priority = priority,
     cue = cue
   )
-  target_mcmc <- targets::tar_target_raw(
+  target_object_mcmc <- targets::tar_target_raw(
     name = name_mcmc,
     command = command_mcmc,
     format = "qs",
@@ -231,7 +202,7 @@ tar_jags_mcmc <- function(
     retrieval = retrieval,
     cue = cue
   )
-  target_draws <- targets::tar_target_raw(
+  target_object_draws <- targets::tar_target_raw(
     name = name_draws,
     command = command_draws,
     packages = character(0),
@@ -243,7 +214,7 @@ tar_jags_mcmc <- function(
     priority = priority,
     cue = cue
   )
-  target_summary <- targets::tar_target_raw(
+  target_object_summary <- targets::tar_target_raw(
     name = name_summary,
     command = command_summary,
     packages = character(0),
@@ -255,9 +226,9 @@ tar_jags_mcmc <- function(
     priority = priority,
     cue = cue
   )
-  target_diagnostics <- targets::tar_target_raw(
-    name = name_diagnostics,
-    command = command_diagnostics,
+  target_object_dic <- targets::tar_target_raw(
+    name = name_dic,
+    command = command_dic,
     packages = character(0),
     format = "fst_tbl",
     error = error,
@@ -268,21 +239,21 @@ tar_jags_mcmc <- function(
     cue = cue
   )
   out <- list(
-    target_file,
-    trn(identical(compile, "original"), NULL, target_lines),
-    target_mcmc,
-    trn(identical(draws, TRUE), target_draws, NULL),
-    trn(identical(summary, TRUE), target_summary, NULL),
-    trn(identical(diagnostics, TRUE), target_diagnostics, NULL)
+    target_object_file,
+    target_object_lines,
+    target_object_mcmc,
+    trn(identical(target_draws, TRUE), target_object_draws, NULL),
+    trn(identical(target_summary, TRUE), target_object_summary, NULL),
+    trn(identical(target_diagnostics, TRUE), target_object_diagnostics, NULL)
   )
   out <- list_nonempty(out)
   values <- list(
-    ._JAGStargets_file_50e43091 = jags_files,
-    ._JAGStargets_name_50e43091 = sym_JAGS
+    ._jagstargets_file_50e43091 = jags_files,
+    ._jagstargets_name_50e43091 = sym_jags
   )
   out <- tarchetypes::tar_map(
     values = values,
-    names = ._JAGStargets_name_50e43091,
+    names = ._jagstargets_name_50e43091,
     unlist = TRUE,
     out
   )
@@ -310,7 +281,7 @@ tar_jags_mcmc <- function(
 #'   local machine. However, as a result, the JAGS model re-compiles
 #'   every time the main target reruns.
 tar_jags_mcmc_run <- function(
-  JAGS_file,
+  jags_file,
   data,
   compile,
   quiet,
@@ -349,14 +320,14 @@ tar_jags_mcmc_run <- function(
   variables,
   inc_warmup
 ) {
-  file <- JAGS_file
+  file <- jags_file
   if (identical(compile, "copy")) {
     tmp <- tempfile(fileext = ".JAGS")
-    writeLines(JAGS_file, tmp)
+    writeLines(jags_file, tmp)
     file <- tmp
   }
   model <- cmdJAGSr::cmdJAGS_model(
-    JAGS_file = file,
+    jags_file = file,
     compile = TRUE,
     quiet = quiet,
     dir = dir,

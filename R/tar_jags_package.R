@@ -20,6 +20,7 @@
 #' @importFrom tarchetypes tar_combine tar_map
 #' @importFrom tibble as_tibble tibble
 #' @importFrom tools file_path_sans_ext
+#' @importFrom utils capture.output
 NULL
 
 utils::globalVariables(
