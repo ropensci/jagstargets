@@ -11,8 +11,8 @@ navbar:
     href: articles/index.html
   - text: targets
     href: https://wlandau.github.io/targets
-  - text: rjags
-    href: https://CRAN.R-project.org/package=rjags
+  - text: R2jags
+    href: https://CRAN.R-project.org/package=R2jags
   - text: JAGS
     href: http://mcmc-jags.sourceforge.net
   - text: News

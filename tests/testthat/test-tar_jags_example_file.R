@@ -5,15 +5,16 @@ targets::tar_test("tar_jags_example_file()", {
   expect_true(file.exists(tmp))
   data <- tar_jags_example_data()
   data$true_beta <- NULL
-  model <- rjags::jags.model(tmp, data = data, n.chains = 3, quiet = TRUE)
-  out <- rjags::coda.samples(
-    model,
-    variable.names = "beta",
-    n.iter = 100,
-    n.chains = 3L,
-    progress.bar = "none"
+  tmp <- capture.output(
+    out <- R2jags::jags(
+      data = data,
+      parameters.to.save = "beta",
+      model.file = tmp,
+      n.chains = 3,
+      n.iter = 200L, 
+      n.burn = 100L,
+      progress.bar = "none"
+    )
   )
-  expect_true(inherits(out, "mcmc.list"))
-  expect_equal(length(out), 3L)
-  expect_equal(dim(out[[1]]), c(100L, 1L))
+  expect_true(inherits(out, "rjags"))
 })

@@ -10,7 +10,7 @@
 
 The `jagstargets` R package is an extension to
 [`targets`](https://github.com/wlandau/targets) and
-[`rjags`](https://CRAN.R-project.org/package=rjags) for Bayesian data
+[`R2jags`](https://CRAN.R-project.org/package=R2jags) for Bayesian data
 analysis. `jagstargets` makes it super easy to set up useful scalable
 JAGS pipelines that automatically parallelize the computation and skip
 expensive steps when the results are already up to date. Minimal custom
@@ -35,7 +35,7 @@ And if you have not done so already, install JAGS from
 The `jagstargets` website at <https://wlandau.github.io/jagstargets/>
 has function documentation and vignettes. Prior familiarity with
 [`targets`](https://github.com/wlandau/targets) and
-[`rjags`](https://CRAN.R-project.org/package=rjags) is highly
+[`R2jags`](https://CRAN.R-project.org/package=R2jags) is highly
 recommended. For [`targets`](https://github.com/wlandau/targets), you
 can learn more at <https://wlandau.github.io/targets>. The JAGS user
 manual is linked from <http://mcmc-jags.sourceforge.net/>.
