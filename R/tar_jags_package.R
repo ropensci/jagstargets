@@ -11,7 +11,6 @@
 #' @importFrom coda mcmc mcmc.list
 #' @importFrom fst read_fst
 #' @importFrom qs qread
-#' @importFrom posterior as_draws_df
 #' @importFrom purrr map
 #' @importFrom R2jags jags jags.parallel
 #' @importFrom rlang as_function sym

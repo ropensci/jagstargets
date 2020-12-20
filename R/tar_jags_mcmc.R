@@ -122,11 +122,11 @@ tar_jags_mcmc <- function(
     tidy_eval = tidy_eval
   )
   command_draws <- substitute(
-    tibble::as_tibble(posterior::as_draws_df(fit$BUGSoutput$sims.array)),
-    env = list(fit = sym_mcmc)
+    jagstargets::tar_jags_df_draws(fit$BUGSoutput$sims.matrix, chains),
+    env = list(fit = sym_mcmc, chains = n.chains)
   )
   command_summary <- substitute(
-    jagstargets::tar_jags_summary_tibble(fit$BUGSoutput$summary),
+    jagstargets::tar_jags_df_summary(fit$BUGSoutput$summary),
     env = list(fit = sym_mcmc)
   )
   command_dic <- substitute(
@@ -336,12 +336,29 @@ tar_jags_mcmc_run <- function(
   )
 }
 
-#' @title Clean up the summary data frame from `R2jags`.
+#' @title Modified draws data frame from `R2jags` output.
 #' @export
 #' @keywords internal
 #' @description Not a user-side function. Do not call directly.
 #'   Exported for infrastructure reasons only.
-tar_jags_summary_tibble <- function(x) {
+#' @param x `R2jags` `sims.matrix` with posterior draws.
+#' @param chains Number of MCMC chains.
+tar_jags_df_draws <- function(x, chains) {
+  out <- tibble::as_tibble(x, .name_repair = make.names)
+  iterations <- as.integer(nrow(out) / chains)
+  out$.chain <- rep(seq_len(chains), each = iterations)
+  out$.iteration <- rep(seq_len(iterations), times = chains)
+  out$.draw <- out$.iteration
+  out
+}
+
+#' @title Modified summary data frame from `R2jags` output.
+#' @export
+#' @keywords internal
+#' @description Not a user-side function. Do not call directly.
+#'   Exported for infrastructure reasons only.
+#' @param x `R2jags` summary data frame.
+tar_jags_df_summary <- function(x) {
   out <- cbind(variable = rownames(x), x)
   tibble::as_tibble(out, .name_repair = make.names)
 }
