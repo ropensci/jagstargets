@@ -8,6 +8,7 @@
 #'   Minimal custom code is required, and there is no need to manually
 #'   configure branching, so usage is much easier than `targets` alone.
 #' @name jagstargets-package
+#' @importFrom coda mcmc mcmc.list
 #' @importFrom fst read_fst
 #' @importFrom qs qread
 #' @importFrom posterior as_draws_df

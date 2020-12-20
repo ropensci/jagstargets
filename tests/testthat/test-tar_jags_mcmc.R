@@ -4,13 +4,18 @@ targets::tar_test("tar_jags_mcmc()", {
   tar_jags_example_file(path = "a.jags")
   tar_jags_example_file(path = "b.jags")
   targets::tar_script({
+    test_data <- function() {
+      out <- tar_jags_example_data(n = 10)
+      out$true_beta <- NULL
+      out
+    }
     tar_pipeline(
       tar_jags_mcmc(
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),
         parameters.to.save = "beta",
         n.iter = 2e3,
-        n.burn = 1e3,
+        n.burnin = 1e3,
         data = test_data()
       )
     )
@@ -97,6 +102,11 @@ targets::tar_test("tar_jags_mcmc()", {
   expect_equal(sort(out), sort(exp))
   # Change the data code.
   targets::tar_script({
+    test_data <- function() {
+      out <- tar_jags_example_data(n = 10)
+      out$true_beta <- NULL
+      out
+    }
     tar_pipeline(
       tar_jags_mcmc(
         model,
@@ -106,7 +116,7 @@ targets::tar_test("tar_jags_mcmc()", {
         n.chains = 2,
         n.cluster = 2,
         n.iter = 2e3,
-        n.burn = 1e3
+        n.burnin = 1e3
       )
     )
   })

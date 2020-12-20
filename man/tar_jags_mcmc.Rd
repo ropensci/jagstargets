@@ -13,7 +13,7 @@ tar_jags_mcmc(
   n.cluster = 1,
   n.chains = 3,
   n.iter = 2000,
-  n.burn = as.integer(n.iter/2),
+  n.burnin = as.integer(n.iter/2),
   n.thin = 1,
   DIC = TRUE,
   jags.module = c("glm", "dic"),
@@ -68,6 +68,11 @@ the suffixed will come from \code{names(jags_files)}.}
 
 \item{n.iter}{number of total iterations per chain (including burn in;
     default: 2000)}
+
+\item{n.burnin}{length of burn in, i.e. number of iterations to
+    discard at the beginning. Default is \code{n.iter/2}, that is,
+    discarding the first half of the simulations. If n.burnin is 0,
+    \code{jags()} will run 100 iterations for adaption.}
 
 \item{n.thin}{thinning rate. Must be a positive integer.  Set
     \code{n.thin} > 1 to save memory and computation time if
@@ -226,7 +231,8 @@ targets::tar_pipeline(
   tar_jags_mcmc(
     your_model,
     jags_files = "jagstargets_example.jags",
-    data = tar_jags_example_data()
+    data = tar_jags_example_data(),
+    parameters.to.save = "beta"
   )
 )
 }

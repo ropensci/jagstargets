@@ -30,6 +30,7 @@ Authors@R: c(
 Depends:
   R (>= 3.5.0)
 Imports:
+  coda (>= 0.19.4),
   fst (>= 0.9.4),
   posterior (>= 0.1.2),
   purrr (>= 0.3.4),
@@ -50,8 +51,7 @@ Suggests:
   rmarkdown (>= 2.1),
   testthat (>= 3.0.0),
   tidyr (>= 1.1.2),
-  visNetwork (>= 2.0.9),
-  withr (>= 2.1.2)
+  visNetwork (>= 2.0.9)
 Remotes:
   stan-dev/posterior,
   wlandau/targets,

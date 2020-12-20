@@ -47,7 +47,8 @@
 #'   tar_jags_mcmc(
 #'     your_model,
 #'     jags_files = "jagstargets_example.jags",
-#'     data = tar_jags_example_data()
+#'     data = tar_jags_example_data(),
+#'     parameters.to.save = "beta"
 #'   )
 #' )
 tar_jags_mcmc <- function(
@@ -59,7 +60,7 @@ tar_jags_mcmc <- function(
   n.cluster = 1,
   n.chains = 3,
   n.iter = 2e3,
-  n.burn = as.integer(n.iter / 2),
+  n.burnin = as.integer(n.iter / 2),
   n.thin = 1,
   DIC = TRUE,
   jags.module = c("glm", "dic"),
@@ -144,7 +145,7 @@ tar_jags_mcmc <- function(
     n.cluster = n.cluster,
     n.chains = n.chains,
     n.iter = n.iter,
-    n.burn = n.burn,
+    n.burnin = n.burnin,
     n.thin = n.thin,
     DIC = DIC,
     jags.module = jags.module,
@@ -281,7 +282,7 @@ tar_jags_mcmc_run <- function(
   n.cluster,
   n.chains,
   n.iter,
-  n.burn,
+  n.burnin,
   n.thin,
   DIC,
   jags.module,
@@ -297,6 +298,7 @@ tar_jags_mcmc_run <- function(
   file <- tempfile()
   writeLines(jags_file, file)
   envir <- environment()
+  requireNamespace("coda")
   trn(
     n.cluster > 1L,
     R2jags::jags.parallel(
@@ -306,7 +308,7 @@ tar_jags_mcmc_run <- function(
       model.file = file,
       n.chains = n.chains,
       n.iter = n.iter,
-      n.burn = n.burn,
+      n.burnin = n.burnin,
       n.thin = n.thin,
       n.cluster = n.cluster,
       DIC = DIC,
@@ -322,7 +324,7 @@ tar_jags_mcmc_run <- function(
       model.file = file,
       n.chains = n.chains,
       n.iter = n.iter,
-      n.burn = n.burn,
+      n.burnin = n.burnin,
       n.thin = n.thin,
       DIC = DIC,
       jags.seed = jags.seed,

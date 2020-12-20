@@ -12,7 +12,7 @@ tar_jags_mcmc_run(
   n.cluster,
   n.chains,
   n.iter,
-  n.burn,
+  n.burnin,
   n.thin,
   DIC,
   jags.module,
@@ -46,6 +46,11 @@ tar_jags_mcmc_run(
 
 \item{n.iter}{number of total iterations per chain (including burn in;
     default: 2000)}
+
+\item{n.burnin}{length of burn in, i.e. number of iterations to
+    discard at the beginning. Default is \code{n.iter/2}, that is,
+    discarding the first half of the simulations. If n.burnin is 0,
+    \code{jags()} will run 100 iterations for adaption.}
 
 \item{n.thin}{thinning rate. Must be a positive integer.  Set
     \code{n.thin} > 1 to save memory and computation time if

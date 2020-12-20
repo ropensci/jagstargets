@@ -3,6 +3,13 @@ targets::tar_test("assert_chr()", {
   expect_error(assert_chr(123), class = "condition_validate")
 })
 
+targets::tar_test("assert_jags_file()", {
+  tmp <- tempfile()
+  file.create(tmp)
+  expect_silent(assert_jags_file(tmp))
+  expect_error(assert_jags_file("nopenopenope"), class = "condition_validate")
+})
+
 targets::tar_test("assert_in()", {
   expect_silent(assert_in("a", letters))
   expect_error(assert_in("1", letters), class = "condition_validate")
