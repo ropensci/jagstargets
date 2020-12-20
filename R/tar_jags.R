@@ -3,13 +3,12 @@
 #' @description Targets to run a JAGS model once with MCMC
 #'   and save multiple outputs.
 #' @details The MCMC targets use `R2jags::jags()` if `n.cluster` is `1` and
-#'   `R2jags::jags.parallel()` otherwise. Most arguments to `tar_jags_mcmc()`
+#'   `R2jags::jags.parallel()` otherwise. Most arguments to `tar_jags()`
 #'   are forwarded to these functions.
-#' @return `tar_jags_mcmc(name = x, jags_files = "y.jags", ...)` returns a list
+#' @return `tar_jags(name = x, jags_files = "y.jags", ...)` returns a list
 #'   of `targets::tar_target()` objects:
 #'   * `x_file_y`: reproducibly track the JAGS model file.
 #'   * `x_lines_y`: contents of the JAGS model file.
-#'     Omitted if `compile = "original"`.
 #'   * `x_data`: data for the MCMC.
 #'   * `x_mcmc_y`: `rjags` object from `R2jags` with all the MCMC results.
 #'   * `x_draws_y`: tidy data frame of MCMC draws. Omitted if `draws = FALSE`.
@@ -19,7 +18,7 @@
 #'     Omitted if `dic = FALSE`.
 #'  If you supply multiple models, you will get more (model-specific) targets.
 #'  All the models share the same dataset.
-#' @inheritParams tar_jags_mcmc_run
+#' @inheritParams tar_jags_run
 #' @inheritParams targets::tar_target
 #' @param name Symbol, base name for the collection of targets.
 #'   Serves as a prefix for target names.
@@ -44,14 +43,14 @@
 #' # tar_jags_example_file() # Writes jagstargets_example.jags
 #' # Then in _targets.R, write the pipeline:
 #' targets::tar_pipeline(
-#'   tar_jags_mcmc(
+#'   tar_jags(
 #'     your_model,
 #'     jags_files = "jagstargets_example.jags",
 #'     data = tar_jags_example_data(),
 #'     parameters.to.save = "beta"
 #'   )
 #' )
-tar_jags_mcmc <- function(
+tar_jags <- function(
   name,
   jags_files,
   parameters.to.save,
@@ -122,22 +121,19 @@ tar_jags_mcmc <- function(
     tidy_eval = tidy_eval
   )
   command_draws <- substitute(
-    jagstargets::tar_jags_df_draws(fit$BUGSoutput$sims.matrix, chains),
-    env = list(fit = sym_mcmc, chains = n.chains)
+    jagstargets::tar_jags_df(fit, output = "draws"),
+    env = list(fit = sym_mcmc)
   )
   command_summary <- substitute(
-    jagstargets::tar_jags_df_summary(fit$BUGSoutput$summary),
+    jagstargets::tar_jags_df(fit, output = "summary"),
     env = list(fit = sym_mcmc)
   )
   command_dic <- substitute(
-    tibble::tibble(
-      dic = fit$BUGSoutput$DIC,
-      pD = fit$BUGSoutput$pD
-    ),
+    jagstargets::tar_jags_df(fit, output = "dic"),
     env = list(fit = sym_mcmc)
   )
   args_mcmc <- list(
-    call_ns("jagstargets", "tar_jags_mcmc_run"),
+    call_ns("jagstargets", "tar_jags_run"),
     jags_file = sym_lines,
     parameters.to.save = parameters.to.save,
     data = sym_data,
@@ -274,7 +270,7 @@ tar_jags_mcmc <- function(
 #' @inheritParams R2jags::jags
 #' @inheritParams R2jags::jags.parallel
 #' @param jags_file Character vector of lines from a JAGS model file.
-tar_jags_mcmc_run <- function(
+tar_jags_run <- function(
   jags_file,
   parameters.to.save,
   data,
@@ -336,15 +332,31 @@ tar_jags_mcmc_run <- function(
   )
 }
 
-#' @title Modified draws data frame from `R2jags` output.
+#' @title Select a strategic piece of `R2jags` output.
 #' @export
 #' @keywords internal
 #' @description Not a user-side function. Do not call directly.
 #'   Exported for infrastructure reasons only.
-#' @param x `R2jags` `sims.matrix` with posterior draws.
-#' @param chains Number of MCMC chains.
-tar_jags_df_draws <- function(x, chains) {
-  out <- tibble::as_tibble(x, .name_repair = make.names)
+#' @param fit `R2jags` object.
+#' @param Character of length 1 denoting the type of output `tibble`
+#'   to return: `"draws"` for MCMC samples (which could take up a lot of space)
+#'   `"summary"` for lightweight posterior summary statistics,
+#'   and `"dic"` for the overall deviance information criterion
+#'   and effective number of parameters
+tar_jags_df <- function(fit, output = c("draws", "summary", "dic")) {
+  out <- match.arg(output)
+  switch(
+    output,
+    draws = tar_jags_df_draws(fit),
+    summary = tar_jags_df_summary(fit),
+    dic = tar_jags_df_dic(fit)
+  )
+}
+
+tar_jags_df_draws <- function(fit) {
+  out <- fit$BUGSoutput$sims.matrix
+  out <- tibble::as_tibble(out, .name_repair = make.names)
+  chains <- as.integer(fit$BUGSoutput$n.chains)
   iterations <- as.integer(nrow(out) / chains)
   out$.chain <- rep(seq_len(chains), each = iterations)
   out$.iteration <- rep(seq_len(iterations), times = chains)
@@ -352,13 +364,15 @@ tar_jags_df_draws <- function(x, chains) {
   out
 }
 
-#' @title Modified summary data frame from `R2jags` output.
-#' @export
-#' @keywords internal
-#' @description Not a user-side function. Do not call directly.
-#'   Exported for infrastructure reasons only.
-#' @param x `R2jags` summary data frame.
-tar_jags_df_summary <- function(x) {
-  out <- cbind(variable = rownames(x), x)
+tar_jags_df_summary <- function(fit) {
+  out <- fit$BUGSoutput$summary
+  out <- cbind(variable = rownames(out), out)
   tibble::as_tibble(out, .name_repair = make.names)
+}
+
+tar_jags_df_dic <- function(fit) {
+  tibble::tibble(
+    dic = fit$BUGSoutput$DIC,
+    pD = fit$BUGSoutput$pD
+  )
 }

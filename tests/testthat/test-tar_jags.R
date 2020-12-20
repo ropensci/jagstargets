@@ -1,4 +1,4 @@
-targets::tar_test("tar_jags_mcmc()", {
+targets::tar_test("tar_jags()", {
   skip_on_cran()
   skip_if_not_installed("dplyr")
   tar_jags_example_file(path = "a.jags")
@@ -10,7 +10,7 @@ targets::tar_test("tar_jags_mcmc()", {
       out
     }
     tar_pipeline(
-      tar_jags_mcmc(
+      tar_jags(
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),
         parameters.to.save = "beta",
@@ -46,7 +46,7 @@ targets::tar_test("tar_jags_mcmc()", {
   rownames(exp) <- NULL
   expect_equal(out, exp)
   # results
-  capture.output(targets::tar_make(callr_function = NULL))
+  tmp <- capture.output(targets::tar_make(callr_function = NULL))
   expect_equal(targets::tar_read(model_file_x), "a.jags")
   expect_equal(targets::tar_read(model_file_y), "b.jags")
   out <- targets::tar_read(model_data)
@@ -108,7 +108,7 @@ targets::tar_test("tar_jags_mcmc()", {
       out
     }
     tar_pipeline(
-      tar_jags_mcmc(
+      tar_jags(
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),
         parameters.to.save = "beta",
