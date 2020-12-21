@@ -19,6 +19,7 @@
 #'  If you supply multiple models, you will get more (model-specific) targets.
 #'  All the models share the same dataset.
 #' @inheritParams tar_jags_run
+#' @inheritParams tar_jags_df
 #' @inheritParams targets::tar_target
 #' @param name Symbol, base name for the collection of targets.
 #'   Serves as a prefix for target names.

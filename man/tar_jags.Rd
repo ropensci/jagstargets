@@ -58,6 +58,14 @@ the suffixed will come from \code{names(jags_files)}.}
 
 \item{data}{Code to generate the \code{data} for the JAGS model.}
 
+\item{summaries}{List of summary functions passed to \code{...} in
+\code{posterior::summarize_draws()} through \verb{$summary()}
+on the \code{CmdStanFit} object.}
+
+\item{summary_args}{List of summary function arguments passed to
+\code{.args} in \code{posterior::summarize_draws()} through \verb{$summary()}
+on the \code{CmdStanFit} object.}
+
 \item{n.cluster}{number of clusters to use to run parallel chains.
     Default equals n.chains.}
 
