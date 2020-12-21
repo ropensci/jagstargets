@@ -55,6 +55,8 @@ tar_jags <- function(
   jags_files,
   parameters.to.save,
   data = list(),
+  summaries = list(),
+  summary_args = list(),
   n.cluster = 1,
   n.chains = 3,
   n.iter = 2e3,
@@ -125,8 +127,17 @@ tar_jags <- function(
     env = list(fit = sym_mcmc)
   )
   command_summary <- substitute(
-    jagstargets::tar_jags_df(fit, output = "summary"),
-    env = list(fit = sym_mcmc)
+    jagstargets::tar_jags_df(
+      fit,
+      output = "summary",
+      summaries = quote(summaries),
+      summary_args = quote(summary_args)
+    ),
+    env = list(
+      fit = sym_mcmc,
+      summaries = substitute(summaries),
+      summary_args = substitute(summary_args)
+    )
   )
   command_dic <- substitute(
     jagstargets::tar_jags_df(fit, output = "dic"),

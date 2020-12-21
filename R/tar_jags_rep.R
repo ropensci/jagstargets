@@ -33,6 +33,8 @@ tar_jags_rep <- function(
   batches = 1L,
   reps = 1L,
   output = c("summary", "draws", "dic"),
+  summaries = quote(list()),
+  summary_args = quote(list()),
   combine = TRUE,
   n.cluster = 1,
   n.chains = 3,
@@ -99,7 +101,8 @@ tar_jags_rep <- function(
     data = sym_data,
     data_copy = data_copy,
     data_omit = data_omit,
-    batches = batches,
+    summaries = summaries,
+    summary_args = summary_args,
     reps = reps,
     output = output,
     n.cluster = n.cluster,
@@ -248,7 +251,8 @@ tar_jags_rep_run <- function(
   data,
   data_copy,
   data_omit,
-  batches,
+  summaries = quote(list()),
+  summary_args = quote(list()),
   reps,
   output,
   n.cluster = n.cluster,
@@ -274,7 +278,8 @@ tar_jags_rep_run <- function(
       parameters.to.save = parameters.to.save,
       data_copy = data_copy,
       data_omit = data_omit,
-      batches = batches,
+      summaries = summaries,
+      summary_args = summary_args,
       reps = reps,
       output = output,
       n.cluster = n.cluster,
@@ -304,7 +309,8 @@ tar_jags_rep_run_rep <- function(
   data,
   data_copy,
   data_omit,
-  batches,
+  summaries,
+  summary_args,
   reps,
   output,
   n.cluster,
@@ -342,7 +348,12 @@ tar_jags_rep_run_rep <- function(
     progress.bar = progress.bar,
     refresh = refresh
   )
-  out <- tar_jags_df(fit, output = output)
+  out <- tar_jags_df(
+    fit = fit,
+    output = output,
+    summaries = summaries,
+    summary_args = summary_args
+  )
   out <- copy_data_scalars(out, data, data_copy)
   out$.rep <- basename(tempfile(pattern = "rep_"))
   out

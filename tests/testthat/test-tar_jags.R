@@ -72,6 +72,8 @@ targets::tar_test("tar_jags()", {
   out_y <- targets::tar_read(model_summary_y)
   expect_true(tibble::is_tibble(out_x))
   expect_true(tibble::is_tibble(out_y))
+  expect_true("q5" %in% colnames(out_x))
+  expect_true("q5" %in% colnames(out_y))
   expect_true(nrow(out_x) < 10)
   expect_true(nrow(out_y) < 10)
   expect_true("mean" %in% colnames(out_x))
@@ -132,4 +134,37 @@ targets::tar_test("tar_jags()", {
   # Run with n.cluster > 1.
   capture.output(targets::tar_make(callr_function = NULL))
   expect_true(inherits(targets::tar_read(model_mcmc_y), "rjags"))
+})
+
+targets::tar_test("tar_jags() with custom summaries", {
+  skip_on_cran()
+  skip_if_not_installed("dplyr")
+  tar_jags_example_file(path = "a.jags")
+  tar_jags_example_file(path = "b.jags")
+  targets::tar_script({
+    test_data <- function() {
+      out <- tar_jags_example_data(n = 10)
+      out$true_beta <- NULL
+      out
+    }
+    tar_pipeline(
+      tar_jags(
+        model,
+        jags_files = c(x = "a.jags", y = "b.jags"),
+        parameters.to.save = "beta",
+        n.iter = 2e3,
+        n.burnin = 1e3,
+        data = test_data(),
+        summaries = list(
+          custom = ~posterior::quantile2(.x, probs = 0.3),
+          custom2 = function(x, my_arg) my_arg
+        ),
+        summary_args = list(my_arg = 34L)
+      )
+    )
+  })
+  capture.output(targets::tar_make(callr_function = NULL))
+  out <- targets::tar_read(model_summary_x)
+  expect_true("q30" %in% colnames(out))
+  expect_true(all(out$custom2 == 34))
 })

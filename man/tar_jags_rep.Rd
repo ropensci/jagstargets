@@ -14,6 +14,8 @@ tar_jags_rep(
   batches = 1L,
   reps = 1L,
   output = c("summary", "draws", "dic"),
+  summaries = quote(list()),
+  summary_args = quote(list()),
   combine = TRUE,
   n.cluster = 1,
   n.chains = 3,
@@ -80,6 +82,14 @@ to return: \code{"draws"} for MCMC samples (which could take up a lot of space)
 \code{"summary"} for lightweight posterior summary statistics,
 and \code{"dic"} for the overall deviance information criterion
 and effective number of parameters}
+
+\item{summaries}{List of summary functions passed to \code{...} in
+\code{posterior::summarize_draws()} through \verb{$summary()}
+on the \code{CmdStanFit} object.}
+
+\item{summary_args}{List of summary function arguments passed to
+\code{.args} in \code{posterior::summarize_draws()} through \verb{$summary()}
+on the \code{CmdStanFit} object.}
 
 \item{combine}{Logical, whether to create a target to
 combine all the model results

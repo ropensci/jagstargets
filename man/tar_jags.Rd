@@ -9,6 +9,8 @@ tar_jags(
   jags_files,
   parameters.to.save,
   data = list(),
+  summaries = list(),
+  summary_args = list(),
   n.cluster = 1,
   n.chains = 3,
   n.iter = 2000,

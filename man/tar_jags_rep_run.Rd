@@ -13,7 +13,8 @@ tar_jags_rep_run(
   data,
   data_copy,
   data_omit,
-  batches,
+  summaries = quote(list()),
+  summary_args = quote(list()),
   reps,
   output,
   n.cluster = n.cluster,
@@ -55,6 +56,14 @@ check the results against some "true value" in the data. See the
 Useful if you want to pass elements to \code{data_copy} without
 supplying them to the model. (Superfluous data causes warnings
 in JAGS.)}
+
+\item{summaries}{List of summary functions passed to \code{...} in
+\code{posterior::summarize_draws()} through \verb{$summary()}
+on the \code{CmdStanFit} object.}
+
+\item{summary_args}{List of summary function arguments passed to
+\code{.args} in \code{posterior::summarize_draws()} through \verb{$summary()}
+on the \code{CmdStanFit} object.}
 
 \item{output}{Character of length 1 denoting the type of output \code{tibble}
 to return: \code{"draws"} for MCMC samples (which could take up a lot of space)
