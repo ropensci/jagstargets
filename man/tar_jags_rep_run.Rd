@@ -58,6 +58,9 @@ Useful if you want to pass elements to \code{data_copy} without
 supplying them to the model. (Superfluous data causes warnings
 in JAGS.)}
 
+\item{variables}{Character vector of model parameter names.
+The output posterior summaries are restricted to these variables.}
+
 \item{summaries}{List of summary functions passed to \code{...} in
 \code{posterior::summarize_draws()} through \verb{$summary()}
 on the \code{CmdStanFit} object.}

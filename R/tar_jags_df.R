@@ -5,6 +5,8 @@
 #'   Exported for infrastructure reasons only.
 #' @inheritParams posterior::summarize_draws
 #' @param fit `R2jags` object.
+#' @param variables Character vector of model parameter names.
+#'   The output posterior summaries are restricted to these variables.
 #' @param output Character of length 1 denoting the type of output `tibble`
 #'   to return: `"draws"` for MCMC samples (which could take up a lot of space)
 #'   `"summary"` for lightweight posterior summary statistics,

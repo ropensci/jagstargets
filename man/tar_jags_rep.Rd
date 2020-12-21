@@ -84,6 +84,9 @@ to return: \code{"draws"} for MCMC samples (which could take up a lot of space)
 and \code{"dic"} for the overall deviance information criterion
 and effective number of parameters}
 
+\item{variables}{Character vector of model parameter names.
+The output posterior summaries are restricted to these variables.}
+
 \item{summaries}{List of summary functions passed to \code{...} in
 \code{posterior::summarize_draws()} through \verb{$summary()}
 on the \code{CmdStanFit} object.}
