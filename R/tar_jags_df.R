@@ -18,8 +18,8 @@
 tar_jags_df <- function(
   fit,
   output = c("draws", "summary", "dic"),
-  summaries = quote(list()),
-  summary_args = quote(list())
+  summaries = NULL,
+  summary_args = NULL
 ) {
   out <- match.arg(output)
   switch(
@@ -48,7 +48,7 @@ tar_jags_df_summary <- function(fit, summaries, summary_args) {
   draws$.draw <- NULL
   args <- list(quote(posterior::summarize_draws), x = quote(draws))
   args$.args <- summary_args
-  args <- c(args, as.list(summaries[-1]))
+  args <- c(args, summaries)
   eval(as.call(args))
 }
 

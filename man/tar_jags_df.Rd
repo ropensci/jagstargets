@@ -7,8 +7,8 @@
 tar_jags_df(
   fit,
   output = c("draws", "summary", "dic"),
-  summaries = quote(list()),
-  summary_args = quote(list())
+  summaries = NULL,
+  summary_args = NULL
 )
 }
 \arguments{

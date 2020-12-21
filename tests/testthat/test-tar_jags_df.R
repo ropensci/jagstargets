@@ -33,16 +33,20 @@ targets::tar_test("tar_jags_df() with dic", {
   expect_true("deviance" %in% summary$variable)
   expect_true(nrow(summary) < 10L)
   # custom summary
-  summary <- tar_jags_df(
-    out,
-    output = "summary",
-    summaries = quote(
+  summaries <- as.list(
+    quote(
       list(
         custom = ~posterior::quantile2(.x, probs = c(0.025, 0.5, 0.975)),
         custom2 = function(x, my_arg) my_arg
       )
-    ),
-    summary_args = quote(list(my_arg = 3L))
+    )
+  )
+  summaries <- summaries[-1]
+  summary <- tar_jags_df(
+    out,
+    output = "summary",
+    summaries = summaries,
+    summary_args = list(my_arg = 3L)
   )
   expect_true(
     all(c("variable", "q97.5", "q2.5", "custom2") %in% colnames(summary))

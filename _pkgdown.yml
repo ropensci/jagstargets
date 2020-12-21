@@ -31,9 +31,9 @@ reference:
 - title: MCMC
   contents:
   - '`tar_jags`'
+  - '`tar_jags_rep_dic`'
   - '`tar_jags_rep_draws`'
   - '`tar_jags_rep_summary`'
-  - '`tar_jags_rep_dic`'
 articles:
   - title: MCMC
     desc: >
