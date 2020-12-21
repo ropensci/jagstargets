@@ -4,7 +4,12 @@
 \alias{tar_jags_df}
 \title{Select a strategic piece of \code{R2jags} output.}
 \usage{
-tar_jags_df(fit, output = c("draws", "summary", "dic"))
+tar_jags_df(
+  fit,
+  output = c("draws", "summary", "dic"),
+  summaries = quote(list()),
+  summary_args = quote(list())
+)
 }
 \arguments{
 \item{fit}{\code{R2jags} object.}
@@ -14,6 +19,14 @@ to return: \code{"draws"} for MCMC samples (which could take up a lot of space)
 \code{"summary"} for lightweight posterior summary statistics,
 and \code{"dic"} for the overall deviance information criterion
 and effective number of parameters}
+
+\item{summaries}{List of summary functions passed to \code{...} in
+\code{posterior::summarize_draws()} through \verb{$summary()}
+on the \code{CmdStanFit} object.}
+
+\item{summary_args}{List of summary function arguments passed to
+\code{.args} in \code{posterior::summarize_draws()} through \verb{$summary()}
+on the \code{CmdStanFit} object.}
 }
 \description{
 Not a user-side function. Do not call directly.

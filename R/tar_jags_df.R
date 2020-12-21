@@ -9,15 +9,23 @@
 #'   `"summary"` for lightweight posterior summary statistics,
 #'   and `"dic"` for the overall deviance information criterion
 #'   and effective number of parameters
+#' @param summaries List of summary functions passed to `...` in
+#'   `posterior::summarize_draws()` through `$summary()`
+#'   on the `CmdStanFit` object.
+#' @param summary_args List of summary function arguments passed to
+#'    `.args` in `posterior::summarize_draws()` through `$summary()`
+#'    on the `CmdStanFit` object.
 tar_jags_df <- function(
   fit,
-  output = c("draws", "summary", "dic")
+  output = c("draws", "summary", "dic"),
+  summaries = quote(list()),
+  summary_args = quote(list())
 ) {
   out <- match.arg(output)
   switch(
     output,
     draws = tar_jags_df_draws(fit),
-    summary = tar_jags_df_summary(fit),
+    summary = tar_jags_df_summary(fit, summaries, summary_args),
     dic = tar_jags_df_dic(fit)
   )
 }
@@ -35,10 +43,13 @@ tar_jags_df_draws <- function(fit) {
   out
 }
 
-tar_jags_df_summary <- function(fit) {
-  out <- fit$BUGSoutput$summary
-  out <- cbind(variable = rownames(out), out)
-  tibble::as_tibble(out, .name_repair = make.names)
+tar_jags_df_summary <- function(fit, summaries, summary_args) {
+  draws <- tar_jags_df_draws(fit)
+  draws$.draw <- NULL
+  args <- list(quote(posterior::summarize_draws), x = quote(draws))
+  args$.args <- summary_args
+  args <- c(args, as.list(summaries[-1]))
+  eval(as.call(args))
 }
 
 tar_jags_df_dic <- function(fit) {
