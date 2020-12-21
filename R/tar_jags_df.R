@@ -3,6 +3,7 @@
 #' @keywords internal
 #' @description Not a user-side function. Do not call directly.
 #'   Exported for infrastructure reasons only.
+#' @inheritParams posterior::summarize_draws
 #' @param fit `R2jags` object.
 #' @param output Character of length 1 denoting the type of output `tibble`
 #'   to return: `"draws"` for MCMC samples (which could take up a lot of space)
@@ -18,6 +19,7 @@
 tar_jags_df <- function(
   fit,
   output = c("draws", "summary", "dic"),
+  variables = NULL,
   summaries = NULL,
   summary_args = NULL
 ) {
@@ -25,7 +27,7 @@ tar_jags_df <- function(
   switch(
     output,
     draws = tar_jags_df_draws(fit),
-    summary = tar_jags_df_summary(fit, summaries, summary_args),
+    summary = tar_jags_df_summary(fit, variables, summaries, summary_args),
     dic = tar_jags_df_dic(fit)
   )
 }
@@ -43,9 +45,12 @@ tar_jags_df_draws <- function(fit) {
   out
 }
 
-tar_jags_df_summary <- function(fit, summaries, summary_args) {
+tar_jags_df_summary <- function(fit, variables, summaries, summary_args) {
   draws <- tar_jags_df_draws(fit)
   draws$.draw <- NULL
+  if (!is.null(variables)) {
+    draws <- draws[, intersect(variables, colnames(draws)), drop = FALSE]
+  }
   args <- list(quote(posterior::summarize_draws), x = quote(draws))
   args$.args <- summary_args
   args <- c(args, summaries)

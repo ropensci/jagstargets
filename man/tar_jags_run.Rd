@@ -14,7 +14,6 @@ tar_jags_run(
   n.iter,
   n.burnin,
   n.thin,
-  DIC,
   jags.module,
   RNGname,
   jags.seed,
@@ -57,9 +56,6 @@ tar_jags_run(
     \code{n.iter} is large.  Default is \code{max(1, floor(n.chains *
     (n.iter-n.burnin) / 1000))} which will only thin if there are at
     least 2000 simulations.}
-
-\item{DIC}{logical; if \code{TRUE} (default), compute deviance, pD,
-    and DIC. The rule \code{pD=var(deviance) / 2} is used.}
 
 \item{jags.module}{the vector of jags modules to be loaded.  Default are \dQuote{glm} and \dQuote{dic}. Input NULL if you don't want to load any jags module.}
 

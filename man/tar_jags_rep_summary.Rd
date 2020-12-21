@@ -11,6 +11,7 @@ tar_jags_rep_summary(
   data = list(),
   data_copy = character(0),
   data_omit = character(0),
+  variables = NULL,
   summaries = NULL,
   summary_args = NULL,
   batches = 1L,

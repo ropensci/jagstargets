@@ -24,10 +24,9 @@ tar_jags(
   quiet = TRUE,
   progress.bar = "text",
   refresh = 0,
-  DIC = TRUE,
-  target_draws = TRUE,
-  target_summary = TRUE,
-  target_dic = TRUE,
+  draws = TRUE,
+  summary = TRUE,
+  dic = TRUE,
   tidy_eval = targets::tar_option_get("tidy_eval"),
   packages = targets::tar_option_get("packages"),
   library = targets::tar_option_get("library"),
@@ -109,17 +108,14 @@ suppress messages, warnings, or errors.}
 
 \item{refresh}{refresh frequency for progress bar, default is \code{n.iter/50}}
 
-\item{DIC}{logical; if \code{TRUE} (default), compute deviance, pD,
-    and DIC. The rule \code{pD=var(deviance) / 2} is used.}
-
-\item{target_draws}{Logical, whether to create a target for posterior draws.
+\item{draws}{Logical, whether to create a target for posterior draws.
 Saves draws as a compressed \code{posterior::as_draws_df()} \code{tibble}.
 Convenient, but duplicates storage.}
 
-\item{target_summary}{Logical, whether to create a target to store a small
+\item{summary}{Logical, whether to create a target to store a small
 data frame of posterior summary statistics and convergence diagnostics.}
 
-\item{target_dic}{Logical, whether to create a target with deviance
+\item{dic}{Logical, whether to create a target with deviance
 information criterion (DIC) results.}
 
 \item{tidy_eval}{Logical, whether to enable tidy evaluation

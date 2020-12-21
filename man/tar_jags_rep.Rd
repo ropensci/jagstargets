@@ -14,6 +14,7 @@ tar_jags_rep(
   batches = 1L,
   reps = 1L,
   output = c("summary", "draws", "dic"),
+  variables = NULL,
   summaries = NULL,
   summary_args = NULL,
   combine = TRUE,

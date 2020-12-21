@@ -7,6 +7,7 @@
 tar_jags_df(
   fit,
   output = c("draws", "summary", "dic"),
+  variables = NULL,
   summaries = NULL,
   summary_args = NULL
 )

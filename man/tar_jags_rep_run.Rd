@@ -13,6 +13,7 @@ tar_jags_rep_run(
   data,
   data_copy,
   data_omit,
+  variables = NULL,
   summaries = NULL,
   summary_args = NULL,
   reps,

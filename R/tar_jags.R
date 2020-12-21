@@ -32,12 +32,12 @@
 #'   the suffixed will come from `names(jags_files)`.
 #' @param quiet Logical, whether to suppress the output stream. Does not
 #'   suppress messages, warnings, or errors.
-#' @param target_draws Logical, whether to create a target for posterior draws.
+#' @param draws Logical, whether to create a target for posterior draws.
 #'   Saves draws as a compressed `posterior::as_draws_df()` `tibble`.
 #'   Convenient, but duplicates storage.
-#' @param target_summary Logical, whether to create a target to store a small
+#' @param summary Logical, whether to create a target to store a small
 #'   data frame of posterior summary statistics and convergence diagnostics.
-#' @param target_dic Logical, whether to create a target with deviance
+#' @param dic Logical, whether to create a target with deviance
 #'   information criterion (DIC) results.
 #' @examples
 #' # First, write your JAGS model file. Example:
@@ -75,10 +75,9 @@ tar_jags <- function(
   quiet = TRUE,
   progress.bar = "text",
   refresh = 0,
-  DIC = TRUE,
-  target_draws = TRUE,
-  target_summary = TRUE,
-  target_dic = TRUE,
+  draws = TRUE,
+  summary = TRUE,
+  dic = TRUE,
   tidy_eval = targets::tar_option_get("tidy_eval"),
   packages = targets::tar_option_get("packages"),
   library = targets::tar_option_get("library"),
@@ -155,7 +154,6 @@ tar_jags <- function(
     n.iter = n.iter,
     n.burnin = n.burnin,
     n.thin = n.thin,
-    DIC = DIC,
     jags.module = jags.module,
     RNGname = RNGname,
     jags.seed = jags.seed,
@@ -255,9 +253,9 @@ tar_jags <- function(
     target_object_file,
     target_object_lines,
     target_object_mcmc,
-    trn(identical(target_draws, TRUE), target_object_draws, NULL),
-    trn(identical(target_summary, TRUE), target_object_summary, NULL),
-    trn(identical(target_dic, TRUE), target_object_dic, NULL)
+    trn(identical(draws, TRUE), target_object_draws, NULL),
+    trn(identical(summary, TRUE), target_object_summary, NULL),
+    trn(identical(dic, TRUE), target_object_dic, NULL)
   )
   out <- list_nonempty(out)
   values <- list(
@@ -292,7 +290,6 @@ tar_jags_run <- function(
   n.iter,
   n.burnin,
   n.thin,
-  DIC,
   jags.module,
   RNGname,
   jags.seed,
@@ -319,7 +316,7 @@ tar_jags_run <- function(
       n.burnin = n.burnin,
       n.thin = n.thin,
       n.cluster = n.cluster,
-      DIC = DIC,
+      DIC = TRUE,
       jags.seed = jags.seed,
       RNGname = RNGname,
       jags.module = jags.module,
@@ -334,7 +331,7 @@ tar_jags_run <- function(
       n.iter = n.iter,
       n.burnin = n.burnin,
       n.thin = n.thin,
-      DIC = DIC,
+      DIC = TRUE,
       jags.seed = jags.seed,
       refresh = refresh,
       progress.bar = progress.bar,
