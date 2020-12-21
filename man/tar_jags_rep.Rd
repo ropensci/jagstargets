@@ -241,11 +241,6 @@ Suppressed if \code{combine} is \code{FALSE}.
 }
 }
 \description{
-Inner engine for the \verb{tar_jags_rep*()} functions.
-Not a user-side function. Do not invoke directly.
+Internal function. Users should not invoke directly.
 }
-\details{
-The MCMC targets use \code{R2jags::jags()} if \code{n.cluster} is \code{1} and
-\code{R2jags::jags.parallel()} otherwise. Most arguments to \code{tar_jags()}
-are forwarded to these functions.
-}
+\keyword{internal}

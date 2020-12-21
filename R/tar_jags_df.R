@@ -3,7 +3,6 @@
 #' @keywords internal
 #' @description Not a user-side function. Do not call directly.
 #'   Exported for infrastructure reasons only.
-#' @inheritParams posterior::summarize_draws
 #' @param fit `R2jags` object.
 #' @param variables Character vector of model parameter names.
 #'   The output posterior summaries are restricted to these variables.

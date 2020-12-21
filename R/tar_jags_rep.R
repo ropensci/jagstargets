@@ -1,9 +1,6 @@
 #' @title Tidy output from multiple MCMCs per model.
-#' @description Inner engine for the `tar_jags_rep*()` functions.
-#'   Not a user-side function. Do not invoke directly.
-#' @details The MCMC targets use `R2jags::jags()` if `n.cluster` is `1` and
-#'   `R2jags::jags.parallel()` otherwise. Most arguments to `tar_jags()`
-#'   are forwarded to these functions.
+#' @keywords internal
+#' @description Internal function. Users should not invoke directly.
 #' @return `tar_jags_rep(name = x, jags_files = "y.jags")`
 #'   returns a list of `targets::tar_target()` objects:
 #'   * `x_file_y`: reproducibly track the jags model file.
