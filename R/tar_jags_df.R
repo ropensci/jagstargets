@@ -23,7 +23,9 @@ tar_jags_df <- function(
 }
 
 tar_jags_df_draws <- function(fit) {
-  out <- fit$BUGSoutput$sims.matrix
+  list <- fit$BUGSoutput$sims.list
+  out <- as.matrix(fit$BUGSoutput$sims.matrix, nrow = nrow(list))
+  colnames(out) <- names(list)
   out <- tibble::as_tibble(out, .name_repair = make.names)
   chains <- as.integer(fit$BUGSoutput$n.chains)
   iterations <- as.integer(nrow(out) / chains)

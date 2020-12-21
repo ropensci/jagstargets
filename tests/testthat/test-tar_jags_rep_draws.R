@@ -1,11 +1,11 @@
-targets::tar_test("tar_jags_rep_dic()", {
+targets::tar_test("tar_jags_rep_draws()", {
   skip_on_cran()
   skip_if_not_installed("dplyr")
   tar_jags_example_file(path = "a.jags")
   tar_jags_example_file(path = "b.jags")
   targets::tar_script({
     tar_pipeline(
-      tar_jags_rep_dic(
+      tar_jags_rep_draws(
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),
         data = tar_jags_example_data(),
@@ -68,7 +68,7 @@ targets::tar_test("tar_jags_rep_dic()", {
   out1 <- targets::tar_read(model_x)
   out2 <- targets::tar_read(model_y)
   out <- targets::tar_read(model)
-  expect_true("dic" %in% colnames(out))
+  expect_true("beta" %in% colnames(out))
   expect_true("true_beta" %in% colnames(out))
   expect_equal(sort(unique(out$.file)), sort(unique(c("a.jags", "b.jags"))))
   expect_equal(sort(unique(out$.name)), sort(unique(c("x", "y"))))
@@ -79,8 +79,8 @@ targets::tar_test("tar_jags_rep_dic()", {
   expect_equal(length(unique(table(out2$.rep))), 1L)
   expect_equal(length(table(out1$.rep)), 4L)
   expect_equal(length(table(out2$.rep)), 4L)
-  expect_equal(nrow(out1), 4L)
-  expect_equal(nrow(out2), 4L)
+  expect_equal(nrow(out1), 16000L)
+  expect_equal(nrow(out2), 16000L)
   # Everything should be up to date.
   expect_equal(targets::tar_outdated(callr_function = NULL), character(0))
   # Change the model.
@@ -91,7 +91,7 @@ targets::tar_test("tar_jags_rep_dic()", {
   # Change the data code.
   targets::tar_script({
     tar_pipeline(
-      tar_jags_rep_dic(
+      tar_jags_rep_draws(
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),
         data = c(tar_jags_example_data()),
