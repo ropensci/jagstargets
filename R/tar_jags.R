@@ -68,7 +68,7 @@ tar_jags <- function(
     "Super-Duper",
     "Mersenne-Twister"
   ),
-  jags.seed = 123,
+  jags.seed = 1,
   quiet = TRUE,
   progress.bar = "text",
   refresh = 0,

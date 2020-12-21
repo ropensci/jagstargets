@@ -27,7 +27,7 @@ tar_jags_rep <- function(
   name,
   jags_files,
   parameters.to.save,
-  data = list(),
+  data = quote(list()),
   data_copy = character(0),
   data_omit = character(0),
   batches = 1L,
@@ -47,7 +47,7 @@ tar_jags_rep <- function(
     "Super-Duper",
     "Mersenne-Twister"
   ),
-  jags.seed = 123,
+  jags.seed = 1,
   quiet = TRUE,
   progress.bar = "text",
   refresh = 0,
@@ -70,7 +70,6 @@ tar_jags_rep <- function(
   assert_chr(data_copy, "data_copy must be a character vector")
   assert_chr(data_omit, "data_omit must be a character vector")
   output <- match.arg(output)
-  name <- deparse_language(substitute(name))
   name_jags <- produce_jags_names(jags_files)
   name_file <- paste0(name, "_file")
   name_lines <- paste0(name, "_lines")
@@ -86,11 +85,7 @@ tar_jags_rep <- function(
     args = list(con = rlang::sym(name_file))
   )
   command_batch <- substitute(seq_len(x), env = list(x = batches))
-  command_rep <- tidy_eval(
-    substitute(data),
-    envir = envir,
-    tidy_eval = tidy_eval
-  )
+  command_rep <- tidy_eval(data, envir = envir, tidy_eval = tidy_eval)
   command_data <- substitute(
     purrr::map(seq_len(.targets_reps), ~.targets_command),
     env = list(.targets_reps = reps, .targets_command = command_rep)
