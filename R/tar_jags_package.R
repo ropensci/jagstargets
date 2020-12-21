@@ -10,8 +10,9 @@
 #' @name jagstargets-package
 #' @importFrom coda mcmc mcmc.list
 #' @importFrom fst read_fst
-#' @importFrom qs qread
+#' @importFrom posterior summarize_draws
 #' @importFrom purrr map
+#' @importFrom qs qread
 #' @importFrom R2jags jags jags.parallel
 #' @importFrom rlang as_function sym
 #' @importFrom stats rnorm
