@@ -1,6 +1,0 @@
-model {
-  for (i in 1:n) {
-    y[i] ~ dnorm(x[i] * beta, 1)
-  }
-  beta ~ dnorm(0, 1)
-}
