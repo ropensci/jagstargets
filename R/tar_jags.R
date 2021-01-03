@@ -43,7 +43,7 @@
 #' # First, write your JAGS model file. Example:
 #' # tar_jags_example_file() # Writes jagstargets_example.jags
 #' # Then in _targets.R, write the pipeline:
-#' targets::tar_pipeline(
+#' list(
 #'   tar_jags(
 #'     your_model,
 #'     jags_files = "jagstargets_example.jags",

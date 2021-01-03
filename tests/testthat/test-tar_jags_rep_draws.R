@@ -4,7 +4,7 @@ targets::tar_test("tar_jags_rep_draws()", {
   tar_jags_example_file(path = "a.jags")
   tar_jags_example_file(path = "b.jags")
   targets::tar_script({
-    tar_pipeline(
+    list(
       tar_jags_rep_draws(
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),
@@ -90,7 +90,7 @@ targets::tar_test("tar_jags_rep_draws()", {
   expect_equal(sort(out), sort(exp))
   # Change the data code.
   targets::tar_script({
-    tar_pipeline(
+    list(
       tar_jags_rep_draws(
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),

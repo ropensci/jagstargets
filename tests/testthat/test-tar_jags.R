@@ -9,7 +9,7 @@ targets::tar_test("tar_jags()", {
       out$true_beta <- NULL
       out
     }
-    tar_pipeline(
+    list(
       tar_jags(
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),
@@ -109,7 +109,7 @@ targets::tar_test("tar_jags()", {
       out$true_beta <- NULL
       out
     }
-    tar_pipeline(
+    list(
       tar_jags(
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),
@@ -147,7 +147,7 @@ targets::tar_test("tar_jags() with custom summaries", {
       out$true_beta <- NULL
       out
     }
-    tar_pipeline(
+    list(
       tar_jags(
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),

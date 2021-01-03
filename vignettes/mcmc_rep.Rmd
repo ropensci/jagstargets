@@ -48,7 +48,7 @@ tar_script({
   library(jagstargets)
   options(crayon.enabled = FALSE)
   tar_option_set(memory = "transient", garbage_collection = TRUE)
-  tar_pipeline(
+  list(
     tar_jags_rep_summary(
       model,
       "model.jags",
@@ -75,7 +75,7 @@ library(targets)
 library(jagstargets)
 options(crayon.enabled = FALSE)
 tar_option_set(memory = "transient", garbage_collection = TRUE)
-tar_pipeline(
+list(
   tar_jags_rep_summary(
     model,
     "model.jags",
@@ -133,7 +133,7 @@ tar_script({
     memory = "transient",
     garbage_collection = TRUE
   )
-  tar_pipeline(
+  list(
     tar_jags_rep_summary(
       model,
       "model.jags",
@@ -163,7 +163,7 @@ tar_script({
 # _targets.R
 library(targets)
 library(jagstargets)
-tar_pipeline(
+list(
   tar_jags_rep_summary(
     model,
     "model.jags",
@@ -219,7 +219,7 @@ tar_script({
     memory = "transient",
     garbage_collection = TRUE
   )
-  tar_pipeline(
+  list(
     tar_jags_rep_summary(
       model,
       c("model.jags", "model2.jags"), # another model
@@ -250,7 +250,7 @@ tar_script({
 # _targets.R
 library(targets)
 library(jagstargets)
-tar_pipeline(
+list(
   tar_jags_rep_summary(
     model,
     c("model.jags", "model2.jags"), # another model

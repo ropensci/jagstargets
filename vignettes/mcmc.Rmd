@@ -44,7 +44,7 @@ library(targets)
 tar_script({
   library(jagstargets)
   options(crayon.enabled = FALSE)
-  tar_pipeline(
+  list(
     tar_jags(
       example,
       jags_files = "x.jags",
@@ -60,7 +60,7 @@ tar_script({
 # _targets.R
 library(targets)
 library(jagstargets)
-tar_pipeline(
+list(
   tar_jags(
     example,
     jags_files = "x.jags",
@@ -138,7 +138,7 @@ tar_script({
   library(jagstargets)
   options(crayon.enabled = FALSE)
   tar_option_set(memory = "transient", garbage_collection = TRUE)
-  tar_pipeline(
+  list(
     tar_jags(
       example,
       jags_files = "x.jags",
@@ -161,7 +161,7 @@ tar_script({
 # _targets.R
 library(targets)
 library(jagstargets)
-tar_pipeline(
+list(
   tar_jags(
     example,
     jags_files = "x.jags",
@@ -203,7 +203,7 @@ tar_read(custom_summary)
 tar_script({
   library(targets)
   library(jagstargets)
-  tar_pipeline(
+  list(
     tar_jags(
       example,
       jags_files = c("x.jags", "y.jags"),
@@ -226,7 +226,7 @@ tar_script({
 # _targets.R
 library(targets)
 library(jagstargets)
-tar_pipeline(
+list(
   tar_jags(
     example,
     jags_files = c("x.jags", "y.jags"),
