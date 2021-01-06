@@ -65,6 +65,8 @@ tar_jags_run(
 
 \item{jags.seed}{random seed for \code{JAGS}, default is 123.  This function is used for jags.parallell() and does not work for jags().  Use set.seed() instead if you want to produce identical result with jags() }
 
+\item{quiet}{Logical, whether to suppress stdout in \code{jags.model()}.}
+
 \item{progress.bar}{type of progress bar. Possible values are \dQuote{text},
       \dQuote{gui}, and \dQuote{none}. Type \dQuote{text} is displayed
       on the R console. Type \dQuote{gui} is a graphical progress bar

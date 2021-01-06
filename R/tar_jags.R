@@ -40,17 +40,21 @@
 #' @param dic Logical, whether to create a target with deviance
 #'   information criterion (DIC) results.
 #' @examples
-#' # First, write your JAGS model file. Example:
-#' # tar_jags_example_file() # Writes jagstargets_example.jags
-#' # Then in _targets.R, write the pipeline:
+#' targets::tar_dir({
+#' tar_jags_example_file()
+#' targets::tar_script({
+#' library(jagstargets)
 #' list(
 #'   tar_jags(
 #'     your_model,
 #'     jags_files = "jagstargets_example.jags",
-#'     data = tar_jags_example_data(),
+#'     data = tar_jags_example_data(true_params = FALSE),
 #'     parameters.to.save = "beta"
 #'   )
 #' )
+#' })
+#' targets::tar_make()
+#' })
 tar_jags <- function(
   name,
   jags_files,
@@ -304,6 +308,11 @@ tar_jags_run <- function(
   writeLines(jags_lines, file)
   envir <- environment()
   requireNamespace("coda")
+  if (quiet) {
+    sink(file = tempfile(), type = "output")
+    on.exit(sink(file = NULL, type = "output"))
+  }
+  lapply(jags.module, rjags::load.module, quiet = quiet)
   trn(
     n.cluster > 1L,
     R2jags::jags.parallel(

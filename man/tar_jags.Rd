@@ -229,15 +229,19 @@ The MCMC targets use \code{R2jags::jags()} if \code{n.cluster} is \code{1} and
 are forwarded to these functions.
 }
 \examples{
-# First, write your JAGS model file. Example:
-# tar_jags_example_file() # Writes jagstargets_example.jags
-# Then in _targets.R, write the pipeline:
+targets::tar_dir({
+tar_jags_example_file()
+targets::tar_script({
+library(jagstargets)
 list(
   tar_jags(
     your_model,
     jags_files = "jagstargets_example.jags",
-    data = tar_jags_example_data(),
+    data = tar_jags_example_data(true_params = FALSE),
     parameters.to.save = "beta"
   )
 )
+})
+targets::tar_make()
+})
 }

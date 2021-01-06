@@ -14,6 +14,7 @@
 #' @importFrom purrr map
 #' @importFrom qs qread
 #' @importFrom R2jags jags jags.parallel
+#' @importFrom rjags load.module
 #' @importFrom rlang as_function sym
 #' @importFrom stats rnorm
 #' @importFrom targets tar_cue tar_dir tar_load tar_option_get tar_path
