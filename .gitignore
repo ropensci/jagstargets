@@ -1,6 +1,7 @@
 *~
 *.out
 *.Rout
+*.code-workspace
 .DS_Store
 .future
 .Rapp.history

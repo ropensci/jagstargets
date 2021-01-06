@@ -4,7 +4,7 @@
 [![R
 Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&labelColor=gray)](https://wlandau.github.io/targetopia/)
 [![cran](http://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)
-[![status](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/wlandau/jagstargets/workflows/check/badge.svg)](https://github.com/wlandau/jagstargets/actions?query=workflow%3Acheck)
 [![codecov](https://codecov.io/gh/wlandau/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/wlandau/targets)
 [![lint](https://github.com/wlandau/jagstargets/workflows/lint/badge.svg)](https://github.com/wlandau/jagstargets/actions?query=workflow%3Alint)
