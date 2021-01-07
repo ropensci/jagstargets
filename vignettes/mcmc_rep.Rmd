@@ -54,10 +54,9 @@ tar_script({
       "model.jags",
       data = tar_jags_example_data(),
       parameters.to.save = "beta",
-      refresh = 0,
       batches = 5, # Number of branch targets.
       reps = 2, # Number of model reps per branch target.
-      quiet = TRUE,
+      log = R.utils::nullfile(),
       data_copy = "true_beta", # Append scalars from data to the output data frame.
       data_omit = "true_beta", # Omit true_beta from the MCMC (avoids warnings).
       variables = "beta",
@@ -81,10 +80,9 @@ list(
     "model.jags",
     data = tar_jags_example_data(),
     parameters.to.save = "beta",
-    refresh = 0,
     batches = 5, # Number of branch targets.
     reps = 2, # Number of model reps per branch target.
-    quiet = TRUE,
+    log = R.utils::nullfile(),
     data_copy = "true_beta", # Append scalars from data to the output data frame.
     data_omit = "true_beta", # Omit true_beta from the MCMC (avoids warnings).
     variables = "beta",
@@ -139,10 +137,9 @@ tar_script({
       "model.jags",
       data = tar_jags_example_data(),
       parameters.to.save = "beta",
-      refresh = 0,
       batches = 5, # Number of branch targets.
       reps = 2, # Number of model reps per branch target.
-      quiet = TRUE,
+      log = R.utils::nullfile(),
       data_copy = "true_beta", # Append scalars from data to the output data frame.
       data_omit = "true_beta", # Omit true_beta from the MCMC (avoids warnings).
       variables = "beta",
@@ -169,10 +166,9 @@ list(
     "model.jags",
     data = tar_jags_example_data(),
     parameters.to.save = "beta",
-    refresh = 0,
     batches = 5, # Number of branch targets.
     reps = 2, # Number of model reps per branch target.
-    quiet = TRUE,
+    log = R.utils::nullfile(),
     data_copy = "true_beta", # Append scalars from data to the output data frame.
     data_omit = "true_beta", # Omit true_beta from the MCMC (avoids warnings).
     variables = "beta",
@@ -225,10 +221,9 @@ tar_script({
       c("model.jags", "model2.jags"), # another model
       data = tar_jags_example_data(),
       parameters.to.save = "beta",
-      refresh = 0,
       batches = 5,
       reps = 2,
-      quiet = TRUE,
+      log = R.utils::nullfile(),
       data_copy = "true_beta",
       data_omit = "true_beta",
       variables = "beta",
@@ -256,10 +251,9 @@ list(
     c("model.jags", "model2.jags"), # another model
     data = tar_jags_example_data(),
     parameters.to.save = "beta",
-    refresh = 0,
     batches = 5,
     reps = 2,
-    quiet = TRUE,
+    log = R.utils::nullfile(),
     data_copy = "true_beta",
     data_omit = "true_beta",
     variables = "beta",

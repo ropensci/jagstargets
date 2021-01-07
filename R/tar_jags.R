@@ -30,8 +30,6 @@
 #'   `tools::file_path_sans_ext(basename(jags_files))` will be used
 #'   as target name suffixes. If `jags_files` is a named vector,
 #'   the suffixed will come from `names(jags_files)`.
-#' @param quiet Logical, whether to suppress the output stream. Does not
-#'   suppress messages, warnings, or errors.
 #' @param draws Logical, whether to create a target for posterior draws.
 #'   Saves draws as a compressed `posterior::as_draws_df()` `tibble`.
 #'   Convenient, but duplicates storage.
@@ -49,7 +47,8 @@
 #'     your_model,
 #'     jags_files = "jagstargets_example.jags",
 #'     data = tar_jags_example_data(true_params = FALSE),
-#'     parameters.to.save = "beta"
+#'     parameters.to.save = "beta",
+#'     log = R.utils::nullfile()
 #'   )
 #' )
 #' })
@@ -76,7 +75,7 @@ tar_jags <- function(
     "Mersenne-Twister"
   ),
   jags.seed = 1,
-  quiet = TRUE,
+  log = NULL,
   progress.bar = "text",
   refresh = 0,
   draws = TRUE,
@@ -161,7 +160,7 @@ tar_jags <- function(
     jags.module = jags.module,
     RNGname = RNGname,
     jags.seed = jags.seed,
-    quiet = quiet,
+    log = log,
     progress.bar = progress.bar,
     refresh = refresh
   )
@@ -284,6 +283,10 @@ tar_jags <- function(
 #' @inheritParams R2jags::jags
 #' @inheritParams R2jags::jags.parallel
 #' @param jags_lines Character vector of lines from a JAGS model file.
+#' @param log Character of length 1, file path to write the stdout stream
+#'   of the model when it runs. Set to `NULL` to print to the console.
+#'   Set to `R.utils::nullfile()` to completely suppress all output.
+#'   Does not apply to messages, warnings, or errors.
 tar_jags_run <- function(
   jags_lines,
   parameters.to.save,
@@ -297,7 +300,7 @@ tar_jags_run <- function(
   jags.module,
   RNGname,
   jags.seed,
-  quiet,
+  log,
   progress.bar,
   refresh
 ) {
@@ -308,11 +311,11 @@ tar_jags_run <- function(
   writeLines(jags_lines, file)
   envir <- environment()
   requireNamespace("coda")
-  if (quiet) {
-    sink(file = tempfile(), type = "output")
+  if (!is.null(log)) {
+    sink(file = log, type = "output")
     on.exit(sink(file = NULL, type = "output"))
   }
-  lapply(jags.module, rjags::load.module, quiet = quiet)
+  lapply(jags.module, rjags::load.module, quiet = TRUE)
   trn(
     n.cluster > 1L,
     R2jags::jags.parallel(

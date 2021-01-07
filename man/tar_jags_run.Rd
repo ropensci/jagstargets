@@ -17,7 +17,7 @@ tar_jags_run(
   jags.module,
   RNGname,
   jags.seed,
-  quiet,
+  log,
   progress.bar,
   refresh
 )
@@ -65,7 +65,10 @@ tar_jags_run(
 
 \item{jags.seed}{random seed for \code{JAGS}, default is 123.  This function is used for jags.parallell() and does not work for jags().  Use set.seed() instead if you want to produce identical result with jags() }
 
-\item{quiet}{Logical, whether to suppress stdout in \code{jags.model()}.}
+\item{log}{Character of length 1, file path to write the stdout stream
+of the model when it runs. Set to \code{NULL} to print to the console.
+Set to \code{R.utils::nullfile()} to completely suppress all output.
+Does not apply to messages, warnings, or errors.}
 
 \item{progress.bar}{type of progress bar. Possible values are \dQuote{text},
       \dQuote{gui}, and \dQuote{none}. Type \dQuote{text} is displayed

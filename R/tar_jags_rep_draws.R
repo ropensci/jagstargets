@@ -29,7 +29,8 @@
 #'     data = tar_jags_example_data(true_params = FALSE),
 #'     parameters.to.save = "beta",
 #'     batches = 2,
-#'     reps = 2
+#'     reps = 2,
+#'     log = R.utils::nullfile()
 #'   )
 #' )
 #' })
@@ -59,7 +60,7 @@ tar_jags_rep_draws <- function(
     "Mersenne-Twister"
   ),
   jags.seed = 123,
-  quiet = TRUE,
+  log = NULL,
   progress.bar = "text",
   refresh = 0,
   tidy_eval = targets::tar_option_get("tidy_eval"),
@@ -95,7 +96,7 @@ tar_jags_rep_draws <- function(
     inits = inits,
     RNGname = RNGname,
     jags.seed = jags.seed,
-    quiet = quiet,
+    log = log,
     progress.bar = progress.bar,
     refresh = refresh,
     tidy_eval = tidy_eval,
