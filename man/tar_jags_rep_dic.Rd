@@ -243,7 +243,8 @@ list(
     data = tar_jags_example_data(true_params = FALSE),
     parameters.to.save = "beta",
     batches = 2,
-    reps = 2
+    reps = 2,
+    log = R.utils::nullfile()
   )
 )
 })
