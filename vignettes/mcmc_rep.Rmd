@@ -1,9 +1,9 @@
 ---
-title: "Pipelines with several MCMC runs"
+title: "Scaling MCMC pipelines"
 output: rmarkdown::html_vignette
 bibliography: mcmc_rep.bib
 vignette: >
-  %\VignetteIndexEntry{Pipelines with several MCMC runs}
+  %\VignetteIndexEntry{Scaling MCMC pipelines}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
