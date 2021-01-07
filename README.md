@@ -19,6 +19,29 @@ code is required, and there is no need to manually configure branching,
 so usage is much easier than
 [`targets`](https://github.com/wlandau/targets) alone.
 
+## Prerequisites
+
+1.  The [prerequisites of the `targets` R
+    package](https://wlandau.github.io/targets/#prerequisites).
+2.  Basic familiarity with
+    [`targets`](https://wlandau.github.io/targets/): watch minutes 6
+    through 40 of [this video](https://youtu.be/Gqn7Xn4d5NI), then read
+    [this
+    chapter](https://wlandau.github.io/targets-manual/walkthrough.html)
+    of the [user manual](https://wlandau.github.io/targets-manual/).
+3.  Familiarity with Bayesian Statistics and
+    [JAGS](http://mcmc-jags.sourceforge.net/). Prior knowledge of
+    [`rjags`](https://cran.r-project.org/package=rjags) or
+    [`R2jags`](https://cran.r-project.org/package=R2jags) helps.
+
+## How to get started
+
+Read the `jagstargets` tutorial vignettes
+[here](https://wlandau.github.io/jagstargets/articles/mcmc.html) and
+[here](https://wlandau.github.io/jagstargets/articles/mcmc_rep.html),
+then use <https://wlandau.github.io/jagstargets/> as a reference while
+constructing your own worklows.
+
 ## Installation
 
 Install the GitHub development version to access the latest features and
@@ -31,15 +54,52 @@ remotes::install_github("wlandau/jagstargets")
 And if you have not done so already, install JAGS from
 <http://mcmc-jags.sourceforge.net/>.
 
-## Documentation
+## Usage
 
-The `jagstargets` website at <https://wlandau.github.io/jagstargets/>
-has function documentation and vignettes. Prior familiarity with
-[`targets`](https://github.com/wlandau/targets) and
-[`R2jags`](https://CRAN.R-project.org/package=R2jags) is highly
-recommended. For [`targets`](https://github.com/wlandau/targets), you
-can learn more at <https://wlandau.github.io/targets>. The JAGS user
-manual is linked from <http://mcmc-jags.sourceforge.net/>.
+First, write a [`_targets.R`
+file](https://wlandau.github.io/targets-manual/walkthrough.html) that
+loads your packages, defines a function to generate JAGS data, and lists
+a pipeline of targets. The target list can call target factories like
+[`tar_jags()`](https://wlandau.github.io/jagstargets/reference/tar_jags.html)
+as well as ordinary targets with
+[`tar_target()`](https://wlandau.github.io/targets/reference/tar_target.html).
+
+``` r
+# _targets.R
+library(targets)
+library(jagstargets)
+
+generate_data <- function() {
+  true_beta <- stats::rnorm(n = 1, mean = 0, sd = 1)
+  x <- seq(from = -1, to = 1, length.out = n)
+  y <- stats::rnorm(n, x * true_beta, 1)
+  out <- list(
+    n = n,
+    x = x,
+    y = y
+  )
+}
+
+list(
+  tar_jags(
+    example,
+    jags_files = "x.jags", # You provide this file.
+    parameters.to.save = "beta",
+    data = generate_data(),
+    log = R.utils::nullfile()
+  )
+)
+```
+
+Run
+[`tar_visnetwork()`](https://wlandau.github.io/targets/reference/tar_visnetwork.html)
+to check `_targets.R` for correctness, then call
+[`tar_make()`](https://wlandau.github.io/targets/reference/tar_make.html)
+to run the pipeline. Access the results using
+[`tar_read()`](https://wlandau.github.io/targets/reference/tar_read.html),
+e.g. `tar_read(tar_read(example_summary_x)`. Visit [this
+vignette](https://wlandau.github.io/jagstargets/articles/mcmc.html) to
+read more about this example.
 
 ## Participation
 
@@ -56,13 +116,11 @@ guide](https://github.com/wlandau/jagstargets/blob/main/CONTRIBUTING.md).
 citation("jagstargets")
 #> Warning in citation("jagstargets"): no date field in DESCRIPTION file of package
 #> 'jagstargets'
-#> Warning in citation("jagstargets"): could not determine year for 'jagstargets'
-#> from package DESCRIPTION file
 #> 
 #> To cite package 'jagstargets' in publications use:
 #> 
-#>   William Michael Landau (NA). jagstargets: Targets for JAGS Workflows.
-#>   https://wlandau.github.io/jagstargets/,
+#>   William Michael Landau (2021). jagstargets: Targets for JAGS
+#>   Workflows. https://wlandau.github.io/jagstargets/,
 #>   https://github.com/wlandau/jagstargets.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -70,6 +128,8 @@ citation("jagstargets")
 #>   @Manual{,
 #>     title = {jagstargets: Targets for JAGS Workflows},
 #>     author = {William Michael Landau},
-#>     note = {https://wlandau.github.io/jagstargets/, https://github.com/wlandau/jagstargets},
+#>     year = {2021},
+#>     note = {https://wlandau.github.io/jagstargets/,
+#> https://github.com/wlandau/jagstargets},
 #>   }
 ```
