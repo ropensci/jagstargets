@@ -6,7 +6,7 @@ Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&lab
 [![cran](http://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/wlandau/jagstargets/workflows/check/badge.svg)](https://github.com/wlandau/jagstargets/actions?query=workflow%3Acheck)
-[![codecov](https://codecov.io/gh/wlandau/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/wlandau/targets)
+[![codecov](https://codecov.io/gh/wlandau/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/wlandau/jagstargets)
 [![lint](https://github.com/wlandau/jagstargets/workflows/lint/badge.svg)](https://github.com/wlandau/jagstargets/actions?query=workflow%3Alint)
 
 The `jagstargets` R package is an extension to
@@ -112,11 +112,13 @@ guide](https://github.com/wlandau/jagstargets/blob/main/CONTRIBUTING.md).
 citation("jagstargets")
 #> Warning in citation("jagstargets"): no date field in DESCRIPTION file of package
 #> 'jagstargets'
+#> Warning in citation("jagstargets"): could not determine year for 'jagstargets'
+#> from package DESCRIPTION file
 #> 
 #> To cite package 'jagstargets' in publications use:
 #> 
-#>   William Michael Landau (2021). jagstargets: Targets for JAGS
-#>   Workflows. https://wlandau.github.io/jagstargets/,
+#>   William Michael Landau (NA). jagstargets: Targets for JAGS Workflows.
+#>   https://wlandau.github.io/jagstargets/,
 #>   https://github.com/wlandau/jagstargets.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -124,8 +126,6 @@ citation("jagstargets")
 #>   @Manual{,
 #>     title = {jagstargets: Targets for JAGS Workflows},
 #>     author = {William Michael Landau},
-#>     year = {2021},
-#>     note = {https://wlandau.github.io/jagstargets/,
-#> https://github.com/wlandau/jagstargets},
+#>     note = {https://wlandau.github.io/jagstargets/, https://github.com/wlandau/jagstargets},
 #>   }
 ```
