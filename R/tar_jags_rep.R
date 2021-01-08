@@ -357,7 +357,7 @@ tar_jags_rep_run_rep <- function(
     summary_args = summary_args
   )
   out <- copy_data_scalars(out, data, data_copy)
-  out$.rep <- basename(tempfile(pattern = "rep_"))
+  out$.rep <- digest::digest(runif(1), algo = "xxhash32")
   out
 }
 

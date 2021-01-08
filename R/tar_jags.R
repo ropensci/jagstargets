@@ -312,7 +312,7 @@ tar_jags_run <- function(
   envir <- environment()
   requireNamespace("coda")
   if (!is.null(log)) {
-    sink(file = log, type = "output")
+    sink(file = log, type = "output", append = TRUE)
     on.exit(sink(file = NULL, type = "output"))
   }
   lapply(jags.module, rjags::load.module, quiet = TRUE)

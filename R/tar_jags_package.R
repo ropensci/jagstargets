@@ -9,6 +9,7 @@
 #'   configure branching, so usage is much easier than `targets` alone.
 #' @name jagstargets-package
 #' @importFrom coda mcmc mcmc.list
+#' @importFrom digest digest
 #' @importFrom fst read_fst
 #' @importFrom posterior summarize_draws
 #' @importFrom purrr map
