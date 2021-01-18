@@ -51,7 +51,7 @@
 #'     log = R.utils::nullfile()
 #'   )
 #' )
-#' })
+#' }, ask = FALSE)
 #' targets::tar_make()
 #' })
 tar_jags <- function(

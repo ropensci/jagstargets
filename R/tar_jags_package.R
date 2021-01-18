@@ -1,7 +1,9 @@
 #' targets: Targets for JAGS Workflows
 #' @docType package
-#' @description The `jagstargets` R package is an extension to
-#'   `targets` and `R2jags` for Bayesian data analysis.
+#' @description Bayesian data analysis usually incurs long runtimes
+#'   and cumbersome custom code. A pipeline toolkit tailored to
+#'   Bayesians, the `jagstargets` R package leverages
+#'   `targets` and `R2jags` to ease this burden.
 #'   `jagstargets` makes it super easy to set up useful scalable
 #'   JAGS pipelines that automatically parallelize the computation
 #'   and skip expensive steps when the results are already up to date.

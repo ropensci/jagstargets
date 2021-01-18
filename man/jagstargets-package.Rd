@@ -5,8 +5,10 @@
 \alias{jagstargets-package}
 \title{targets: Targets for JAGS Workflows}
 \description{
-The \code{jagstargets} R package is an extension to
-\code{targets} and \code{R2jags} for Bayesian data analysis.
+Bayesian data analysis usually incurs long runtimes
+and cumbersome custom code. A pipeline toolkit tailored to
+Bayesians, the \code{jagstargets} R package leverages
+\code{targets} and \code{R2jags} to ease this burden.
 \code{jagstargets} makes it super easy to set up useful scalable
 JAGS pipelines that automatically parallelize the computation
 and skip expensive steps when the results are already up to date.

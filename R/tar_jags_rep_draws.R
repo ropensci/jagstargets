@@ -33,7 +33,7 @@
 #'     log = R.utils::nullfile()
 #'   )
 #' )
-#' })
+#' }, ask = FALSE)
 #' targets::tar_make()
 #' })
 tar_jags_rep_draws <- function(
