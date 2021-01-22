@@ -3,32 +3,33 @@
 
 [![R
 Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&labelColor=gray)](https://wlandau.github.io/targetopia/)
+<!--
 [![cran](http://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)
+-->
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/wlandau/jagstargets/workflows/check/badge.svg)](https://github.com/wlandau/jagstargets/actions?query=workflow%3Acheck)
 [![codecov](https://codecov.io/gh/wlandau/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/wlandau/jagstargets)
 [![lint](https://github.com/wlandau/jagstargets/workflows/lint/badge.svg)](https://github.com/wlandau/jagstargets/actions?query=workflow%3Alint)
 
 The `jagstargets` R package is an extension to
-[`targets`](https://github.com/wlandau/targets) and
+[`targets`](https://docs.ropensci.org/targets/) and
 [`R2jags`](https://CRAN.R-project.org/package=R2jags) for Bayesian data
 analysis. `jagstargets` makes it super easy to set up useful scalable
 JAGS pipelines that automatically parallelize the computation and skip
 expensive steps when the results are already up to date. Minimal custom
 code is required, and there is no need to manually configure branching,
 so usage is much easier than
-[`targets`](https://github.com/wlandau/targets) alone.
+[`targets`](https://docs.ropensci.org/targets/) alone.
 
 ## Prerequisites
 
 1.  The [prerequisites of the `targets` R
-    package](https://wlandau.github.io/targets/#prerequisites).
+    package](https://docs.ropensci.org/targets/#prerequisites).
 2.  Basic familiarity with
-    [`targets`](https://wlandau.github.io/targets/): watch minutes 6
+    [`targets`](https://docs.ropensci.org/targets/): watch minutes 6
     through 40 of [this video](https://youtu.be/Gqn7Xn4d5NI), then read
-    [this
-    chapter](https://wlandau.github.io/targets-manual/walkthrough.html)
-    of the [user manual](https://wlandau.github.io/targets-manual/).
+    [this chapter](https://books.ropensci.org/targets/walkthrough.html)
+    of the [user manual](https://books.ropensci.org/targets/).
 3.  Familiarity with Bayesian Statistics and
     [JAGS](http://mcmc-jags.sourceforge.net/). Prior knowledge of
     [`rjags`](https://cran.r-project.org/package=rjags) or
@@ -57,12 +58,12 @@ And if you have not done so already, install JAGS from
 ## Usage
 
 First, write a [`_targets.R`
-file](https://wlandau.github.io/targets-manual/walkthrough.html) that
-loads your packages, defines a function to generate JAGS data, and lists
-a pipeline of targets. The target list can call target factories like
+file](https://books.ropensci.org/targets/walkthrough.html) that loads
+your packages, defines a function to generate JAGS data, and lists a
+pipeline of targets. The target list can call target factories like
 [`tar_jags()`](https://wlandau.github.io/jagstargets/reference/tar_jags.html)
 as well as ordinary targets with
-[`tar_target()`](https://wlandau.github.io/targets/reference/tar_target.html).
+[`tar_target()`](https://docs.ropensci.org/targets/reference/tar_target.html).
 
 ``` r
 # _targets.R
@@ -88,11 +89,11 @@ list(
 ```
 
 Run
-[`tar_visnetwork()`](https://wlandau.github.io/targets/reference/tar_visnetwork.html)
+[`tar_visnetwork()`](https://docs.ropensci.org/targets/reference/tar_visnetwork.html)
 to check `_targets.R` for correctness, then call
-[`tar_make()`](https://wlandau.github.io/targets/reference/tar_make.html)
+[`tar_make()`](https://docs.ropensci.org/targets/reference/tar_make.html)
 to run the pipeline. Access the results using
-[`tar_read()`](https://wlandau.github.io/targets/reference/tar_read.html),
+[`tar_read()`](https://docs.ropensci.org/targets/reference/tar_read.html),
 e.g. `tar_read(tar_read(example_summary_x)`. Visit [this
 vignette](https://wlandau.github.io/jagstargets/articles/mcmc.html) to
 read more about this example.

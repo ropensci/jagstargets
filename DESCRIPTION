@@ -10,8 +10,7 @@ Description: Bayesian data analysis usually incurs long runtimes
   Minimal custom code is required, and there is no need to manually
   configure branching, so usage is much easier than 'targets' alone.
   For the underlying methodology, please refer
-  to the documentation of 'targets'
-  (Landau 2021) <https://github.com/wlandau/targets> and 'JAGS'
+  to the documentation of 'targets' <doi:10.21105/joss.02959> and 'JAGS'
   (Plummer 2003) <https://www.r-project.org/conferences/DSC-2003/Proceedings/Plummer.pdf>.
 Version: 0.0.0.9000
 License: MIT + file LICENSE
