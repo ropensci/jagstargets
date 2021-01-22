@@ -59,7 +59,6 @@ Suggests:
   visNetwork (>= 2.0.9)
 Remotes:
   stan-dev/posterior,
-  wlandau/targets,
   wlandau/tarchetypes
 SystemRequirements: JAGS 4.x.y (http://mcmc-jags.sourceforge.net)
 Encoding: UTF-8
