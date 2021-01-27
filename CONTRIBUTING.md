@@ -6,16 +6,13 @@ Development is a community effort, and we welcome participation.
 
 By participating in this project, you agree to abide by the [code of conduct](https://github.com/wlandau/jagstargets/blob/main/CODE_OF_CONDUCT.md).
 
+## Discussions
+
+At <https://github.com/wlandau/jagstargets/discussions>, you can post general questions, brainstorm ideas, and ask for help.
+
 ## Issues
 
-Anyone can submit an issue to <https://github.com/wlandau/jagstargets/issues> or comment on an existing thread. Common reasons are to
-
-* Suggest features.
-* Report bugs.
-* Request help with difficult use cases.
-* Ask questions.
-
-Please abide by the following guidelines.
+<https://github.com/wlandau/jagstargets/issues> is for bug reports, performance issues, maintenance tasks, and feature requests. When you post, please abide by the following guidelines.
 
 * Before posting a new issue, please take a moment to search for existing similar issues in order to avoid duplication.
 * For bug reports: if you can, please install the latest GitHub version of `jagstargets` (i.e. `remotes::install_github("wlandau/jagstargets")`) and verify that the issue still persists.
