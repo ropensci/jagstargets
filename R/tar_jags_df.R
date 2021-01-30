@@ -1,6 +1,7 @@
 #' @title Select a strategic piece of `R2jags` output.
 #' @export
 #' @keywords internal
+#' @return A data frame of `R2jags` output. Depends on the `output` argument.
 #' @description Not a user-side function. Do not call directly.
 #'   Exported for infrastructure reasons only.
 #' @param fit `R2jags` object.

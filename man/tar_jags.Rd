@@ -232,13 +232,16 @@ are forwarded to these functions.
 }
 \examples{
 targets::tar_dir({
-tar_jags_example_file()
 targets::tar_script({
 library(jagstargets)
+# Do not use a temp file for a real project
+# or else your targets will always rerun.
+tmp <- tempfile()
+tar_jags_example_file(tmp)
 list(
   tar_jags(
     your_model,
-    jags_files = "jagstargets_example.jags",
+    jags_files = tmp,
     data = tar_jags_example_data(true_params = FALSE),
     parameters.to.save = "beta",
     log = R.utils::nullfile()

@@ -4,7 +4,7 @@
 \alias{tar_jags_example_file}
 \title{Write an example JAGS model file.}
 \usage{
-tar_jags_example_file(path = "jagstargets_example.jags")
+tar_jags_example_file(path = tempfile())
 }
 \arguments{
 \item{path}{Character of length 1, file path to write the model file.}

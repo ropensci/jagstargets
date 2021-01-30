@@ -32,6 +32,9 @@ on the \code{CmdStanFit} object.}
 \code{.args} in \code{posterior::summarize_draws()} through \verb{$summary()}
 on the \code{CmdStanFit} object.}
 }
+\value{
+A data frame of \code{R2jags} output. Depends on the \code{output} argument.
+}
 \description{
 Not a user-side function. Do not call directly.
 Exported for infrastructure reasons only.

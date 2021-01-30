@@ -8,7 +8,7 @@
 #' path <- tempfile()
 #' tar_jags_example_file(path = path)
 #' writeLines(readLines(path))
-tar_jags_example_file <- function(path = "jagstargets_example.jags") {
+tar_jags_example_file <- function(path = tempfile()) {
   src <- system.file("example.jags", package = "jagstargets", mustWork = TRUE)
   file.copy(src, path, overwrite = TRUE)
   invisible()

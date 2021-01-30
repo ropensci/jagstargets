@@ -235,6 +235,12 @@ summaries.
 a single data frame with columns to distinguish among the models.
 Suppressed if \code{combine} is \code{FALSE}.
 }
+
+Target objects represent skippable steps of the analysis pipeline
+as described at \url{https://books.ropensci.org/targets/}.
+Please see the design specification at
+\url{https://books.ropensci.org/targets-design/}
+to learn about the structure and composition of target objects.
 }
 \description{
 Run multiple MCMCs on simulated datasets
@@ -248,13 +254,16 @@ are forwarded to these functions.
 }
 \examples{
 targets::tar_dir({
-tar_jags_example_file()
 targets::tar_script({
 library(jagstargets)
+# Do not use a temp file for a real project
+# or else your targets will always rerun.
+tmp <- tempfile()
+tar_jags_example_file(tmp)
 list(
   tar_jags_rep_summary(
     your_model,
-    jags_files = "jagstargets_example.jags",
+    jags_files = tmp,
     data = tar_jags_example_data(true_params = FALSE),
     parameters.to.save = "beta",
     batches = 2,
