@@ -238,7 +238,7 @@ The MCMC targets use \code{R2jags::jags()} if \code{n.cluster} is \code{1} and
 are forwarded to these functions.
 }
 \examples{
-targets::tar_dir({
+targets::tar_dir({ # tar_dir() runs code from a temporary directory.
 targets::tar_script({
 library(jagstargets)
 # Do not use a temp file for a real project

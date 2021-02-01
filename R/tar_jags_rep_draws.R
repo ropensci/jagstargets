@@ -24,7 +24,7 @@
 #'   to learn about the structure and composition of target objects.
 #' @inheritParams tar_jags_rep
 #' @examples
-#' targets::tar_dir({
+#' targets::tar_dir({ # tar_dir() runs code from a temporary directory.
 #' targets::tar_script({
 #' library(jagstargets)
 #' # Do not use a temp file for a real project

@@ -1,3 +1,5 @@
+# targets::tar_test() runs the test code inside a temporary directory
+# to avoid accidentally writing to the user's file space.
 targets::tar_test("tar_jags_example_file()", {
   tmp <- tempfile()
   expect_false(file.exists(tmp))
