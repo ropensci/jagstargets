@@ -85,10 +85,11 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install jags
+          brew install libgit2
           
       - name: Install dependencies
         run: |
-          remotes::install_deps(dependencies = TRUE, type = "source")
+          remotes::install_deps(dependencies = TRUE, type = ifelse(tolower(Sys.info()["sysname"]) == "linux", "source", "binary"))
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
