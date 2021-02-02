@@ -32,7 +32,7 @@ The `jagstargets` R package is an extension to [`targets`](https://docs.ropensci
 
 ## How to get started
 
-Read the `jagstargets` tutorial vignettes [here](https://wlandau.github.io/jagstargets/articles/mcmc.html) and [here](https://wlandau.github.io/jagstargets/articles/mcmc_rep.html), then use <https://wlandau.github.io/jagstargets/> as a reference while constructing your own worklows.
+Read the `jagstargets` tutorial vignettes [here](https://wlandau.github.io/jagstargets/articles/mcmc.html) and [here](https://wlandau.github.io/jagstargets/articles/mcmc_rep.html), then use <https://wlandau.github.io/jagstargets/> as a reference while constructing your own workflows.
 
 ## Installation
 

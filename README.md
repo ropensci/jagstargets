@@ -41,7 +41,7 @@ Read the `jagstargets` tutorial vignettes
 [here](https://wlandau.github.io/jagstargets/articles/mcmc.html) and
 [here](https://wlandau.github.io/jagstargets/articles/mcmc_rep.html),
 then use <https://wlandau.github.io/jagstargets/> as a reference while
-constructing your own worklows.
+constructing your own workflows.
 
 ## Installation
 
