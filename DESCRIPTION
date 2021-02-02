@@ -42,7 +42,7 @@ Imports:
   rlang (>= 0.4.8),
   stats,
   targets (>= 0.0.1),
-  tarchetypes (>= 0.0.0.9000),
+  tarchetypes (>= 0.0.1),
   tibble (>= 3.0.4),
   tools,
   utils,
@@ -57,8 +57,7 @@ Suggests:
   tidyr (>= 1.1.2),
   visNetwork (>= 2.0.9)
 Remotes:
-  stan-dev/posterior,
-  wlandau/tarchetypes
+  stan-dev/posterior
 SystemRequirements: JAGS 4.x.y (http://mcmc-jags.sourceforge.net)
 Encoding: UTF-8
 Language: en-US
