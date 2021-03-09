@@ -11,8 +11,6 @@ tar_jags_rep_run(
   jags_file,
   parameters.to.save,
   data,
-  data_copy,
-  data_omit,
   variables = NULL,
   summaries = NULL,
   summary_args = NULL,
@@ -42,21 +40,7 @@ tar_jags_rep_run(
 \item{parameters.to.save}{character vector of the names of the
     parameters to save which should be monitored.}
 
-\item{data}{(1) a vector or list of the names of the data objects used by
-    the model, (2) a (named) list of the data objects themselves, or
-  (3) the name of a "dump" format file containing the data objects,
-   which must end in ".txt", see example below for details.}
-
-\item{data_copy}{Character vector of names of scalars in \code{data}.
-These values will be inserted as columns in the output data frame
-for each rep. Useful for simulation studies where you want to
-check the results against some "true value" in the data. See the
-\code{mcmc_rep} vignette for an example.}
-
-\item{data_omit}{Elements of the data to omit from the JAGS model.
-Useful if you want to pass elements to \code{data_copy} without
-supplying them to the model. (Superfluous data causes warnings
-in JAGS.)}
+\item{data}{A list, the original JAGS dataset.}
 
 \item{variables}{Character vector of model parameter names.
 The output posterior summaries are restricted to these variables.}

@@ -11,8 +11,6 @@ targets::tar_test("tar_jags_rep_draws()", {
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),
         data = tar_jags_example_data(),
-        data_copy = "true_beta",
-        data_omit = "true_beta",
         parameters.to.save = "beta",
         log = R.utils::nullfile(),
         refresh = 0,
@@ -66,12 +64,10 @@ targets::tar_test("tar_jags_rep_draws()", {
   expect_equal(length(out$y), 10L)
   expect_true(is.numeric(out$x))
   expect_true(is.numeric(out$y))
-  expect_true(is.numeric(out$true_beta))
   out1 <- targets::tar_read(model_x)
   out2 <- targets::tar_read(model_y)
   out <- targets::tar_read(model)
   expect_true("beta" %in% colnames(out))
-  expect_true("true_beta" %in% colnames(out))
   expect_equal(sort(unique(out$.file)), sort(unique(c("a.jags", "b.jags"))))
   expect_equal(sort(unique(out$.name)), sort(unique(c("x", "y"))))
   expect_equal(dplyr::bind_rows(out1, out2), out)
@@ -97,8 +93,6 @@ targets::tar_test("tar_jags_rep_draws()", {
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),
         data = c(tar_jags_example_data()),
-        data_copy = "true_beta",
-        data_omit = "true_beta",
         parameters.to.save = "beta",
         log = R.utils::nullfile(),
         refresh = 0,

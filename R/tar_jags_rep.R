@@ -25,8 +25,6 @@ tar_jags_rep <- function(
   jags_files,
   parameters.to.save,
   data = quote(list()),
-  data_copy = character(0),
-  data_omit = character(0),
   batches = 1L,
   reps = 1L,
   output = c("summary", "draws", "dic"),
@@ -67,8 +65,6 @@ tar_jags_rep <- function(
   envir <- tar_option_get("envir")
   assert_chr(jags_files, "jags_files must be a character vector")
   assert_unique(jags_files, "jags_files must be unique")
-  assert_chr(data_copy, "data_copy must be a character vector")
-  assert_chr(data_omit, "data_omit must be a character vector")
   output <- match.arg(output)
   name_jags <- produce_jags_names(jags_files)
   name_file <- paste0(name, "_file")
@@ -97,8 +93,6 @@ tar_jags_rep <- function(
     jags_file = quote(._jagstargets_file_50e43091),
     parameters.to.save = parameters.to.save,
     data = sym_data,
-    data_copy = data_copy,
-    data_omit = data_omit,
     variables = variables,
     summaries = summaries,
     summary_args = summary_args,
@@ -233,23 +227,12 @@ tar_jags_rep <- function(
 #' @param jags_lines Character vector of lines from a JAGS file.
 #' @param jags_name Friendly suffix of the jags model target.
 #' @param jags_file Original path to the input jags file.
-#' @param data_copy Character vector of names of scalars in `data`.
-#'   These values will be inserted as columns in the output data frame
-#'   for each rep. Useful for simulation studies where you want to
-#'   check the results against some "true value" in the data. See the
-#'   `mcmc_rep` vignette for an example.
-#' @param data_omit Elements of the data to omit from the JAGS model.
-#'   Useful if you want to pass elements to `data_copy` without
-#'   supplying them to the model. (Superfluous data causes warnings
-#'   in JAGS.)
 tar_jags_rep_run <- function(
   jags_lines,
   jags_name,
   jags_file,
   parameters.to.save,
   data,
-  data_copy,
-  data_omit,
   variables = NULL,
   summaries = NULL,
   summary_args = NULL,
@@ -276,8 +259,6 @@ tar_jags_rep_run <- function(
       jags_name = jags_name,
       jags_file = jags_file,
       parameters.to.save = parameters.to.save,
-      data_copy = data_copy,
-      data_omit = data_omit,
       variables = variables,
       summaries = summaries,
       summary_args = summary_args,
@@ -308,8 +289,6 @@ tar_jags_rep_run_rep <- function(
   jags_file,
   parameters.to.save,
   data,
-  data_copy,
-  data_omit,
   variables,
   summaries,
   summary_args,
@@ -329,9 +308,7 @@ tar_jags_rep_run_rep <- function(
   refresh
 ) {
   jags_data <- data
-  for (omit in data_omit) {
-    jags_data[[omit]] <- NULL
-  }
+  jags_data$.join_data <- NULL
   fit <- tar_jags_run(
     jags_lines = jags_lines,
     parameters.to.save = parameters.to.save,
@@ -351,23 +328,12 @@ tar_jags_rep_run_rep <- function(
   )
   out <- tar_jags_df(
     fit = fit,
+    data = data,
     output = output,
     variables = variables,
     summaries = summaries,
     summary_args = summary_args
   )
-  out <- copy_data_scalars(out, data, data_copy)
   out$.rep <- digest::digest(runif(1), algo = "xxhash32")
   out
-}
-
-copy_data_scalars <- function(x, data, copy_data) {
-  for (var in copy_data) {
-    msg <- paste(var, "in copy_data must have length 1 in data.")
-    assert_scalar(data[[var]], msg)
-    msg <- paste(var, "in copy_data must not already be in output.")
-    assert_not_in(var, colnames(x), msg)
-    x[[var]] <- data[[var]]
-  }
-  x
 }

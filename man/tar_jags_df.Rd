@@ -6,6 +6,7 @@
 \usage{
 tar_jags_df(
   fit,
+  data,
   output = c("draws", "summary", "dic"),
   variables = NULL,
   summaries = NULL,
@@ -14,6 +15,8 @@ tar_jags_df(
 }
 \arguments{
 \item{fit}{\code{R2jags} object.}
+
+\item{data}{A list, the original JAGS dataset.}
 
 \item{output}{Character of length 1 denoting the type of output \code{tibble}
 to return: \code{"draws"} for MCMC samples (which could take up a lot of space)

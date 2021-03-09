@@ -18,7 +18,7 @@ targets::tar_test("tar_jags()", {
         parameters.to.save = "beta",
         n.iter = 2e3,
         n.burnin = 1e3,
-        data = test_data()
+       data = test_data()
       )
     )
   })
@@ -37,6 +37,12 @@ targets::tar_test("tar_jags()", {
     "model_file_y", "model_lines_y",
     "model_lines_x", "model_mcmc_x",
     "model_lines_y", "model_mcmc_y",
+    "model_data", "model_dic_x",
+    "model_data", "model_draws_x",
+    "model_data", "model_summary_x",
+    "model_data", "model_dic_y",
+    "model_data", "model_draws_y",
+    "model_data", "model_summary_y",
     "model_mcmc_x", "model_dic_x",
     "model_mcmc_x", "model_draws_x",
     "model_mcmc_x", "model_summary_x",
@@ -104,7 +110,7 @@ targets::tar_test("tar_jags()", {
     "model_mcmc_x"
   )
   expect_equal(sort(out), sort(exp))
-  # Change the data code.
+  # Change the_data code.
   targets::tar_script({
     test_data <- function() {
       out <- tar_jags_example_data(n = 10)

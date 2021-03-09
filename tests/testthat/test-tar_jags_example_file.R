@@ -6,7 +6,7 @@ targets::tar_test("tar_jags_example_file()", {
   tar_jags_example_file(path = tmp)
   expect_true(file.exists(tmp))
   data <- tar_jags_example_data(n = 10)
-  data$true_beta <- NULL
+  data$.join_data <- NULL
   dir <- tempfile()
   dir.create(dir)
   msg <- capture.output(

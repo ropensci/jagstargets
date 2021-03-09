@@ -14,7 +14,7 @@
 #' @importFrom digest digest
 #' @importFrom fst read_fst
 #' @importFrom posterior summarize_draws
-#' @importFrom purrr map
+#' @importFrom purrr map map_dbl
 #' @importFrom qs qread
 #' @importFrom R2jags jags jags.parallel
 #' @importFrom rjags load.module

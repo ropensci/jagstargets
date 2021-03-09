@@ -4,21 +4,24 @@
 \alias{tar_jags_example_data}
 \title{Example data for \code{\link[=tar_jags_example_file]{tar_jags_example_file()}}}
 \usage{
-tar_jags_example_data(n = 10L, true_params = TRUE)
+tar_jags_example_data(n = 10L)
 }
 \arguments{
 \item{n}{Integer of length 1, number of data points.}
-
-\item{true_params}{Logical, whether to include the true values of
-the parameters used to simulate the data.}
 }
 \value{
 List, dataset compatible with the model file from
-\code{\link[=tar_jags_example_file]{tar_jags_example_file()}}.
+\code{\link[=tar_jags_example_file]{tar_jags_example_file()}}. The output has a \code{.join_data}
+element so the true value of \code{beta} from the simulation
+is automatically appended to the \code{beta} rows of the
+summary output.
 }
 \description{
 An example dataset compatible with the model file
-from \code{\link[=tar_jags_example_file]{tar_jags_example_file()}}.
+from \code{\link[=tar_jags_example_file]{tar_jags_example_file()}}. The output has a \code{.join_data}
+element so the true value of \code{beta} from the simulation
+is automatically appended to the \code{beta} rows of the
+summary output.
 }
 \examples{
 tar_jags_example_data()

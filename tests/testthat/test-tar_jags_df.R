@@ -6,12 +6,12 @@ targets::tar_test("tar_jags_df() with dic", {
   tar_jags_example_file(path = tmp)
   expect_true(file.exists(tmp))
   data <- tar_jags_example_data(n = 10)
-  data$true_beta <- NULL
+  data$.join_data <- NULL
   dir <- tempfile()
   dir.create(dir)
   msg <- capture.output(
     out <- R2jags::jags(
-      data = data,
+      data =data,
       parameters.to.save = "beta",
       model.file = tmp,
       n.chains = 3,
@@ -24,16 +24,24 @@ targets::tar_test("tar_jags_df() with dic", {
   )
   out
   # draws
-  draws <- tar_jags_df(out, "draws")
+  draws <- tar_jags_df(out, data = data, "draws")
   cols <- c("beta", "deviance", ".chain", ".iteration", ".draw")
   expect_true(all(cols %in% colnames(draws)))
   expect_equal(nrow(draws), 300L)
   # summary
-  summary <- tar_jags_df(out, "summary")
-  expect_true(all(c("variable", "mean", "sd", "q5") %in% colnames(summary)))
+  summary <- tar_jags_df(out, data = data, "summary")
+  expect_true(
+    all(c("variable", "mean", "sd", "q5", ".join_data") %in% colnames(summary))
+  )
   expect_true("beta" %in% summary$variable)
   expect_true("deviance" %in% summary$variable)
   expect_true(nrow(summary) < 10L)
+  expect_equal(summary$.join_data, rep(NA_real_, 2))
+  # summary with joined data
+  data$.join_data$beta <- 1
+  summary <- tar_jags_df(out, data = data, "summary")
+  expect_equal(summary$.join_data[summary$variable == "beta"], 1)
+  expect_equal(summary$.join_data[summary$variable == "deviance"], NA_real_)
   # custom summary
   summaries <- as.list(
     quote(
@@ -46,6 +54,7 @@ targets::tar_test("tar_jags_df() with dic", {
   summaries <- summaries[-1]
   summary <- tar_jags_df(
     out,
+    data = data,
     output = "summary",
     summaries = summaries,
     summary_args = list(my_arg = 3L)
@@ -58,7 +67,7 @@ targets::tar_test("tar_jags_df() with dic", {
   expect_true(all(summary$custom2 == 3L))
   expect_true(nrow(summary) < 10L)
   # dic
-  dic <- tar_jags_df(out, "dic")
+  dic <- tar_jags_df(out, data = data, "dic")
   expect_equal(nrow(dic), 1)
   expect_equal(sort(colnames(dic)), sort(c("dic", "pD")))
   # invalid output
