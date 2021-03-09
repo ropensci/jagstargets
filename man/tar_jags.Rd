@@ -249,7 +249,7 @@ list(
   tar_jags(
     your_model,
     jags_files = tmp,
-    data = tar_jags_example_data(true_params = FALSE),
+    data = tar_jags_example_data(),
     parameters.to.save = "beta",
     log = R.utils::nullfile()
   )

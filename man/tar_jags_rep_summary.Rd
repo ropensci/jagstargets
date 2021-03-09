@@ -258,7 +258,7 @@ list(
   tar_jags_rep_summary(
     your_model,
     jags_files = tmp,
-    data = tar_jags_example_data(true_params = FALSE),
+    data = tar_jags_example_data(),
     parameters.to.save = "beta",
     batches = 2,
     reps = 2,
