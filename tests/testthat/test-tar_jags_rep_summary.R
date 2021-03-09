@@ -171,7 +171,7 @@ targets::tar_test("join to summaries", {
       beta <- stats::rnorm(n = n, mean = 0, sd = 1)
       x <- seq(from = -1, to = 1, length.out = n)
       y <- stats::rnorm(n, x * beta, 1)
-      .join_data = list(alpha = alpha, beta = beta)
+      .join_data <- list(alpha = alpha, beta = beta)
       out <- list(n = n, x = x, y = y, .join_data = .join_data)
       out
     }

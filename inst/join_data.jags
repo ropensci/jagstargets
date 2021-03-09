@@ -1,0 +1,7 @@
+model {
+  for (i in 1:n) {
+    y[i] ~ dnorm(alpha + x[i] * beta[i], 1)
+    beta[i] ~ dnorm(0, 1)
+  }
+  alpha ~ dnorm(0, 1)
+}

@@ -53,7 +53,7 @@ tar_script({
       example,
       jags_files = "x.jags",
       parameters.to.save = "beta",
-      data = tar_jags_example_data(true_params = FALSE),
+      data = tar_jags_example_data(),
       log = R.utils::nullfile()
     )
   )
@@ -155,7 +155,7 @@ tar_script({
       example,
       jags_files = "x.jags",
       parameters.to.save = "beta",
-      data = tar_jags_example_data(true_params = FALSE),
+      data = tar_jags_example_data(),
       log = R.utils::nullfile()
     ),
     tar_target(
@@ -228,7 +228,7 @@ tar_script({
       example,
       jags_files = c("x.jags", "y.jags"),
       parameters.to.save = "beta",
-      data = tar_jags_example_data(true_params = FALSE),
+      data = tar_jags_example_data(),
       log = R.utils::nullfile()
     ),
     tar_target(

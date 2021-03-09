@@ -58,7 +58,7 @@ tar_script({
     beta <- stats::rnorm(n = n, mean = 0, sd = 1)
     x <- seq(from = -1, to = 1, length.out = n)
     y <- stats::rnorm(n, x * beta, 1)
-    .join_data = list(alpha = alpha, beta = beta)
+    .join_data <- list(alpha = alpha, beta = beta)
     list(n = n, x = x, y = y, .join_data = .join_data)
   }
   list(
@@ -94,7 +94,7 @@ generate_data <- function (n = 10L) {
   # Elements of .join_data get joined on to the .join_data column
   # in the summary output next to the model parameters
   # with the same names.
-  .join_data = list(alpha = alpha, beta = beta)
+  .join_data <- list(alpha = alpha, beta = beta)
   list(n = n, x = x, y = y, .join_data = .join_data)
 }
 
@@ -163,7 +163,7 @@ tar_script({
     # Elements of .join_data get joined on to the .join_data column
     # in the summary output next to the model parameters
     # with the same names.
-    .join_data = list(alpha = alpha, beta = beta)
+    .join_data <- list(alpha = alpha, beta = beta)
     list(n = n, x = x, y = y, .join_data = .join_data)
   }
   list(
@@ -183,7 +183,11 @@ tar_script({
     tar_target(
       coverage,
       model %>%
-        summarize(coverage = mean(q2.5 < .join_data & .join_data < q97.5))
+        group_by(variable) %>%
+        summarize(
+          coverage = mean(q2.5 < .join_data & .join_data < q97.5),
+          .groups = "drop"
+        )
     )
   )
 })
@@ -202,7 +206,7 @@ generate_data <- function (n = 10L) {
   # Elements of .join_data get joined on to the .join_data column
   # in the summary output next to the model parameters
   # with the same names.
-  .join_data = list(alpha = alpha, beta = beta)
+  .join_data <- list(alpha = alpha, beta = beta)
   list(n = n, x = x, y = y, .join_data = .join_data)
 }
 
@@ -223,7 +227,11 @@ list(
   tar_target(
     coverage,
     model %>%
-      summarize(coverage = mean(q2.5 < .join_data & .join_data < q97.5))
+      group_by(variable) %>%
+      summarize(
+        coverage = mean(q2.5 < .join_data & .join_data < q97.5),
+        .groups = "drop"
+      )
   )
 )
 ```
@@ -267,7 +275,7 @@ tar_script({
     # Elements of .join_data get joined on to the .join_data column
     # in the summary output next to the model parameters
     # with the same names.
-    .join_data = list(alpha = alpha, beta = beta)
+    .join_data <- list(alpha = alpha, beta = beta)
     list(n = n, x = x, y = y, .join_data = .join_data)
   }
   list(
@@ -307,7 +315,7 @@ generate_data <- function (n = 10L) {
   # Elements of .join_data get joined on to the .join_data column
   # in the summary output next to the model parameters
   # with the same names.
-  .join_data = list(alpha = alpha, beta = beta)
+  .join_data <- list(alpha = alpha, beta = beta)
   list(n = n, x = x, y = y, .join_data = .join_data)
 }
 
