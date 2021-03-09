@@ -11,7 +11,7 @@ targets::tar_test("tar_jags_df() with dic", {
   dir.create(dir)
   msg <- capture.output(
     out <- R2jags::jags(
-      data =data,
+      data = data,
       parameters.to.save = "beta",
       model.file = tmp,
       n.chains = 3,

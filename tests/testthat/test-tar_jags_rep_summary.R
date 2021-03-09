@@ -166,7 +166,7 @@ targets::tar_test("join to summaries", {
   )
   file.copy(path, "a.jags")
   targets::tar_script({
-    sim_data <- function (n = 10L) {
+    sim_data <- function(n = 10L) {
       alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
       beta <- stats::rnorm(n = n, mean = 0, sd = 1)
       x <- seq(from = -1, to = 1, length.out = n)
