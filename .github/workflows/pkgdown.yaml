@@ -33,6 +33,8 @@ jobs:
 
       - name: Install Mac system dependencies
         run: |
+          brew install harfbuzz
+          brew install fribidi
           brew install jags
 
       - name: Install dependencies
