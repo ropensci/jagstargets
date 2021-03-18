@@ -46,7 +46,8 @@ tar_jags_rep <- function(
     "Mersenne-Twister"
   ),
   jags.seed = 1,
-  log = NULL,
+  stdout = NULL,
+  stderr = NULL,
   progress.bar = "text",
   refresh = 0,
   tidy_eval = targets::tar_option_get("tidy_eval"),
@@ -107,7 +108,8 @@ tar_jags_rep <- function(
     inits = inits,
     RNGname = RNGname,
     jags.seed = jags.seed,
-    log = log,
+    stdout = stdout,
+    stderr = stderr,
     progress.bar = progress.bar,
     refresh = refresh
   )
@@ -247,7 +249,8 @@ tar_jags_rep_run <- function(
   inits = inits,
   RNGname = RNGname,
   jags.seed = jags.seed,
-  log = log,
+  stdout = stdout,
+  stderr = stderr,
   progress.bar = progress.bar,
   refresh = refresh
 ) {
@@ -273,7 +276,8 @@ tar_jags_rep_run <- function(
       inits = inits,
       RNGname = RNGname,
       jags.seed = jags.seed,
-      log = log,
+      stdout = stdout,
+      stderr = stderr,
       progress.bar = progress.bar,
       refresh = refresh
     )
@@ -303,7 +307,8 @@ tar_jags_rep_run_rep <- function(
   inits,
   RNGname,
   jags.seed,
-  log,
+  stdout,
+  stderr,
   progress.bar,
   refresh
 ) {
@@ -322,7 +327,8 @@ tar_jags_rep_run_rep <- function(
     jags.module = jags.module,
     RNGname = RNGname,
     jags.seed = jags.seed,
-    log = log,
+    stdout = stdout,
+    stderr = stderr,
     progress.bar = progress.bar,
     refresh = refresh
   )

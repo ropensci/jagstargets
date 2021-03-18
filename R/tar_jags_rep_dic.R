@@ -38,7 +38,8 @@
 #'     parameters.to.save = "beta",
 #'     batches = 2,
 #'     reps = 2,
-#'     log = R.utils::nullfile()
+#'     stdout = R.utils::nullfile(),
+#'     stderr = R.utils::nullfile()
 #'   )
 #' )
 #' }, ask = FALSE)
@@ -66,7 +67,8 @@ tar_jags_rep_dic <- function(
     "Mersenne-Twister"
   ),
   jags.seed = 123,
-  log = NULL,
+  stdout = NULL,
+  stderr = NULL,
   progress.bar = "text",
   refresh = 0,
   tidy_eval = targets::tar_option_get("tidy_eval"),
@@ -100,7 +102,8 @@ tar_jags_rep_dic <- function(
     inits = inits,
     RNGname = RNGname,
     jags.seed = jags.seed,
-    log = log,
+    stdout = stdout,
+    stderr = stderr,
     progress.bar = progress.bar,
     refresh = refresh,
     tidy_eval = tidy_eval,

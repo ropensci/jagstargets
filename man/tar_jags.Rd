@@ -21,7 +21,8 @@ tar_jags(
   RNGname = c("Wichmann-Hill", "Marsaglia-Multicarry", "Super-Duper",
     "Mersenne-Twister"),
   jags.seed = 1,
-  log = NULL,
+  stdout = NULL,
+  stderr = NULL,
   progress.bar = "text",
   refresh = 0,
   draws = TRUE,
@@ -100,9 +101,14 @@ on the \code{CmdStanFit} object.}
 
 \item{jags.seed}{random seed for \code{JAGS}, default is 123.  This function is used for jags.parallell() and does not work for jags().  Use set.seed() instead if you want to produce identical result with jags() }
 
-\item{log}{Character of length 1, file path to write the stdout stream
+\item{stdout}{Character of length 1, file path to write the stdout stream
 of the model when it runs. Set to \code{NULL} to print to the console.
-Set to \code{R.utils::nullfile()} to completely suppress all output.
+Set to \code{R.utils::nullfile()} to suppress stdout.
+Does not apply to messages, warnings, or errors.}
+
+\item{stderr}{Character of length 1, file path to write the stderr stream
+of the model when it runs. Set to \code{NULL} to print to the console.
+Set to \code{R.utils::nullfile()} to suppress stderr.
 Does not apply to messages, warnings, or errors.}
 
 \item{progress.bar}{type of progress bar. Possible values are \dQuote{text},
@@ -251,7 +257,8 @@ list(
     jags_files = tmp,
     data = tar_jags_example_data(),
     parameters.to.save = "beta",
-    log = R.utils::nullfile()
+    stdout = R.utils::nullfile(),
+    stderr = R.utils::nullfile()
   )
 )
 }, ask = FALSE)

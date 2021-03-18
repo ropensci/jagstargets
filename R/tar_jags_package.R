@@ -26,7 +26,7 @@
 #' @importFrom tibble as_tibble tibble
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils capture.output
-#' @importFrom withr local_dir
+#' @importFrom withr local_dir local_message_sink local_output_sink
 NULL
 
 utils::globalVariables(

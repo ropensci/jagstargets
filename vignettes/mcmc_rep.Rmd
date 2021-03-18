@@ -69,7 +69,8 @@ tar_script({
       parameters.to.save = c("alpha", "beta"),
       batches = 5, # Number of branch targets.
       reps = 2, # Number of model reps per branch target.
-      log = R.utils::nullfile(),
+      stdout = R.utils::nullfile(),
+      stderr = R.utils::nullfile(),
       variables = c("alpha", "beta"),
       summaries = list(
         ~posterior::quantile2(.x, probs = c(0.025, 0.975))
@@ -106,7 +107,8 @@ list(
     parameters.to.save = c("alpha", "beta"),
     batches = 5, # Number of branch targets.
     reps = 2, # Number of model reps per branch target.
-    log = R.utils::nullfile(),
+    stdout = R.utils::nullfile(),
+    stderr = R.utils::nullfile(),
     variables = c("alpha", "beta"),
     summaries = list(
       ~posterior::quantile2(.x, probs = c(0.025, 0.975))
@@ -174,7 +176,8 @@ tar_script({
       parameters.to.save = c("alpha", "beta"),
       batches = 5, # Number of branch targets.
       reps = 2, # Number of model reps per branch target.
-      log = R.utils::nullfile(),
+      stdout = R.utils::nullfile(),
+      stderr = R.utils::nullfile(),
       variables = c("alpha", "beta"),
       summaries = list(
         ~posterior::quantile2(.x, probs = c(0.025, 0.975))
@@ -218,7 +221,8 @@ list(
     parameters.to.save = c("alpha", "beta"),
     batches = 5, # Number of branch targets.
     reps = 2, # Number of model reps per branch target.
-    log = R.utils::nullfile(),
+    stdout = R.utils::nullfile(),
+    stderr = R.utils::nullfile(),
     variables = c("alpha", "beta"),
     summaries = list(
       ~posterior::quantile2(.x, probs = c(0.025, 0.975))
@@ -286,7 +290,8 @@ tar_script({
       parameters.to.save = c("alpha", "beta"),
       batches = 5,
       reps = 2,
-      log = R.utils::nullfile(),
+      stdout = R.utils::nullfile(),
+      stderr = R.utils::nullfile(),
       variables = c("alpha", "beta"),
       summaries = list(
         ~posterior::quantile2(.x, probs = c(0.025, 0.975))
@@ -327,7 +332,8 @@ list(
     parameters.to.save = c("alpha", "beta"),
     batches = 5,
     reps = 2,
-    log = R.utils::nullfile(),
+    stdout = R.utils::nullfile(),
+    stderr = R.utils::nullfile(),
     variables = c("alpha", "beta"),
     summaries = list(
       ~posterior::quantile2(.x, probs = c(0.025, 0.975))

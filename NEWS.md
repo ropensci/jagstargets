@@ -1,3 +1,7 @@
+# jagstargets 0.0.0.9002
+
+* Replace the `log` argument with `stdout` and `stderr`.
+
 # jagstargets 0.0.0.9001
 
 * Use `.join_data` list element instead of arguments `copy_data` and `omit_data`.

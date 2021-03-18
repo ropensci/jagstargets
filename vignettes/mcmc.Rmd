@@ -54,7 +54,8 @@ tar_script({
       jags_files = "x.jags",
       parameters.to.save = "beta",
       data = tar_jags_example_data(),
-      log = R.utils::nullfile()
+      stdout = R.utils::nullfile(),
+      stderr = R.utils::nullfile(),
     )
   )
 })
@@ -78,7 +79,8 @@ list(
     jags_files = "x.jags",
     parameters.to.save = "beta",
     data = generate_data(),
-    log = R.utils::nullfile()
+    stdout = R.utils::nullfile(),
+    stderr = R.utils::nullfile(),
   )
 )
 ```
@@ -156,7 +158,8 @@ tar_script({
       jags_files = "x.jags",
       parameters.to.save = "beta",
       data = tar_jags_example_data(),
-      log = R.utils::nullfile()
+      stdout = R.utils::nullfile(),
+      stderr = R.utils::nullfile(),
     ),
     tar_target(
       custom_summary,
@@ -187,7 +190,8 @@ list(
     jags_files = "x.jags",
     parameters.to.save = "beta",
     data = generate_data(),
-    log = R.utils::nullfile()
+    stdout = R.utils::nullfile(),
+    stderr = R.utils::nullfile(),
   ),
   tar_target(
     custom_summary,
@@ -229,7 +233,8 @@ tar_script({
       jags_files = c("x.jags", "y.jags"),
       parameters.to.save = "beta",
       data = tar_jags_example_data(),
-      log = R.utils::nullfile()
+      stdout = R.utils::nullfile(),
+      stderr = R.utils::nullfile(),
     ),
     tar_target(
       custom_summary,
@@ -260,7 +265,8 @@ list(
     jags_files = c("x.jags", "y.jags"),
     parameters.to.save = "beta",
     data = generate_data(),
-    log = R.utils::nullfile()
+    stdout = R.utils::nullfile(),
+    stderr = R.utils::nullfile(),
   ),
   tar_target(
     custom_summary,

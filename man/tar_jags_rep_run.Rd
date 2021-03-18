@@ -25,7 +25,8 @@ tar_jags_rep_run(
   inits = inits,
   RNGname = RNGname,
   jags.seed = jags.seed,
-  log = log,
+  stdout = stdout,
+  stderr = stderr,
   progress.bar = progress.bar,
   refresh = refresh
 )
@@ -91,9 +92,14 @@ and effective number of parameters}
 
 \item{jags.seed}{random seed for \code{JAGS}, default is 123.  This function is used for jags.parallell() and does not work for jags().  Use set.seed() instead if you want to produce identical result with jags() }
 
-\item{log}{Character of length 1, file path to write the stdout stream
+\item{stdout}{Character of length 1, file path to write the stdout stream
 of the model when it runs. Set to \code{NULL} to print to the console.
-Set to \code{R.utils::nullfile()} to completely suppress all output.
+Set to \code{R.utils::nullfile()} to suppress stdout.
+Does not apply to messages, warnings, or errors.}
+
+\item{stderr}{Character of length 1, file path to write the stderr stream
+of the model when it runs. Set to \code{NULL} to print to the console.
+Set to \code{R.utils::nullfile()} to suppress stderr.
 Does not apply to messages, warnings, or errors.}
 
 \item{progress.bar}{type of progress bar. Possible values are \dQuote{text},

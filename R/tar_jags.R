@@ -54,7 +54,8 @@
 #'     jags_files = tmp,
 #'     data = tar_jags_example_data(),
 #'     parameters.to.save = "beta",
-#'     log = R.utils::nullfile()
+#'     stdout = R.utils::nullfile(),
+#'     stderr = R.utils::nullfile()
 #'   )
 #' )
 #' }, ask = FALSE)
@@ -81,7 +82,8 @@ tar_jags <- function(
     "Mersenne-Twister"
   ),
   jags.seed = 1,
-  log = NULL,
+  stdout = NULL,
+  stderr = NULL,
   progress.bar = "text",
   refresh = 0,
   draws = TRUE,
@@ -168,7 +170,8 @@ tar_jags <- function(
     jags.module = jags.module,
     RNGname = RNGname,
     jags.seed = jags.seed,
-    log = log,
+    stdout = stdout,
+    stderr = stderr,
     progress.bar = progress.bar,
     refresh = refresh
   )
@@ -291,9 +294,13 @@ tar_jags <- function(
 #' @inheritParams R2jags::jags
 #' @inheritParams R2jags::jags.parallel
 #' @param jags_lines Character vector of lines from a JAGS model file.
-#' @param log Character of length 1, file path to write the stdout stream
+#' @param stdout Character of length 1, file path to write the stdout stream
 #'   of the model when it runs. Set to `NULL` to print to the console.
-#'   Set to `R.utils::nullfile()` to completely suppress all output.
+#'   Set to `R.utils::nullfile()` to suppress stdout.
+#'   Does not apply to messages, warnings, or errors.
+#' @param stderr Character of length 1, file path to write the stderr stream
+#'   of the model when it runs. Set to `NULL` to print to the console.
+#'   Set to `R.utils::nullfile()` to suppress stderr.
 #'   Does not apply to messages, warnings, or errors.
 tar_jags_run <- function(
   jags_lines,
@@ -308,7 +315,8 @@ tar_jags_run <- function(
   jags.module,
   RNGname,
   jags.seed,
-  log,
+  stdout,
+  stderr,
   progress.bar,
   refresh
 ) {
@@ -319,9 +327,11 @@ tar_jags_run <- function(
   writeLines(jags_lines, file)
   envir <- environment()
   requireNamespace("coda")
-  if (!is.null(log)) {
-    sink(file = log, type = "output", append = TRUE)
-    on.exit(sink(file = NULL, type = "output"))
+  if (!is.null(stdout)) {
+    withr::local_output_sink(new = stdout, append = TRUE)
+  }
+  if (!is.null(stderr)) {
+    withr::local_message_sink(new = stderr, append = TRUE)
   }
   lapply(jags.module, rjags::load.module, quiet = TRUE)
   jags_data <- data
