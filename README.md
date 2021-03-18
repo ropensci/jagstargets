@@ -82,8 +82,7 @@ list(
     example,
     jags_files = "x.jags", # You provide this file.
     parameters.to.save = "beta",
-    data = generate_data(),
-    log = R.utils::nullfile()
+    data = generate_data()
   )
 )
 ```
