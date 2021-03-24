@@ -1,6 +1,7 @@
 # jagstargets 0.0.0.9002
 
 * Replace the `log` argument with `stdout` and `stderr`.
+* Switch meaning of `%||%` and `%|||%` to conform to historical precedent.
 
 # jagstargets 0.0.0.9001
 
