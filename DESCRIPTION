@@ -38,6 +38,7 @@ Imports:
   purrr (>= 0.3.4),
   qs (>= 0.14.1),
   R2jags (>= 0.6.1),
+  rlang (>= 0.4.10),
   rjags (>= 4.10),
   stats,
   targets (>= 0.0.1),
