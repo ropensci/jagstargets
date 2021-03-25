@@ -128,7 +128,7 @@ tar_jags <- function(
     "readLines",
     args = list(con = rlang::sym(name_file))
   )
-  command_data <- tidy_eval(
+  command_data <- tar_tidy_eval(
     substitute(data),
     envir = envir,
     tidy_eval = tidy_eval

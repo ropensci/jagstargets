@@ -82,7 +82,7 @@ tar_jags_rep <- function(
     args = list(con = rlang::sym(name_file))
   )
   command_batch <- substitute(seq_len(x), env = list(x = batches))
-  command_rep <- tidy_eval(data, envir = envir, tidy_eval = tidy_eval)
+  command_rep <- tar_tidy_eval(data, envir = envir, tidy_eval = tidy_eval)
   command_data <- substitute(
     purrr::map(seq_len(.targets_reps), ~.targets_command),
     env = list(.targets_reps = reps, .targets_command = command_rep)
