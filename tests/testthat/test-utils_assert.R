@@ -17,6 +17,18 @@ targets::tar_test("assert_in()", {
   expect_error(assert_in("1", letters), class = "condition_validate")
 })
 
+targets::tar_test("assert_jags_file()", {
+  tmp <- tempfile()
+  tar_jags_example_file(tmp)
+  expect_silent(assert_jags_file(tmp))
+  expect_error(assert_jags_file(tempdir()), class = "condition_validate")
+})
+
+targets::tar_test("assert_nonempty()", {
+  expect_silent(assert_nonempty(letters))
+  expect_error(assert_nonempty(NULL), class = "condition_validate")
+})
+
 targets::tar_test("assert_not_in()", {
   expect_silent(assert_not_in("1", letters))
   expect_error(assert_not_in("a", letters), class = "condition_validate")
@@ -25,10 +37,6 @@ targets::tar_test("assert_not_in()", {
 targets::tar_test("assert_nzchar()", {
   expect_silent(assert_nzchar(letters))
   expect_error(assert_nzchar(c("x", "")), class = "condition_validate")
-})
-
-targets::tar_test("assert_package()", {
-  expect_error(assert_package("_illegal"), class = "condition_validate")
 })
 
 targets::tar_test("assert_path()", {

@@ -39,7 +39,6 @@ Imports:
   qs (>= 0.14.1),
   R2jags (>= 0.6.1),
   rjags (>= 4.10),
-  rlang (>= 0.4.8),
   stats,
   targets (>= 0.0.1),
   tarchetypes (>= 0.0.1),

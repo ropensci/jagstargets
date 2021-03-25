@@ -119,14 +119,14 @@ tar_jags <- function(
   name_draws <- paste0(name, "_draws")
   name_summary <- paste0(name, "_summary")
   name_dic <- paste0(name, "_dic")
-  sym_jags <- rlang::syms(name_jags)
-  sym_file <- rlang::sym(name_file)
-  sym_lines <- rlang::sym(name_lines)
-  sym_data <- rlang::sym(name_data)
-  sym_mcmc <- rlang::sym(name_mcmc)
+  sym_jags <- as_symbols(name_jags)
+  sym_file <- as.symbol(name_file)
+  sym_lines <- as.symbol(name_lines)
+  sym_data <- as.symbol(name_data)
+  sym_mcmc <- as.symbol(name_mcmc)
   command_lines <- call_function(
     "readLines",
-    args = list(con = rlang::sym(name_file))
+    args = list(con = as.symbol(name_file))
   )
   command_data <- tar_tidy_eval(
     substitute(data),
