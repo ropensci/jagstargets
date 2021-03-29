@@ -11,7 +11,7 @@ targets::tar_test("produce_jags_names()", {
   )
   expect_error(
     produce_jags_names(c("x/a.jags", "y/a.jags")),
-    class = "condition_validate"
+    class = "tar_condition_validate"
   )
   expect_equal(
     produce_jags_names(c(a = "x/a.jags", b = "y/a.jags")),
@@ -19,6 +19,6 @@ targets::tar_test("produce_jags_names()", {
   )
   expect_error(
     produce_jags_names(c("x/a.jags", y = "y/asdf.jags")),
-    class = "condition_validate"
+    class = "tar_condition_validate"
   )
 })

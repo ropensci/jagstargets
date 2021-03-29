@@ -31,7 +31,7 @@ so usage is much easier than
     [this chapter](https://books.ropensci.org/targets/walkthrough.html)
     of the [user manual](https://books.ropensci.org/targets/).
 3.  Familiarity with Bayesian Statistics and
-    [JAGS](http://mcmc-jags.sourceforge.net/). Prior knowledge of
+    [JAGS](https://mcmc-jags.sourceforge.io/). Prior knowledge of
     [`rjags`](https://cran.r-project.org/package=rjags) or
     [`R2jags`](https://cran.r-project.org/package=R2jags) helps.
 
@@ -53,7 +53,7 @@ remotes::install_github("wlandau/jagstargets")
 ```
 
 And if you have not done so already, install JAGS from
-<http://mcmc-jags.sourceforge.net/>.
+<https://mcmc-jags.sourceforge.io/>.
 
 ## Usage
 
