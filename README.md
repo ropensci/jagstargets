@@ -64,6 +64,10 @@ pipeline of targets. The target list can call target factories like
 [`tar_jags()`](https://wlandau.github.io/jagstargets/reference/tar_jags.html)
 as well as ordinary targets with
 [`tar_target()`](https://docs.ropensci.org/targets/reference/tar_target.html).
+The following minimal example is simple enough to contain entirely
+within the `_targets.R` file, but for larger projects, you may wish to
+store functions in separate files as in the
+[`targets-keras`](https://github.com/wlandau/targets-keras) example.
 
 ``` r
 # _targets.R
@@ -110,10 +114,6 @@ guide](https://github.com/wlandau/jagstargets/blob/main/CONTRIBUTING.md).
 
 ``` r
 citation("jagstargets")
-#> Warning in citation("jagstargets"): no date field in DESCRIPTION file of package
-#> 'jagstargets'
-#> Warning in citation("jagstargets"): could not determine year for 'jagstargets'
-#> from package DESCRIPTION file
 #> 
 #> To cite package 'jagstargets' in publications use:
 #> 
