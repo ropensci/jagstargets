@@ -288,7 +288,7 @@ targets::tar_script({
 library(jagstargets)
 # Do not use a temp file for a real project
 # or else your targets will always rerun.
-tmp <- tempfile()
+tmp <- tempfile(pattern = "", fileext = ".jags")
 tar_jags_example_file(tmp)
 list(
   tar_jags_rep_summary(

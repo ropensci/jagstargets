@@ -75,7 +75,7 @@
 #' library(jagstargets)
 #' # Do not use a temp file for a real project
 #' # or else your targets will always rerun.
-#' tmp <- tempfile()
+#' tmp <- tempfile(pattern = "", fileext = ".jags")
 #' tar_jags_example_file(tmp)
 #' list(
 #'   tar_jags(
@@ -134,6 +134,7 @@ tar_jags <- function(
   envir <- tar_option_get("envir")
   assert_chr(jags_files)
   assert_unique(jags_files)
+  lapply(jags_files, assert_jags_file)
   assert_in(
     as.integer(n.cluster),
     as.integer(c(1L, n.chains)),
@@ -352,7 +353,7 @@ tar_jags_run <- function(
   tmp <- tempfile()
   dir.create(tmp)
   withr::local_dir(tmp)
-  file <- tempfile()
+  file <- tempfile(pattern = "", fileext = ".jags")
   writeLines(jags_lines, file)
   envir <- environment()
   requireNamespace("coda")

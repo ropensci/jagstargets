@@ -4,7 +4,7 @@
 \alias{tar_jags_example_file}
 \title{Write an example JAGS model file.}
 \usage{
-tar_jags_example_file(path = tempfile())
+tar_jags_example_file(path = tempfile(pattern = "", fileext = ".jags"))
 }
 \arguments{
 \item{path}{Character of length 1, file path to write the model file.}
@@ -17,7 +17,7 @@ Overwrites the file at \code{path} with a built-in example
 JAGS model file.
 }
 \examples{
-path <- tempfile()
+path <- tempfile(pattern = "", fileext = ".jags")
 tar_jags_example_file(path = path)
 writeLines(readLines(path))
 }
