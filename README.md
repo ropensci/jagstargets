@@ -42,10 +42,11 @@ pipelines](https://wlandau.github.io/jagstargets/articles/mcmc.html).
 1.  The [prerequisites of the `targets` R
     package](https://docs.ropensci.org/targets/#prerequisites).
 2.  Basic familiarity with
-    [`targets`](https://docs.ropensci.org/targets/): watch minutes 6
-    through 40 of [this video](https://youtu.be/Gqn7Xn4d5NI), then read
-    [this chapter](https://books.ropensci.org/targets/walkthrough.html)
-    of the [user manual](https://books.ropensci.org/targets/).
+    [`targets`](https://docs.ropensci.org/targets/): watch minutes 7
+    through 40 of [this video](https://youtu.be/Gqn7Xn4d5NI?t=439), then
+    read [this
+    chapter](https://books.ropensci.org/targets/walkthrough.html) of the
+    [user manual](https://books.ropensci.org/targets/).
 3.  Familiarity with Bayesian Statistics and
     [JAGS](https://mcmc-jags.sourceforge.io/). Prior knowledge of
     [`rjags`](https://cran.r-project.org/package=rjags) or
