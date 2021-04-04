@@ -1,4 +1,4 @@
-#' @title Tidy posterior samples from multiple MCMCs per model.
+#' @title Tidy posterior draws from multiple MCMCs per model
 #' @export
 #' @description Run multiple MCMCs on simulated datasets
 #'   and return posterior samples and the effective number of parameters

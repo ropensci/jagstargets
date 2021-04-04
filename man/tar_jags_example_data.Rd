@@ -2,7 +2,7 @@
 % Please edit documentation in R/tar_jags_example_data.R
 \name{tar_jags_example_data}
 \alias{tar_jags_example_data}
-\title{Example data for \code{\link[=tar_jags_example_file]{tar_jags_example_file()}}}
+\title{Simulate example JAGS data.}
 \format{
 A list with the following elements:
 \itemize{

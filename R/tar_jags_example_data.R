@@ -1,4 +1,4 @@
-#' @title Example data for [tar_jags_example_file()]
+#' @title Simulate example JAGS data.
 #' @export
 #' @description An example dataset compatible with the model file
 #'   from [tar_jags_example_file()]. The output has a `.join_data`

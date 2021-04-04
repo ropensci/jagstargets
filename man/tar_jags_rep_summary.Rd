@@ -2,7 +2,7 @@
 % Please edit documentation in R/tar_jags_rep_summary.R
 \name{tar_jags_rep_summary}
 \alias{tar_jags_rep_summary}
-\title{Tidy posterior summaries from multiple MCMCs per model.}
+\title{Tidy posterior summaries from multiple MCMCs per model}
 \usage{
 tar_jags_rep_summary(
   name,

@@ -1,4 +1,4 @@
-#' @title Tidy posterior summaries from multiple MCMCs per model.
+#' @title Tidy posterior summaries from multiple MCMCs per model
 #' @export
 #' @description Run multiple MCMCs on simulated datasets
 #'   and return posterior summaries and the effective number of parameters

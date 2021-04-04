@@ -2,7 +2,7 @@
 % Please edit documentation in R/tar_jags_rep_draws.R
 \name{tar_jags_rep_draws}
 \alias{tar_jags_rep_draws}
-\title{Tidy posterior samples from multiple MCMCs per model.}
+\title{Tidy posterior draws from multiple MCMCs per model}
 \usage{
 tar_jags_rep_draws(
   name,

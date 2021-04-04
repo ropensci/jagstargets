@@ -2,7 +2,7 @@
 % Please edit documentation in R/tar_jags_rep_dic.R
 \name{tar_jags_rep_dic}
 \alias{tar_jags_rep_dic}
-\title{Tidy DIC output from multiple MCMCs per model.}
+\title{Tidy DIC output from multiple MCMCs per model}
 \usage{
 tar_jags_rep_dic(
   name,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/tar_jags.R
 \name{tar_jags}
 \alias{tar_jags}
-\title{One MCMC per model with multiple outputs.}
+\title{One MCMC per model with multiple outputs}
 \usage{
 tar_jags(
   name,

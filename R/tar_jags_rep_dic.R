@@ -1,4 +1,4 @@
-#' @title Tidy DIC output from multiple MCMCs per model.
+#' @title Tidy DIC output from multiple MCMCs per model
 #' @export
 #' @description Run multiple MCMCs on simulated datasets
 #'   and return DIC and the effective number of parameters
