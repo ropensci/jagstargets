@@ -203,3 +203,24 @@ targets::tar_test("join to summaries", {
   expect_equal(out$.join_data[grepl("beta", out$variable)], data$beta)
   expect_equal(out$.join_data[out$variable == "deviance"], NA_real_)
 })
+
+targets::tar_test("no JAGS files", {
+  expect_error(
+    tar_jags_rep_summary(
+      model,
+      jags_files = "a.jags",
+      data = sim_data(),
+      parameters.to.save = c("alpha", "beta"),
+      stdout = R.utils::nullfile(),
+      stderr = R.utils::nullfile(),
+      refresh = 0,
+      n.iter = 2e3,
+      n.burnin = 1e3,
+      n.thin = 1,
+      n.chains = 4,
+      batches = 2,
+      reps = 2
+    ),
+    class = "tar_condition_validate"
+  )
+})

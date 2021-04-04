@@ -176,3 +176,19 @@ targets::tar_test("tar_jags() with custom summaries", {
   expect_true("q30" %in% colnames(out))
   expect_true(all(out$custom2 == 34))
 })
+
+targets::tar_test("no JAGS files", {
+  expect_error(
+    tar_jags(
+      model,
+      jags_files = c(x = "a.jags", y = "b.jags"),
+      parameters.to.save = "beta",
+      data = test_data(),
+      n.chains = 2,
+      n.cluster = 2,
+      n.iter = 2e3,
+      n.burnin = 1e3
+    ),
+    class = "tar_condition_validate"
+  )
+})

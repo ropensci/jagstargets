@@ -119,3 +119,25 @@ targets::tar_test("tar_jags_rep_dic()", {
   )
   expect_equal(sort(out), sort(exp))
 })
+
+targets::tar_test("no JAGS files", {
+  expect_error(
+    tar_jags_rep_dic(
+      model,
+      jags_files = c(x = "a.jags", y = "b.jags"),
+      data = c(tar_jags_example_data()),
+      parameters.to.save = "beta",
+      stdout = R.utils::nullfile(),
+      stderr = R.utils::nullfile(),
+      refresh = 0,
+      n.iter = 2e3,
+      n.burnin = 1e3,
+      n.thin = 1,
+      n.chains = 4,
+      batches = 2,
+      reps = 2,
+      combine = TRUE
+    ),
+    class = "tar_condition_validate"
+  )
+})
