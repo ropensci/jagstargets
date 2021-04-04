@@ -6,22 +6,31 @@
 #' @details The MCMC targets use `R2jags::jags()` if `n.cluster` is `1` and
 #'   `R2jags::jags.parallel()` otherwise. Most arguments to `tar_jags()`
 #'   are forwarded to these functions.
-#' @return `tar_jags_rep_dic(name = x, jags_files = "y.jags")`
-#'   returns a list of `targets::tar_target()` objects:
-#'   * `x_file_y`: reproducibly track the jags model file.
-#'   * `x_lines_y`: contents of the jags model file.
-#'   * `x_data`: dynamic branching target with simulated datasets.
-#'   * `x_y`: dynamic branching target with tidy data frames of posterior
-#'     samples.
-#'   * `x`: combine all the model-specific summary targets into
-#'     a single data frame with columns to distinguish among the models.
+#' @return `tar_jags_rep_draws()` returns list of target objects.
+#'   See the "Target objects" section for
+#'   background.
+#'   The target names use the `name` argument as a prefix, and the individual
+#'   elements of `jags_files` appear in the suffixes where applicable.
+#'   As an example, the specific target objects returned by
+#'   `tar_jags_rep_dic(name = x, jags_files = "y.jags")`
+#'   are as follows.
+#'   * `x_file_y`: reproducibly track the JAGS model file. Returns
+#'     a character vector of length 1 with the path to the JAGS
+#'     model file.
+#'   * `x_lines_y`: read the contents of the JAGS model file
+#'     for safe transport to parallel workers.
+#'     Returns a character vector of lines in the model file.
+#'   * `x_data`: use dynamic branching to generate multiple JAGS
+#'     datasets from the R expression in the `data` argument.
+#'     Each dynamic branch returns a batch of JAGS data lists.
+#'   * `x_y`: run JAGS on each dataset from `x_data`.
+#'     Each dynamic branch returns a tidy data frame of draws
+#'     for each batch of data.
+#'   * `x`: combine all the batches from `x_y` into a non-dynamic target.
 #'     Suppressed if `combine` is `FALSE`.
-#'
-#'   Target objects represent skippable steps of the analysis pipeline
-#'   as described at <https://books.ropensci.org/targets/>.
-#'   Please see the design specification at
-#'   <https://books.ropensci.org/targets-design/>
-#'   to learn about the structure and composition of target objects.
+#'     Returns a long tidy data frame with all draws
+#'     from all the branches of `x_y`.
+#' @inheritSection tar_jags Target objects
 #' @inheritParams tar_jags_rep
 #' @examples
 #' targets::tar_dir({ # tar_dir() runs code from a temporary directory.

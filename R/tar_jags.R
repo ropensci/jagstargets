@@ -5,19 +5,48 @@
 #' @details The MCMC targets use `R2jags::jags()` if `n.cluster` is `1` and
 #'   `R2jags::jags.parallel()` otherwise. Most arguments to `tar_jags()`
 #'   are forwarded to these functions.
-#' @return `tar_jags(name = x, jags_files = "y.jags", ...)` returns a list
+#' @return `tar_jags()` returns list of target objects.
+#'   See the "Target objects" section for
+#'   background.
+#'   The target names use the `name` argument as a prefix, and the individual
+#'   elements of `jags_files` appear in the suffixes where applicable.
+#'   As an example, the specific target objects returned by
+#'   `tar_jags(name = x, jags_files = "y.jags", ...)` returns a list
 #'   of `targets::tar_target()` objects:
-#'   * `x_file_y`: reproducibly track the JAGS model file.
-#'   * `x_lines_y`: contents of the JAGS model file.
-#'   * `x_data`: data for the MCMC.
-#'   * `x_mcmc_y`: `rjags` object from `R2jags` with all the MCMC results.
-#'   * `x_draws_y`: tidy data frame of MCMC draws. Omitted if `draws = FALSE`.
-#'   * `x_summary_y`: tidy data frame of MCMC summaries.
+#'   * `x_file_y`: reproducibly track the JAGS model file. Returns
+#'     a character vector of length 1 with the path to the JAGS
+#'     model file.
+#'   * `x_lines_y`: read the contents of the JAGS model file
+#'     for safe transport to parallel workers.
+#'     Returns a character vector of lines in the model file.
+#'   * `x_data`: run the R expression in the `data` argument to produce
+#'     a JAGS dataset for the model. Returns a JAGS data list.
+#'   * `x_mcmc_y`: run MCMC on the model and dataset.
+#'     Returns an `rjags` object from `R2jags` with all the MCMC results.
+#'   * `x_draws_y`: extract posterior samples from `x_mcmc_y`.
+#'     Returns a tidy data frame of MCMC draws. Omitted if `draws = FALSE`.
+#'   * `x_summary_y`: extract posterior summaries from `x_mcmc_y`.
+#'     Returns a tidy data frame of MCMC draws.
 #'     Omitted if `summary = FALSE`.
-#'   * `x_dic`: tidy data frame of deviance information criterion (DIC) info.
+#'   * `x_dic`: extract deviance information criterion (DIC) info
+#'     from `x_mcmc_y`. Returns a tidy data frame of DIC info.
 #'     Omitted if `dic = FALSE`.
-#'  If you supply multiple models, you will get more (model-specific) targets.
-#'  All the models share the same dataset.
+#' @section Target objects:
+#'   Most `stantargets` functions are target factories,
+#'   which means they return target objects
+#'   or lists of target objects.
+#'   Target objects represent skippable steps of the analysis pipeline
+#'   as described at <https://books.ropensci.org/targets/>.
+#'   Please read the walkthrough at
+#'   <https://books.ropensci.org/targets/walkthrough.html>
+#'   to understand the role of target objects in analysis pipelines.
+#'
+#'   For developers,
+#'   <https://wlandau.github.io/targetopia/contributing.html#target-factories>
+#'   explains target factories (functions like this one which generate targets)
+#'   and the design specification at
+#'   <https://books.ropensci.org/targets-design/>
+#'   details the structure and composition of target objects.
 #' @inheritParams tar_jags_run
 #' @inheritParams tar_jags_df
 #' @inheritParams targets::tar_target

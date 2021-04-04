@@ -221,20 +221,33 @@ If \code{"worker"}, the worker loads the targets dependencies.}
 rules that decide whether the target is up to date.}
 }
 \value{
+\code{tar_jags()} returns list of target objects.
+See the "Target objects" section for
+background.
+The target names use the \code{name} argument as a prefix, and the individual
+elements of \code{jags_files} appear in the suffixes where applicable.
+As an example, the specific target objects returned by
 \code{tar_jags(name = x, jags_files = "y.jags", ...)} returns a list
 of \code{targets::tar_target()} objects:
 \itemize{
-\item \code{x_file_y}: reproducibly track the JAGS model file.
-\item \code{x_lines_y}: contents of the JAGS model file.
-\item \code{x_data}: data for the MCMC.
-\item \code{x_mcmc_y}: \code{rjags} object from \code{R2jags} with all the MCMC results.
-\item \code{x_draws_y}: tidy data frame of MCMC draws. Omitted if \code{draws = FALSE}.
-\item \code{x_summary_y}: tidy data frame of MCMC summaries.
+\item \code{x_file_y}: reproducibly track the JAGS model file. Returns
+a character vector of length 1 with the path to the JAGS
+model file.
+\item \code{x_lines_y}: read the contents of the JAGS model file
+for safe transport to parallel workers.
+Returns a character vector of lines in the model file.
+\item \code{x_data}: run the R expression in the \code{data} argument to produce
+a JAGS dataset for the model. Returns a JAGS data list.
+\item \code{x_mcmc_y}: run MCMC on the model and dataset.
+Returns an \code{rjags} object from \code{R2jags} with all the MCMC results.
+\item \code{x_draws_y}: extract posterior samples from \code{x_mcmc_y}.
+Returns a tidy data frame of MCMC draws. Omitted if \code{draws = FALSE}.
+\item \code{x_summary_y}: extract posterior summaries from \code{x_mcmc_y}.
+Returns a tidy data frame of MCMC draws.
 Omitted if \code{summary = FALSE}.
-\item \code{x_dic}: tidy data frame of deviance information criterion (DIC) info.
+\item \code{x_dic}: extract deviance information criterion (DIC) info
+from \code{x_mcmc_y}. Returns a tidy data frame of DIC info.
 Omitted if \code{dic = FALSE}.
-If you supply multiple models, you will get more (model-specific) targets.
-All the models share the same dataset.
 }
 }
 \description{
@@ -246,6 +259,25 @@ The MCMC targets use \code{R2jags::jags()} if \code{n.cluster} is \code{1} and
 \code{R2jags::jags.parallel()} otherwise. Most arguments to \code{tar_jags()}
 are forwarded to these functions.
 }
+\section{Target objects}{
+
+Most \code{stantargets} functions are target factories,
+which means they return target objects
+or lists of target objects.
+Target objects represent skippable steps of the analysis pipeline
+as described at \url{https://books.ropensci.org/targets/}.
+Please read the walkthrough at
+\url{https://books.ropensci.org/targets/walkthrough.html}
+to understand the role of target objects in analysis pipelines.
+
+For developers,
+\url{https://wlandau.github.io/targetopia/contributing.html#target-factories}
+explains target factories (functions like this one which generate targets)
+and the design specification at
+\url{https://books.ropensci.org/targets-design/}
+details the structure and composition of target objects.
+}
+
 \examples{
 targets::tar_dir({ # tar_dir() runs code from a temporary directory.
 targets::tar_script({

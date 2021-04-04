@@ -212,24 +212,32 @@ If \code{"worker"}, the worker loads the targets dependencies.}
 rules that decide whether the target is up to date.}
 }
 \value{
+\code{tar_jags_rep_draws()} returns list of target objects.
+See the "Target objects" section for
+background.
+The target names use the \code{name} argument as a prefix, and the individual
+elements of \code{jags_files} appear in the suffixes where applicable.
+As an example, the specific target objects returned by
 \code{tar_jags_rep_dic(name = x, jags_files = "y.jags")}
-returns a list of \code{targets::tar_target()} objects:
+are as follows.
 \itemize{
-\item \code{x_file_y}: reproducibly track the jags model file.
-\item \code{x_lines_y}: contents of the jags model file.
-\item \code{x_data}: dynamic branching target with simulated datasets.
-\item \code{x_y}: dynamic branching target with tidy data frames of posterior
-samples.
-\item \code{x}: combine all the model-specific summary targets into
-a single data frame with columns to distinguish among the models.
+\item \code{x_file_y}: reproducibly track the JAGS model file. Returns
+a character vector of length 1 with the path to the JAGS
+model file.
+\item \code{x_lines_y}: read the contents of the JAGS model file
+for safe transport to parallel workers.
+Returns a character vector of lines in the model file.
+\item \code{x_data}: use dynamic branching to generate multiple JAGS
+datasets from the R expression in the \code{data} argument.
+Each dynamic branch returns a batch of JAGS data lists.
+\item \code{x_y}: run JAGS on each dataset from \code{x_data}.
+Each dynamic branch returns a tidy data frame of draws
+for each batch of data.
+\item \code{x}: combine all the batches from \code{x_y} into a non-dynamic target.
 Suppressed if \code{combine} is \code{FALSE}.
+Returns a long tidy data frame with all draws
+from all the branches of \code{x_y}.
 }
-
-Target objects represent skippable steps of the analysis pipeline
-as described at \url{https://books.ropensci.org/targets/}.
-Please see the design specification at
-\url{https://books.ropensci.org/targets-design/}
-to learn about the structure and composition of target objects.
 }
 \description{
 Run multiple MCMCs on simulated datasets
@@ -241,6 +249,25 @@ The MCMC targets use \code{R2jags::jags()} if \code{n.cluster} is \code{1} and
 \code{R2jags::jags.parallel()} otherwise. Most arguments to \code{tar_jags()}
 are forwarded to these functions.
 }
+\section{Target objects}{
+
+Most \code{stantargets} functions are target factories,
+which means they return target objects
+or lists of target objects.
+Target objects represent skippable steps of the analysis pipeline
+as described at \url{https://books.ropensci.org/targets/}.
+Please read the walkthrough at
+\url{https://books.ropensci.org/targets/walkthrough.html}
+to understand the role of target objects in analysis pipelines.
+
+For developers,
+\url{https://wlandau.github.io/targetopia/contributing.html#target-factories}
+explains target factories (functions like this one which generate targets)
+and the design specification at
+\url{https://books.ropensci.org/targets-design/}
+details the structure and composition of target objects.
+}
+
 \examples{
 targets::tar_dir({ # tar_dir() runs code from a temporary directory.
 targets::tar_script({
