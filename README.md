@@ -21,6 +21,22 @@ code is required, and there is no need to manually configure branching,
 so usage is much easier than
 [`targets`](https://docs.ropensci.org/targets/) alone.
 
+## How it works
+
+`jagstargets` supports specialized [target
+factories](https://ropensci.org/blog/2021/02/03/targets/#target-factories)
+that create ensembles of [target
+objects](https://docs.ropensci.org/targets/reference/tar_target.html)
+for [`R2jags`](https://CRAN.R-project.org/package=R2jags) workflows.
+These [target
+factories](https://ropensci.org/blog/2021/02/03/targets/#target-factories)
+abstract away the details of
+[`targets`](https://docs.ropensci.org/targets/) and
+[`R2jags`](https://CRAN.R-project.org/package=R2jags) and make both
+packages easier to use. For details, please read the [vignette on
+non-branching MCMC
+pipelines](https://wlandau.github.io/jagstargets/articles/mcmc.html).
+
 ## Prerequisites
 
 1.  The [prerequisites of the `targets` R
@@ -100,6 +116,26 @@ to run the pipeline. Access the results using
 e.g. `tar_read(tar_read(example_summary_x)`. Visit [this
 vignette](https://wlandau.github.io/jagstargets/articles/mcmc.html) to
 read more about this example.
+
+## Help
+
+If you have trouble using `jagstargets`, you can ask for help in the
+[GitHub discussions
+forum](https://github.com/wlandau/jagstargets/discussions/categories/help).
+Because the purpose of `jagstargets` is to combine
+[`targets`](https://docs.ropensci.org/targets/) and
+[`R2jags`](https://CRAN.R-project.org/package=R2jags), your issue may
+have something to do with one of the latter two packages, a [dependency
+of
+`targets`](https://github.com/ropensci/targets/blob/4e3ef2a6c986f558a25e544416f480fc01236b6b/DESCRIPTION#L49-L88),
+or [`R2jags`](https://CRAN.R-project.org/package=R2jags) itself. When
+you troubleshoot, peel back as many layers as possible to isolate the
+problem. For example, if the issue comes from
+[`R2jags`](https://CRAN.R-project.org/package=R2jags), create a
+[reproducible example](https://reprex.tidyverse.org) that directly
+invokes [`R2jags`](https://CRAN.R-project.org/package=R2jags) without
+invoking `jagstargets`. The GitHub discussion and issue forums of those
+packages are great resources.
 
 ## Participation
 
