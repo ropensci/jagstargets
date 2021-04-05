@@ -297,9 +297,9 @@ tar_jags <- function(
     target_object_file,
     target_object_lines,
     target_object_mcmc,
-    trn(identical(draws, TRUE), target_object_draws, NULL),
-    trn(identical(summary, TRUE), target_object_summary, NULL),
-    trn(identical(dic, TRUE), target_object_dic, NULL)
+    if_any(identical(draws, TRUE), target_object_draws, NULL),
+    if_any(identical(summary, TRUE), target_object_summary, NULL),
+    if_any(identical(dic, TRUE), target_object_dic, NULL)
   )
   out <- list_nonempty(out)
   values <- list(
@@ -366,7 +366,7 @@ tar_jags_run <- function(
   lapply(jags.module, rjags::load.module, quiet = TRUE)
   jags_data <- data
   jags_data$.join_data <- NULL
-  trn(
+  if_any(
     n.cluster > 1L,
     R2jags::jags.parallel(
       data = jags_data,

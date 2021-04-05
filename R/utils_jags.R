@@ -1,5 +1,5 @@
 produce_jags_names <- function(jags_files) {
-  out <- trn(
+  out <- if_any(
     is.null(names(jags_files)),
     tools::file_path_sans_ext(basename(jags_files)),
     names(jags_files)
