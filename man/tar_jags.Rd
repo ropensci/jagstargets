@@ -255,9 +255,11 @@ Targets to run a JAGS model once with MCMC
 and save multiple outputs.
 }
 \details{
-The MCMC targets use \code{R2jags::jags()} if \code{n.cluster} is \code{1} and
-\code{R2jags::jags.parallel()} otherwise. Most arguments to \code{tar_jags()}
-are forwarded to these functions.
+The table is:\tabular{lll}{
+   Tables \tab Are \tab Cool \cr
+   col 3 is \tab right-aligned \tab $1600 \cr
+   col 2 is \tab centered \tab $12 \cr
+}
 }
 \section{Target objects}{
 
