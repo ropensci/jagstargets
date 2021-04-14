@@ -144,7 +144,11 @@ when loading \code{packages}.}
 \item{error}{Character of length 1, what to do if the target
 runs into an error. If \code{"stop"}, the whole pipeline stops
 and throws an error. If \code{"continue"}, the error is recorded,
-but the pipeline keeps going.}
+but the pipeline keeps going. \code{error = "workspace"} is just like
+\code{error = "stop"} except \code{targets} saves a special workspace file
+to support interactive debugging outside the pipeline.
+(Visit \url{https://books.ropensci.org/targets/debugging.html}
+to learn how to debug targets using saved workspaces.)}
 
 \item{memory}{Character of length 1, memory strategy.
 If \code{"persistent"}, the target stays in memory
@@ -255,7 +259,7 @@ Targets to run a JAGS model once with MCMC
 and save multiple outputs.
 }
 \details{
-The table is:\tabular{lll}{
+The table is:\tabular{lcr}{
    Tables \tab Are \tab Cool \cr
    col 3 is \tab right-aligned \tab $1600 \cr
    col 2 is \tab centered \tab $12 \cr

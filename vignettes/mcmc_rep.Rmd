@@ -305,6 +305,7 @@ tar_script({
     )
   )
 })
+file.copy("model.jags", "model2.jags")
 ```
 
 ```{r, eval = FALSE}

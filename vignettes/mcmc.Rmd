@@ -245,6 +245,7 @@ tar_script({
     )
   )
 })
+file.copy("x.jags", "y.jags")
 ```
 
 ```{r, eval = FALSE}
