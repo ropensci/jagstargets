@@ -2,13 +2,9 @@
 #' @export
 #' @description Targets to run a JAGS model once with MCMC
 #'   and save multiple outputs.
-#' @details
-#' The table is: 
-#'
-#' | Tables        | Are           | Cool  |
-#' | ------------- |:-------------:| -----:|
-#' | col 3 is      | right-aligned | $1600 |
-#' | col 2 is      | centered      |   $12 |
+#' @details The MCMC targets use `R2jags::jags()` if `n.cluster` is `1` and
+#'   `R2jags::jags.parallel()` otherwise. Most arguments to `tar_jags()`
+#'   are forwarded to these functions.
 #' @return `tar_jags()` returns list of target objects.
 #'   See the "Target objects" section for
 #'   background.
