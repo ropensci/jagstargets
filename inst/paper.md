@@ -22,9 +22,11 @@ affiliations:
   index: 1
 ---
 
-# Summary
+# Statement of need
 
 Bayesian statisticians regularly experiment with models to refine, compare, and understand them [@bayesworkflow]. Each fitted model informs subsequent model-building choices, and even for experienced practitioners, the investigation often leads to final models that differ from the ones originally proposed. Fitting a model usually means applying Markov chain Monte Carlo or a similar method to approximate the full joint posterior distribution of the parameters [@bda3]. Flexible probabilistic programming languages such as JAGS have made model specification quick and straightforward [@jags], but computation time is still a bottleneck. A workflow can take several minutes or hours to run, and in subsequent iterations, researchers struggle to keep the results up to date with frequent changes to the models, code, and data.
+
+# Summary
 
 The [`jagstargets`](https://github.com/wlandau/jagstargets) R package [@jagstargets] is a pipeline toolkit for Bayesian data analysis with JAGS. It automatically detects the dependency relationships among the results, models, and datasets, it watches these computational steps for changes, and it deploys the work with optional distributed computing while skipping the tasks that are already synchronized with their upstream dependencies. This automated selective skipping reduces the runtime of successive experiments, and when the entire workflow is up to date, the user has tangible evidence of reproducibility.
 
