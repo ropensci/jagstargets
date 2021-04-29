@@ -44,6 +44,7 @@ writeLines(lines, "x.jags")
 Next, create a `_targets.R` file to define the [`targets`](https://docs.ropensci.org/targets/) pipeline.
 
 ```{r, echo = FALSE}
+# Writes the _targets.R file shown in the next code chunk.
 library(targets)
 tar_script({
   library(jagstargets)
@@ -148,6 +149,7 @@ tar_make()
 At this point, we can add more targets and custom functions for additional post-processing. See below for a custom summary target (which is equivalent to customizing the `summaries` argument of `tar_jags()`.)
 
 ```{r, echo = FALSE}
+# Writes the _targets.R file shown in the next code chunk.
 tar_script({
   library(jagstargets)
   options(crayon.enabled = FALSE)
@@ -224,6 +226,7 @@ tar_read(custom_summary)
 `tar_jags()` and related functions allow you to supply multiple models to `jags_files`. If you do, each model will run on the same dataset. Below, we add another `y.jags` model to the `jags_files` argument of `tar_jags()`.
 
 ```{r, echo = FALSE}
+# Writes the _targets.R file shown in the next code chunk.
 tar_script({
   library(targets)
   library(jagstargets)
