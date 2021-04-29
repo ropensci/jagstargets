@@ -3,6 +3,7 @@
 \docType{package}
 \name{jagstargets-package}
 \alias{jagstargets-package}
+\alias{jagstargets}
 \title{targets: Targets for JAGS Workflows}
 \description{
 Bayesian data analysis usually incurs long runtimes
