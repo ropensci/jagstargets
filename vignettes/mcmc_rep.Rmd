@@ -58,7 +58,7 @@ tar_script({
     alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
     beta <- stats::rnorm(n = n, mean = 0, sd = 1)
     x <- seq(from = -1, to = 1, length.out = n)
-    y <- stats::rnorm(n, x * beta, 1)
+    y <- stats::rnorm(n, alpha + x * beta, 1)
     .join_data <- list(alpha = alpha, beta = beta)
     list(n = n, x = x, y = y, .join_data = .join_data)
   }
@@ -92,7 +92,7 @@ generate_data <- function (n = 10L) {
   alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
   beta <- stats::rnorm(n = n, mean = 0, sd = 1)
   x <- seq(from = -1, to = 1, length.out = n)
-  y <- stats::rnorm(n, x * beta, 1)
+  y <- stats::rnorm(n, alpha + x * beta, 1)
   # Elements of .join_data get joined on to the .join_data column
   # in the summary output next to the model parameters
   # with the same names.
@@ -163,7 +163,7 @@ tar_script({
     alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
     beta <- stats::rnorm(n = n, mean = 0, sd = 1)
     x <- seq(from = -1, to = 1, length.out = n)
-    y <- stats::rnorm(n, x * beta, 1)
+    y <- stats::rnorm(n, alpha + x * beta, 1)
     # Elements of .join_data get joined on to the .join_data column
     # in the summary output next to the model parameters
     # with the same names.
@@ -207,7 +207,7 @@ generate_data <- function (n = 10L) {
   alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
   beta <- stats::rnorm(n = n, mean = 0, sd = 1)
   x <- seq(from = -1, to = 1, length.out = n)
-  y <- stats::rnorm(n, x * beta, 1)
+  y <- stats::rnorm(n, alpha + x * beta, 1)
   # Elements of .join_data get joined on to the .join_data column
   # in the summary output next to the model parameters
   # with the same names.
@@ -278,7 +278,7 @@ tar_script({
     alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
     beta <- stats::rnorm(n = n, mean = 0, sd = 1)
     x <- seq(from = -1, to = 1, length.out = n)
-    y <- stats::rnorm(n, x * beta, 1)
+    y <- stats::rnorm(n, alpha + x * beta, 1)
     # Elements of .join_data get joined on to the .join_data column
     # in the summary output next to the model parameters
     # with the same names.
@@ -320,7 +320,7 @@ generate_data <- function (n = 10L) {
   alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
   beta <- stats::rnorm(n = n, mean = 0, sd = 1)
   x <- seq(from = -1, to = 1, length.out = n)
-  y <- stats::rnorm(n, x * beta, 1)
+  y <- stats::rnorm(n, alpha + x * beta, 1)
   # Elements of .join_data get joined on to the .join_data column
   # in the summary output next to the model parameters
   # with the same names.
