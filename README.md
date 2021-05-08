@@ -11,31 +11,20 @@ Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&lab
 [![codecov](https://codecov.io/gh/wlandau/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/wlandau/jagstargets)
 [![lint](https://github.com/wlandau/jagstargets/workflows/lint/badge.svg)](https://github.com/wlandau/jagstargets/actions?query=workflow%3Alint)
 
-The `jagstargets` R package is an extension to
+Bayesian data analysis usually incurs long runtimes and cumbersome
+custom code, and the process of prototyping and deploying custom
+[JAGS](https://mcmc-jags.sourceforge.io) models can become a daunting
+software engineering challenge. To ease this burden, the `jagstargets` R
+package creates [JAGS](https://mcmc-jags.sourceforge.io) pipelines that
+are concise, efficient, scalable, and tailored to the needs of Bayesian
+statisticians. Leveraging
+[`targets`](https://docs.ropensci.org/targets/), `jagstargets` pipelines
+automatically parallelize the computation and skip expensive steps when
+the results are already up to date. Minimal custom user-side code is
+required, and there is no need to manually configure branching, so
+`jagstargets` is easier to use than
 [`targets`](https://docs.ropensci.org/targets/) and
-[`R2jags`](https://CRAN.R-project.org/package=R2jags) for Bayesian data
-analysis. `jagstargets` makes it super easy to set up useful scalable
-JAGS pipelines that automatically parallelize the computation and skip
-expensive steps when the results are already up to date. Minimal custom
-code is required, and there is no need to manually configure branching,
-so usage is much easier than
-[`targets`](https://docs.ropensci.org/targets/) alone.
-
-## How it works
-
-`jagstargets` supports specialized [target
-factories](https://ropensci.org/blog/2021/02/03/targets/#target-factories)
-that create ensembles of [target
-objects](https://docs.ropensci.org/targets/reference/tar_target.html)
-for [`R2jags`](https://CRAN.R-project.org/package=R2jags) workflows.
-These [target
-factories](https://ropensci.org/blog/2021/02/03/targets/#target-factories)
-abstract away the details of
-[`targets`](https://docs.ropensci.org/targets/) and
-[`R2jags`](https://CRAN.R-project.org/package=R2jags) and make both
-packages easier to use. For details, please read the [vignette on
-non-branching MCMC
-pipelines](https://wlandau.github.io/jagstargets/articles/mcmc.html).
+[`R2jags`](https://CRAN.R-project.org/package=R2jags) directly.
 
 ## Prerequisites
 
@@ -117,6 +106,22 @@ to run the pipeline. Access the results using
 e.g. `tar_read(tar_read(example_summary_x)`. Visit [this
 vignette](https://wlandau.github.io/jagstargets/articles/mcmc.html) to
 read more about this example.
+
+## How the package works
+
+`jagstargets` supports specialized [target
+factories](https://ropensci.org/blog/2021/02/03/targets/#target-factories)
+that create ensembles of [target
+objects](https://docs.ropensci.org/targets/reference/tar_target.html)
+for [`R2jags`](https://CRAN.R-project.org/package=R2jags) workflows.
+These [target
+factories](https://ropensci.org/blog/2021/02/03/targets/#target-factories)
+abstract away the details of
+[`targets`](https://docs.ropensci.org/targets/) and
+[`R2jags`](https://CRAN.R-project.org/package=R2jags) and make both
+packages easier to use. For details, please read the [vignette on
+non-branching MCMC
+pipelines](https://wlandau.github.io/jagstargets/articles/mcmc.html).
 
 ## Help
 

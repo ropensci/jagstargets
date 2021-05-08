@@ -8,9 +8,9 @@
 \description{
 Bayesian data analysis usually incurs long runtimes
 and cumbersome custom code. A pipeline toolkit tailored to
-Bayesians, the \code{jagstargets} R package leverages
+Bayesian statisticians, the \code{jagstargets} R package leverages
 \code{targets} and \code{R2jags} to ease this burden.
-\code{jagstargets} makes it super easy to set up useful scalable
+\code{jagstargets} makes it super easy to set up scalable
 JAGS pipelines that automatically parallelize the computation
 and skip expensive steps when the results are already up to date.
 Minimal custom code is required, and there is no need to manually
