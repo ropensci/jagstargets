@@ -1,5 +1,11 @@
 # targets::tar_test() runs the test code inside a temporary directory
 # to avoid accidentally writing to the user's file space.
+
+# tar_jags_rep_summary() creates a JAGS pipeline that
+# runs multiple MCMCs on multiple JAGS models
+# and returns data frames of MCMC summaries in the output. This test
+# checks that the pipeline is correctly constructed
+# and the output is correctly formatted.
 targets::tar_test("tar_jags_rep_summary()", {
   skip_on_cran()
   skip_if_not_installed("dplyr")
@@ -26,10 +32,10 @@ targets::tar_test("tar_jags_rep_summary()", {
       )
     )
   })
-  # manifest
+  # Enough targets are created.
   out <- targets::tar_manifest(callr_function = NULL)
   expect_equal(nrow(out), 9L)
-  # graph
+  # Nodes in the graph are connected properly.
   out <- targets::tar_network(callr_function = NULL, targets_only = TRUE)$edges
   out <- dplyr::arrange(out, from, to)
   rownames(out) <- NULL
@@ -48,7 +54,7 @@ targets::tar_test("tar_jags_rep_summary()", {
   exp <- dplyr::arrange(exp, from, to)
   rownames(exp) <- NULL
   expect_equal(out, exp)
-  # results
+  # The pipeline produces correctly formatted output.
   capture.output(targets::tar_make(callr_function = NULL))
   meta <- tar_meta(starts_with("model_data_"))
   expect_equal(nrow(meta), 2L)
@@ -84,12 +90,12 @@ targets::tar_test("tar_jags_rep_summary()", {
   expect_equal(nrow(out2), 4L)
   # Everything should be up to date.
   expect_equal(targets::tar_outdated(callr_function = NULL), character(0))
-  # Change the model.
+  # Change the model. Some targets should invalidate.
   write("", file = "b.jags", append = TRUE)
   out <- targets::tar_outdated(callr_function = NULL)
   exp <- c("model_file_y", "model_lines_y", "model_y", "model")
   expect_equal(sort(out), sort(exp))
-  # Change the data code.
+  # Change the data code. Some targets should invalidate.
   targets::tar_script({
     list(
       tar_jags_rep_summary(
@@ -204,7 +210,7 @@ targets::tar_test("join to summaries", {
   expect_equal(out$.join_data[out$variable == "deviance"], NA_real_)
 })
 
-targets::tar_test("no JAGS files", {
+targets::tar_test("tar_jags_rep_summary() errors if no JAGS file", {
   expect_error(
     tar_jags_rep_summary(
       model,

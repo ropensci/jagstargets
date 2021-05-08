@@ -1,6 +1,6 @@
 # targets::tar_test() runs the test code inside a temporary directory
 # to avoid accidentally writing to the user's file space.
-targets::tar_test("produce_jags_names()", {
+targets::tar_test("produce_jags_names() produces friendly JAGS model names", {
   expect_equal(
     produce_jags_names(c(j = "x/a.jags", k = "x/b.jags")),
     c("j", "k")

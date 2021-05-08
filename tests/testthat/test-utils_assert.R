@@ -1,5 +1,8 @@
 # targets::tar_test() runs the test code inside a temporary directory
 # to avoid accidentally writing to the user's file space.
+
+# These tests check internal assertion routines
+# used to verify the correctness of user inputs.
 targets::tar_test("assert_chr()", {
   expect_silent(assert_chr(letters))
   expect_error(assert_chr(123), class = "tar_condition_validate")

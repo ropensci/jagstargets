@@ -1,5 +1,11 @@
 # targets::tar_test() runs the test code inside a temporary directory
 # to avoid accidentally writing to the user's file space.
+
+# tar_jags() creates a JAGS pipeline that
+# runs one MCMC and returns easily consumable outputs,
+# such as a data frame of summaries and DIC.
+# This test checks that the pipeline is correctly constructed
+# and the output is correctly formatted.
 targets::tar_test("tar_jags()", {
   skip_on_cran()
   skip_if_not_installed("dplyr")
@@ -22,10 +28,10 @@ targets::tar_test("tar_jags()", {
       )
     )
   })
-  # manifest
+  # Enough targets are created.
   out <- targets::tar_manifest(callr_function = NULL)
   expect_equal(nrow(out), 13L)
-  # graph
+  # Nodes in the graph are connected properly.
   out <- targets::tar_network(callr_function = NULL, targets_only = TRUE)$edges
   out <- dplyr::arrange(out, from, to)
   rownames(out) <- NULL
@@ -98,7 +104,7 @@ targets::tar_test("tar_jags()", {
   expect_true("dic" %in% colnames(out_y))
   # Everything should be up to date.
   expect_equal(targets::tar_outdated(callr_function = NULL), character(0))
-  # Change the model.
+  # Change the model. Some targets should invalidate.
   write("", file = "a.jags", append = TRUE)
   out <- targets::tar_outdated(callr_function = NULL)
   exp <- c(
@@ -110,7 +116,7 @@ targets::tar_test("tar_jags()", {
     "model_mcmc_x"
   )
   expect_equal(sort(out), sort(exp))
-  # Change the_data code.
+  # Change the_data code. Some targets should invalidate.
   targets::tar_script({
     test_data <- function() {
       out <- tar_jags_example_data(n = 10)
@@ -144,7 +150,7 @@ targets::tar_test("tar_jags()", {
   expect_true(inherits(targets::tar_read(model_mcmc_y), "rjags"))
 })
 
-targets::tar_test("tar_jags() with custom summaries", {
+targets::tar_test("tar_jags() can produced user-defined MCMC summaries", {
   skip_on_cran()
   skip_if_not_installed("dplyr")
   tar_jags_example_file(path = "a.jags")
@@ -177,7 +183,7 @@ targets::tar_test("tar_jags() with custom summaries", {
   expect_true(all(out$custom2 == 34))
 })
 
-targets::tar_test("no JAGS files", {
+targets::tar_test("tar_jags() errors is no JAGS file", {
   expect_error(
     tar_jags(
       model,

@@ -1,5 +1,9 @@
 # targets::tar_test() runs the test code inside a temporary directory
 # to avoid accidentally writing to the user's file space.
+
+# tar_jags_df() is an internal function to produce clean
+# summary output from a JAGS model fit.
+# This test checks if the output is formatted correctly.
 targets::tar_test("tar_jags_df() with dic", {
   tmp <- tempfile()
   expect_false(file.exists(tmp))

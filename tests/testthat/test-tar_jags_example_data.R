@@ -1,6 +1,6 @@
 # targets::tar_test() runs the test code inside a temporary directory
 # to avoid accidentally writing to the user's file space.
-targets::tar_test("tar_jags_example_data()", {
+targets::tar_test("tar_jags_example_data() returns correctly formatted data", {
   out <- tar_jags_example_data(n = 50L)
   expect_equal(out$n, 50L)
   expect_equal(length(out$x), 50L)
