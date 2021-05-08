@@ -1,9 +1,9 @@
 ---
-title: "Scaling MCMC pipelines"
+title: "Bayesian simulation pipelines with jagstargets"
 output: rmarkdown::html_vignette
-bibliography: mcmc_rep.bib
+bibliography: simulation.bib
 vignette: >
-  %\VignetteIndexEntry{Scaling MCMC pipelines}
+  %\VignetteIndexEntry{Bayesian simulation pipelines with jagstargets}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -27,7 +27,7 @@ library(targets)
 library(jagstargets)
 ```
 
-It is sometimes desirable to run one or more Bayesian models repeatedly across multiple simulated datasets. Examples:
+The [introductory vignette](https://wlandau.github.io/jagstargets/articles/introduction.html) vignette caters to Bayesian data analysis workflows with few datasets to analyze. However, it is sometimes desirable to run one or more Bayesian models repeatedly across many simulated datasets. Examples:
 
 1. Validate the implementation of a Bayesian model using simulation.
 2. Simulate a randomized controlled experiment to explore frequentist properties such as power and Type I error.

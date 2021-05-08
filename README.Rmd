@@ -32,7 +32,7 @@ Bayesian data analysis usually incurs long runtimes and cumbersome custom code, 
 
 ## How to get started
 
-Read the `jagstargets` tutorial vignettes [here](https://wlandau.github.io/jagstargets/articles/mcmc.html) and [here](https://wlandau.github.io/jagstargets/articles/mcmc_rep.html), then use <https://wlandau.github.io/jagstargets/> as a reference while constructing your own workflows.
+Read the `jagstargets` [introductory vignette](https://wlandau.github.io/jagstargets/articles/introduction.html), and then use <https://wlandau.github.io/jagstargets/> as a reference while constructing your own workflows. If you need to analyze large collections of simulated datasets, please consult the [simulation vignette](https://wlandau.github.io/jagstargets/articles/simulation.html).
 
 ## Installation
 
@@ -74,7 +74,7 @@ Run [`tar_visnetwork()`](https://docs.ropensci.org/targets/reference/tar_visnetw
 
 ## How the package works
 
-`jagstargets` supports specialized [target factories](https://ropensci.org/blog/2021/02/03/targets/#target-factories) that create ensembles of [target objects](https://docs.ropensci.org/targets/reference/tar_target.html) for [`R2jags`](https://CRAN.R-project.org/package=R2jags) workflows. These [target factories](https://ropensci.org/blog/2021/02/03/targets/#target-factories) abstract away the details of [`targets`](https://docs.ropensci.org/targets/) and [`R2jags`](https://CRAN.R-project.org/package=R2jags) and make both packages easier to use. For details, please read the [vignette on non-branching MCMC pipelines](https://wlandau.github.io/jagstargets/articles/mcmc.html).
+`jagstargets` supports specialized [target factories](https://ropensci.org/blog/2021/02/03/targets/#target-factories) that create ensembles of [target objects](https://docs.ropensci.org/targets/reference/tar_target.html) for [`R2jags`](https://CRAN.R-project.org/package=R2jags) workflows. These [target factories](https://ropensci.org/blog/2021/02/03/targets/#target-factories) abstract away the details of [`targets`](https://docs.ropensci.org/targets/) and [`R2jags`](https://CRAN.R-project.org/package=R2jags) and make both packages easier to use. For details, please read the [introductory vignette](https://wlandau.github.io/jagstargets/articles/introduction.html).
 
 ## Help
 

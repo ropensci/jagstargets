@@ -1,8 +1,8 @@
 ---
-title: "MCMC pipelines"
+title: "Introduction to jagstargets"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{MCMC pipelines}
+  %\VignetteIndexEntry{Introduction to jagstargets}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

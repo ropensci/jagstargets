@@ -43,11 +43,12 @@ required, and there is no need to manually configure branching, so
 
 ## How to get started
 
-Read the `jagstargets` tutorial vignettes
-[here](https://wlandau.github.io/jagstargets/articles/mcmc.html) and
-[here](https://wlandau.github.io/jagstargets/articles/mcmc_rep.html),
-then use <https://wlandau.github.io/jagstargets/> as a reference while
-constructing your own workflows.
+Read the `jagstargets` [introductory
+vignette](https://wlandau.github.io/jagstargets/articles/introduction.html),
+and then use <https://wlandau.github.io/jagstargets/> as a reference
+while constructing your own workflows. If you need to analyze large
+collections of simulated datasets, please consult the [simulation
+vignette](https://wlandau.github.io/jagstargets/articles/simulation.html).
 
 ## Installation
 
@@ -119,9 +120,8 @@ factories](https://ropensci.org/blog/2021/02/03/targets/#target-factories)
 abstract away the details of
 [`targets`](https://docs.ropensci.org/targets/) and
 [`R2jags`](https://CRAN.R-project.org/package=R2jags) and make both
-packages easier to use. For details, please read the [vignette on
-non-branching MCMC
-pipelines](https://wlandau.github.io/jagstargets/articles/mcmc.html).
+packages easier to use. For details, please read the [introductory
+vignette](https://wlandau.github.io/jagstargets/articles/introduction.html).
 
 ## Help
 
