@@ -28,7 +28,17 @@ library(jagstargets)
 
 The `jagstargets` package makes it easy to run a single jags model and keep track of the results. [`R2jags`](https://github.com/suyusung/R2jags) fits the models, and [`targets`](https://docs.ropensci.org/targets/) manages the workflow and helps avoid unnecessary computation.
 
-Consider the jags model file below.
+Consider the simple regression model below with response variable `y` and covariate `x`.
+
+
+$$
+\begin{aligned}
+y_i &\stackrel{\text{iid}}{\sim} \text{Normal}(x_i \beta, 1) \\
+\beta &\sim \text{Normal}(0, 1)
+\end{aligned}
+$$
+
+We write this model in the JAGS model file below.
 
 ```{r}
 lines <- "model {

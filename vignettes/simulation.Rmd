@@ -34,6 +34,17 @@ The [introductory vignette](https://wlandau.github.io/jagstargets/articles/intro
 
 This vignette focuses on (1). The goal of this particular example to simulate multiple datasets from the model below, analyze each dataset, and assess how often the estimated posterior intervals cover the true parameters from the prior predictive simulations. The quantile method by @cook2006 generalizes this concept, and simulation-based calibration [@talts2020] generalizes further. The interval-based technique featured in this vignette is not as robust as SBC, but it may be more expedient for large models because it does not require visual inspection of multiple histograms.
 
+Consider a simple regression model with a continuous response `y` with a covariate `x`.
+
+$$
+\begin{aligned}
+y_i &\stackrel{\text{iid}}{\sim} \text{Normal}(\beta_1 + x_i \beta_2, 1) \\
+\beta_1, \beta_2 &\stackrel{\text{iid}}{\sim} \text{Normal}(0, 1)
+\end{aligned}
+$$
+
+We write this model in a JAGS model file.
+
 ```{r}
 lines <- "model {
   for (i in 1:n) {
