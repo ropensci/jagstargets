@@ -29,7 +29,7 @@ library(jagstargets)
 
 The [introductory vignette](https://wlandau.github.io/jagstargets/articles/introduction.html) vignette caters to Bayesian data analysis workflows with few datasets to analyze. However, it is sometimes desirable to run one or more Bayesian models repeatedly across many simulated datasets. Examples:
 
-1. Validate the implementation of a Bayesian model using simulation.
+1. Validate the implementation of a Bayesian model, using simulation to determine how reliably the model estimates the parameters under known data-generating scenarios.
 2. Simulate a randomized controlled experiment to explore frequentist properties such as power and Type I error.
 
 This vignette focuses on (1). The goal of this particular example to simulate multiple datasets from the model below, analyze each dataset, and assess how often the estimated posterior intervals cover the true parameters from the prior predictive simulations. The quantile method by @cook2006 generalizes this concept, and simulation-based calibration [@talts2020] generalizes further. The interval-based technique featured in this vignette is not as robust as SBC, but it may be more expedient for large models because it does not require visual inspection of multiple histograms.
@@ -37,10 +37,11 @@ This vignette focuses on (1). The goal of this particular example to simulate mu
 ```{r}
 lines <- "model {
   for (i in 1:n) {
-    y[i] ~ dnorm(alpha + x[i] * beta[i], 1)
+    y[i] ~ dnorm(beta[1] + x[i] * beta[2], 1)
+  }
+  for (i in 1:2) {
     beta[i] ~ dnorm(0, 1)
   }
-  alpha ~ dnorm(0, 1)
 }"
 writeLines(lines, "model.jags")
 ```
@@ -55,11 +56,10 @@ tar_script({
   options(crayon.enabled = FALSE)
   tar_option_set(memory = "transient", garbage_collection = TRUE)
   generate_data <- function (n = 10L) {
-    alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
-    beta <- stats::rnorm(n = n, mean = 0, sd = 1)
+    beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
     x <- seq(from = -1, to = 1, length.out = n)
-    y <- stats::rnorm(n, alpha + x * beta, 1)
-    .join_data <- list(alpha = alpha, beta = beta)
+    y <- stats::rnorm(n, beta[1] + x * beta[2], 1)
+    .join_data <- list(beta = beta)
     list(n = n, x = x, y = y, .join_data = .join_data)
   }
   list(
@@ -67,12 +67,12 @@ tar_script({
       model,
       "model.jags",
       data = generate_data(),
-      parameters.to.save = c("alpha", "beta"),
+      parameters.to.save = "beta",
       batches = 5, # Number of branch targets.
-      reps = 2, # Number of model reps per branch target.
+      reps = 4, # Number of model reps per branch target.
       stdout = R.utils::nullfile(),
       stderr = R.utils::nullfile(),
-      variables = c("alpha", "beta"),
+      variables = "beta",
       summaries = list(
         ~posterior::quantile2(.x, probs = c(0.025, 0.975))
       )
@@ -89,14 +89,13 @@ options(crayon.enabled = FALSE)
 tar_option_set(memory = "transient", garbage_collection = TRUE)
 
 generate_data <- function (n = 10L) {
-  alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
-  beta <- stats::rnorm(n = n, mean = 0, sd = 1)
+  beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
   x <- seq(from = -1, to = 1, length.out = n)
-  y <- stats::rnorm(n, alpha + x * beta, 1)
+  y <- stats::rnorm(n, beta[1] + x * beta[2], 1)
   # Elements of .join_data get joined on to the .join_data column
   # in the summary output next to the model parameters
   # with the same names.
-  .join_data <- list(alpha = alpha, beta = beta)
+  .join_data <- list(beta = beta)
   list(n = n, x = x, y = y, .join_data = .join_data)
 }
 
@@ -105,12 +104,10 @@ list(
     model,
     "model.jags",
     data = generate_data(),
-    parameters.to.save = c("alpha", "beta"),
+    parameters.to.save = "beta",
     batches = 5, # Number of branch targets.
-    reps = 2, # Number of model reps per branch target.
-    stdout = R.utils::nullfile(),
-    stderr = R.utils::nullfile(),
-    variables = c("alpha", "beta"),
+    reps = 4, # Number of model reps per branch target.
+    variables = "beta",
     summaries = list(
       ~posterior::quantile2(.x, probs = c(0.025, 0.975))
     )
@@ -118,7 +115,7 @@ list(
 )
 ```
 
-We now have a pipeline that runs the model 10 times: 5 batches (branch targets) with 2 replications per batch.
+We now have a pipeline that runs the model 10 times: 5 batches (branch targets) with 4 replications per batch.
 
 ```{r}
 tar_visnetwork()
@@ -160,14 +157,13 @@ tar_script({
     garbage_collection = TRUE
   )
   generate_data <- function (n = 10L) {
-    alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
-    beta <- stats::rnorm(n = n, mean = 0, sd = 1)
+    beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
     x <- seq(from = -1, to = 1, length.out = n)
-    y <- stats::rnorm(n, alpha + x * beta, 1)
+    y <- stats::rnorm(n, beta[1] + x * beta[2], 1)
     # Elements of .join_data get joined on to the .join_data column
     # in the summary output next to the model parameters
     # with the same names.
-    .join_data <- list(alpha = alpha, beta = beta)
+    .join_data <- list(beta = beta)
     list(n = n, x = x, y = y, .join_data = .join_data)
   }
   list(
@@ -175,12 +171,12 @@ tar_script({
       model,
       "model.jags",
       data = generate_data(),
-      parameters.to.save = c("alpha", "beta"),
+      parameters.to.save = "beta",
       batches = 5, # Number of branch targets.
-      reps = 2, # Number of model reps per branch target.
+      reps = 4, # Number of model reps per branch target.
       stdout = R.utils::nullfile(),
       stderr = R.utils::nullfile(),
-      variables = c("alpha", "beta"),
+      variables = "beta",
       summaries = list(
         ~posterior::quantile2(.x, probs = c(0.025, 0.975))
       )
@@ -204,14 +200,13 @@ library(targets)
 library(jagstargets)
 
 generate_data <- function (n = 10L) {
-  alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
-  beta <- stats::rnorm(n = n, mean = 0, sd = 1)
+  beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
   x <- seq(from = -1, to = 1, length.out = n)
-  y <- stats::rnorm(n, alpha + x * beta, 1)
+  y <- stats::rnorm(n, beta[1] + x * beta[2], 1)
   # Elements of .join_data get joined on to the .join_data column
   # in the summary output next to the model parameters
   # with the same names.
-  .join_data <- list(alpha = alpha, beta = beta)
+  .join_data <- list(beta = beta)
   list(n = n, x = x, y = y, .join_data = .join_data)
 }
 
@@ -220,12 +215,10 @@ list(
     model,
     "model.jags",
     data = generate_data(),
-    parameters.to.save = c("alpha", "beta"),
+    parameters.to.save = "beta",
     batches = 5, # Number of branch targets.
-    reps = 2, # Number of model reps per branch target.
-    stdout = R.utils::nullfile(),
-    stderr = R.utils::nullfile(),
-    variables = c("alpha", "beta"),
+    reps = 4, # Number of model reps per branch target.
+    variables = "beta",
     summaries = list(
       ~posterior::quantile2(.x, probs = c(0.025, 0.975))
     )
@@ -262,6 +255,18 @@ tar_read(coverage)
 
 `tar_jags_rep_mcmc_summary()` and similar functions allow you to supply multiple jags models. If you do, each model will share the the same collection of datasets. Below, we add a new `model2.jags` file to the `jags_files` argument of `tar_jags_rep_mcmc_summary()`. In the coverage summary below, we group by `.name` to compute a coverage statistic for each model.
 
+```{r}
+lines <- "model {
+  for (i in 1:n) {
+    y[i] ~ dnorm(beta[1] + x[i] * x[i] * beta[2], 1) # Regress on x^2 instead of x.
+  }
+  for (i in 1:2) {
+    beta[i] ~ dnorm(0, 1)
+  }
+}"
+writeLines(lines, "model2.jags")
+```
+
 
 ```{r, echo = FALSE}
 # Writes the _targets.R file shown in the next code chunk.
@@ -275,14 +280,13 @@ tar_script({
     garbage_collection = TRUE
   )
   generate_data <- function (n = 10L) {
-    alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
-    beta <- stats::rnorm(n = n, mean = 0, sd = 1)
+    beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
     x <- seq(from = -1, to = 1, length.out = n)
-    y <- stats::rnorm(n, alpha + x * beta, 1)
+    y <- stats::rnorm(n, beta[1] + x * beta[2], 1)
     # Elements of .join_data get joined on to the .join_data column
     # in the summary output next to the model parameters
     # with the same names.
-    .join_data <- list(alpha = alpha, beta = beta)
+    .join_data <- list(beta = beta)
     list(n = n, x = x, y = y, .join_data = .join_data)
   }
   list(
@@ -290,12 +294,12 @@ tar_script({
       model,
       c("model.jags", "model2.jags"), # another model
       data = generate_data(),
-      parameters.to.save = c("alpha", "beta"),
+      parameters.to.save = "beta",
       batches = 5,
-      reps = 2,
+      reps = 4,
       stdout = R.utils::nullfile(),
       stderr = R.utils::nullfile(),
-      variables = c("alpha", "beta"),
+      variables = "beta",
       summaries = list(
         ~posterior::quantile2(.x, probs = c(0.025, 0.975))
       )
@@ -308,7 +312,6 @@ tar_script({
     )
   )
 })
-file.copy("model.jags", "model2.jags")
 ```
 
 ```{r, eval = FALSE}
@@ -317,14 +320,13 @@ library(targets)
 library(jagstargets)
 
 generate_data <- function (n = 10L) {
-  alpha <- stats::rnorm(n = 1, mean = 0, sd = 1)
-  beta <- stats::rnorm(n = n, mean = 0, sd = 1)
+  beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
   x <- seq(from = -1, to = 1, length.out = n)
-  y <- stats::rnorm(n, alpha + x * beta, 1)
+  y <- stats::rnorm(n, beta[1] + x * beta[2], 1)
   # Elements of .join_data get joined on to the .join_data column
   # in the summary output next to the model parameters
   # with the same names.
-  .join_data <- list(alpha = alpha, beta = beta)
+  .join_data <- list(beta = beta)
   list(n = n, x = x, y = y, .join_data = .join_data)
 }
 
@@ -333,12 +335,10 @@ list(
     model,
     c("model.jags", "model2.jags"), # another model
     data = generate_data(),
-    parameters.to.save = c("alpha", "beta"),
+    parameters.to.save = "beta",
     batches = 5,
-    reps = 2,
-    stdout = R.utils::nullfile(),
-    stderr = R.utils::nullfile(),
-    variables = c("alpha", "beta"),
+    reps = 4,
+    variables = "beta",
     summaries = list(
       ~posterior::quantile2(.x, probs = c(0.025, 0.975))
     )
