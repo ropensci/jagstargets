@@ -227,7 +227,19 @@ tar_read(custom_summary)
 
 ## Multiple models
 
-`tar_jags()` and related functions allow you to supply multiple models to `jags_files`. If you do, each model will run on the same dataset. Below, we add another `y.jags` model to the `jags_files` argument of `tar_jags()`.
+`tar_jags()` and related functions allow you to supply multiple models to `jags_files`. If you do, each model will run on the same dataset. Consider a new model, `y.jags`.
+
+```{r}
+lines <- "model {
+  for (i in 1:n) {
+    y[i] ~ dnorm(x[i] * x[i] * beta, 1) # Regress on x^2 instead of x.
+  }
+  beta ~ dnorm(0, 1)
+}"
+writeLines(lines, "y.jags")
+```
+
+Below, we add `y.jags` to the `jags_files` argument of `tar_jags()`.
 
 ```{r, echo = FALSE}
 # Writes the _targets.R file shown in the next code chunk.
@@ -252,7 +264,6 @@ tar_script({
     )
   )
 })
-file.copy("x.jags", "y.jags")
 ```
 
 ```{r, eval = FALSE}
