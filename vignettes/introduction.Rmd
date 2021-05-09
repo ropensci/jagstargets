@@ -81,6 +81,8 @@ generate_data <- function(n = 10) {
   out <- list(n = n, x = x, y = y)
 }
 
+# The _targets.R file ends with a list of target objects
+# produced by jagstargets::tar_jags(), targets::tar_target(), or similar.
 list(
   tar_jags(
     example,
