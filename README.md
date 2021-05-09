@@ -104,9 +104,9 @@ to check `_targets.R` for correctness, then call
 [`tar_make()`](https://docs.ropensci.org/targets/reference/tar_make.html)
 to run the pipeline. Access the results using
 [`tar_read()`](https://docs.ropensci.org/targets/reference/tar_read.html),
-e.g. `tar_read(tar_read(example_summary_x)`. Visit [this
-vignette](https://wlandau.github.io/jagstargets/articles/mcmc.html) to
-read more about this example.
+e.g. `tar_read(tar_read(example_summary_x)`. Visit the [introductory
+vignette](https://wlandau.github.io/jagstargets/articles/introduction.html)
+to read more about this example.
 
 ## How the package works
 
