@@ -97,6 +97,7 @@ tar_script({
 library(targets)
 library(jagstargets)
 options(crayon.enabled = FALSE)
+# Use computer memory more sparingly:
 tar_option_set(memory = "transient", garbage_collection = TRUE)
 
 generate_data <- function (n = 10L) {
