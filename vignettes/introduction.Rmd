@@ -28,7 +28,7 @@ library(jagstargets)
 
 The `jagstargets` package makes it easy to run a single jags model and keep track of the results. [`R2jags`](https://github.com/suyusung/R2jags) fits the models, and [`targets`](https://docs.ropensci.org/targets/) manages the workflow and helps avoid unnecessary computation.
 
-First, write a jags model file.
+Consider the jags model file below.
 
 ```{r}
 lines <- "model {
@@ -40,8 +40,15 @@ lines <- "model {
 writeLines(lines, "x.jags")
 ```
 
+A typical workflow proceeds as follows:
 
-Next, create a `_targets.R` file to define the [`targets`](https://docs.ropensci.org/targets/) pipeline.
+1. Prepare a list of input data to JAGS, including vector elements `x` and `y`.
+1. Fit the JAGS model using the list of input data.
+1. Use the fitted model object to compute posterior summaries and convergence diagnostics.
+1. Use the fitted model object to extract posterior draws of parameters and store them in a tidy data frame.
+1. If there are other models to compare, use the fitted model object to compute the deviance information criterion (DIC).
+
+`jagstargets` encapsulates this workflow with the [`tar_jags()`](https://wlandau.github.io/jagstargets/reference/tar_jags.html) function. To use it in a [`targets`](https://docs.ropensci.org/targets/) pipeline, invoke it from the `_targets.R` script of the project.
 
 ```{r, echo = FALSE}
 # Writes the _targets.R file shown in the next code chunk.
@@ -79,15 +86,12 @@ list(
     example,
     jags_files = "x.jags",
     parameters.to.save = "beta",
-    data = generate_data(),
-    stdout = R.utils::nullfile(),
-    stderr = R.utils::nullfile(),
+    data = generate_data()
   )
 )
 ```
 
-
-Above, the `tar_jags()` function defines several targets:
+[`tar_jags()`](https://wlandau.github.io/jagstargets/reference/tar_jags.html) only *defines* the pipeline. It does not actually run JAGS, it declares the targets that will eventually run JAGS. The specific targets are as follows.
 
 * `example_file_x`: Reproducibly track changes to the jags model file.
 * `example_data`: Run the code you supplied to `data` and return a dataset compatible with jags.
@@ -98,7 +102,7 @@ Above, the `tar_jags()` function defines several targets:
 
 The suffix `_x` comes from the base name of the model file, in this case `x.jags`. If you supply multiple model files to the `jags_files` argument, all the models share the same dataset, and the suffixes distinguish among the various targets.
 
-Run `tar_manifest()` to see a tidy data frame of commands and settings for the targets.
+Run `tar_manifest()` to show specific details about the targets.
 
 ```{r}
 tar_manifest()
@@ -191,9 +195,7 @@ list(
     example,
     jags_files = "x.jags",
     parameters.to.save = "beta",
-    data = generate_data(),
-    stdout = R.utils::nullfile(),
-    stderr = R.utils::nullfile(),
+    data = generate_data()
   ),
   tar_target(
     custom_summary,
@@ -268,9 +270,7 @@ list(
     example,
     jags_files = c("x.jags", "y.jags"),
     parameters.to.save = "beta",
-    data = generate_data(),
-    stdout = R.utils::nullfile(),
-    stderr = R.utils::nullfile(),
+    data = generate_data()
   ),
   tar_target(
     custom_summary,
