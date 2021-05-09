@@ -16,3 +16,6 @@ and skip expensive steps when the results are already up to date.
 Minimal custom code is required, and there is no need to manually
 configure branching, so usage is much easier than \code{targets} alone.
 }
+\seealso{
+\url{https://wlandau.github.io/jagstargets/}, \code{\link[=tar_jags]{tar_jags()}}
+}

@@ -10,6 +10,7 @@
 #'   Minimal custom code is required, and there is no need to manually
 #'   configure branching, so usage is much easier than `targets` alone.
 #' @name jagstargets-package
+#' @seealso <https://wlandau.github.io/jagstargets/>, [tar_jags()]
 #' @aliases jagstargets
 #' @importFrom coda mcmc mcmc.list
 #' @importFrom digest digest
