@@ -5,6 +5,14 @@
 #'   element so the true value of `beta` from the simulation
 #'   is automatically appended to the `beta` rows of the
 #'   summary output.
+#' @details The `tar_jags_example_data()` function draws a JAGS
+#'   dataset from the prior predictive distribution of the
+#'   model from [tar_jags_example_file()]. First, the
+#'   regression coefficient `beta` is drawn from its standard
+#'   normal prior, and the covariate `x` is computed.
+#'   Then, conditional on the `beta` draws and the covariate,
+#'   the response vector `y` is drawn from its
+#'   Normal(`x * beta`, 1) likelihood.
 #' @return List, dataset compatible with the model file from
 #'   [tar_jags_example_file()]. The output has a `.join_data`
 #'   element so the true value of `beta` from the simulation
