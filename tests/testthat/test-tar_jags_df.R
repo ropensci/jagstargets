@@ -41,9 +41,14 @@ targets::tar_test("tar_jags_df() with dic", {
   expect_true("deviance" %in% summary$variable)
   expect_true(nrow(summary) < 10L)
   expect_equal(summary$.join_data, rep(NA_real_, 2))
-  # summary with joined data
+  # summary with joined data and explicit variables
   data$.join_data$beta <- 1
-  summary <- tar_jags_df(out, data = data, "summary")
+  summary <- tar_jags_df(
+    out,
+    data = data,
+    output = "summary",
+    variables = c("beta", "deviance")
+  )
   expect_equal(summary$.join_data[summary$variable == "beta"], 1)
   expect_equal(summary$.join_data[summary$variable == "deviance"], NA_real_)
   # custom summary
