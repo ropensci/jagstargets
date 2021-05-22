@@ -20,6 +20,11 @@
 #'   combine all the model results
 #'   into a single data frame downstream. Convenient, but
 #'   duplicates data.
+#' @param format Character of length 1, storage format of the data frames
+#'   of posterior summaries and other data frames returned by targets.
+#'   We recommend efficient data frame formats
+#'   such as `"feather"` or `"aws_parquet"`. For more on storage formats,
+#'   see the help file of `targets::tar_target()`.
 tar_jags_rep <- function(
   name,
   jags_files,
@@ -53,6 +58,8 @@ tar_jags_rep <- function(
   tidy_eval = targets::tar_option_get("tidy_eval"),
   packages = targets::tar_option_get("packages"),
   library = targets::tar_option_get("library"),
+  format = "qs",
+  format_df = "fst_tbl",
   error = targets::tar_option_get("error"),
   memory = targets::tar_option_get("memory"),
   garbage_collection = targets::tar_option_get("garbage_collection"),
@@ -156,7 +163,7 @@ tar_jags_rep <- function(
     pattern = pattern_data,
     packages = packages,
     library = library,
-    format = "qs",
+    format = format,
     iteration = "list",
     error = error,
     memory = memory,
@@ -170,7 +177,7 @@ tar_jags_rep <- function(
     command = command,
     pattern = pattern,
     packages = character(0),
-    format = "fst_tbl",
+    format = format_df,
     error = error,
     memory = memory,
     garbage_collection = garbage_collection,
@@ -202,7 +209,7 @@ tar_jags_rep <- function(
       name = name,
       out[names_mcmc],
       packages = character(0),
-      format = "fst_tbl",
+      format = format_df,
       iteration = "vector",
       error = error,
       memory = memory,

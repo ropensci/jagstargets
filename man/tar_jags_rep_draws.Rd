@@ -29,6 +29,8 @@ tar_jags_rep_draws(
   tidy_eval = targets::tar_option_get("tidy_eval"),
   packages = targets::tar_option_get("packages"),
   library = targets::tar_option_get("library"),
+  format = "qs",
+  format_df = "fst_tbl",
   error = targets::tar_option_get("error"),
   memory = "transient",
   garbage_collection = targets::tar_option_get("garbage_collection"),
@@ -131,6 +133,17 @@ globally for all subsequent targets you define.}
 
 \item{library}{Character vector of library paths to try
 when loading \code{packages}.}
+
+\item{format}{Character of length 1, storage format of the data frames
+of posterior summaries and other data frames returned by targets.
+We recommend efficient data frame formats
+such as \code{"feather"} or \code{"aws_parquet"}. For more on storage formats,
+see the help file of \code{targets::tar_target()}.}
+
+\item{format_df}{Character of length 1, storage format of the data frame
+targets such as posterior draws. We recommend efficient data frame formats
+such as \code{"feather"} or \code{"aws_parquet"}. For more on storage formats,
+see the help file of \code{targets::tar_target()}.}
 
 \item{error}{Character of length 1, what to do if the target
 runs into an error. If \code{"stop"}, the whole pipeline stops
