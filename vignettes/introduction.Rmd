@@ -73,7 +73,7 @@ tar_script({
       parameters.to.save = "beta",
       data = tar_jags_example_data(),
       stdout = R.utils::nullfile(),
-      stderr = R.utils::nullfile(),
+      stderr = R.utils::nullfile()
     )
   )
 })

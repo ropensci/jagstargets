@@ -69,7 +69,7 @@ tar_jags_df_summary <- function(
     columns <- grep(pattern, colnames(draws), value = TRUE)
     draws <- draws[, columns, drop = FALSE]
   }
-  args <- list(quote(posterior::summarize_draws), x = quote(draws))
+  args <- list(quote(posterior::summarize_draws), .x = quote(draws))
   args$.args <- summary_args
   args <- c(args, summaries)
   out <- eval(as.call(args))
