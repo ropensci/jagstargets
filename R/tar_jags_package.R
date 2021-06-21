@@ -28,7 +28,7 @@
 #'   tar_deparse_language tar_deparse_safe
 #'   tar_cue tar_dir tar_load tar_option_get tar_path
 #'   tar_read tar_script tar_target tar_target_raw tar_test
-#'   tar_tidy_eval
+#'   tar_throw_validate tar_tidy_eval
 #' @importFrom tarchetypes tar_combine tar_map
 #' @importFrom tibble as_tibble tibble
 #' @importFrom tools file_path_sans_ext
