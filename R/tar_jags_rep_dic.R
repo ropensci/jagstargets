@@ -98,7 +98,7 @@ tar_jags_rep_dic <- function(
 ) {
   lapply(jags_files, assert_jags_file)
   tar_jags_rep(
-    name = deparse_language(substitute(name)),
+    name = targets::tar_deparse_language(substitute(name)),
     jags_files = jags_files,
     parameters.to.save = parameters.to.save,
     data = substitute(data),

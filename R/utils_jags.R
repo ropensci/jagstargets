@@ -4,7 +4,13 @@ produce_jags_names <- function(jags_files) {
     tools::file_path_sans_ext(basename(jags_files)),
     names(jags_files)
   )
-  assert_unique(out, "target suffixes from jags_files are not unique.")
-  assert_nzchar(out, "target suffixes from jags_files must be nonempty.")
+  targets::tar_assert_unique(
+    out,
+    "target suffixes from jags_files must be unique."
+  )
+  targets::tar_assert_nzchar(
+    out,
+    "target suffixes from jags_files must be nonempty."
+  )
   make.names(out)
 }

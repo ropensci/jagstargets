@@ -22,8 +22,13 @@
 #' @importFrom rjags load.module
 #' @importFrom rlang expr quo_squash
 #' @importFrom stats rnorm runif
-#' @importFrom targets tar_cue tar_dir tar_load tar_option_get tar_path
+#' @importFrom targets tar_assert_chr tar_assert_in
+#'   tar_assert_nonempty tar_assert_not_in tar_assert_nzchar
+#'   tar_assert_path tar_assert_scalar tar_assert_unique
+#'   tar_deparse_language tar_deparse_safe
+#'   tar_cue tar_dir tar_load tar_option_get tar_path
 #'   tar_read tar_script tar_target tar_target_raw tar_test
+#'   tar_tidy_eval
 #' @importFrom tarchetypes tar_combine tar_map
 #' @importFrom tibble as_tibble tibble
 #' @importFrom tools file_path_sans_ext

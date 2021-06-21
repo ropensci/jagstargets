@@ -3,11 +3,6 @@
 
 # These tests check internal assertion routines
 # used to verify the correctness of user inputs.
-targets::tar_test("assert_chr()", {
-  expect_silent(assert_chr(letters))
-  expect_error(assert_chr(123), class = "tar_condition_validate")
-})
-
 targets::tar_test("assert_jags_file()", {
   tmp <- tempfile()
   file.create(tmp)
@@ -16,48 +11,4 @@ targets::tar_test("assert_jags_file()", {
     assert_jags_file("nopenopenope"),
     class = "tar_condition_validate"
   )
-})
-
-targets::tar_test("assert_in()", {
-  expect_silent(assert_in("a", letters))
-  expect_error(assert_in("1", letters), class = "tar_condition_validate")
-})
-
-targets::tar_test("assert_jags_file()", {
-  tmp <- tempfile()
-  tar_jags_example_file(tmp)
-  expect_silent(assert_jags_file(tmp))
-  expect_error(assert_jags_file(tempdir()), class = "tar_condition_validate")
-})
-
-targets::tar_test("assert_nonempty()", {
-  expect_silent(assert_nonempty(letters))
-  expect_error(assert_nonempty(NULL), class = "tar_condition_validate")
-})
-
-targets::tar_test("assert_not_in()", {
-  expect_silent(assert_not_in("1", letters))
-  expect_error(assert_not_in("a", letters), class = "tar_condition_validate")
-})
-
-targets::tar_test("assert_nzchar()", {
-  expect_silent(assert_nzchar(letters))
-  expect_error(assert_nzchar(c("x", "")), class = "tar_condition_validate")
-})
-
-targets::tar_test("assert_path()", {
-  file.create("x")
-  expect_error(assert_path(c("x", "y")), class = "tar_condition_validate")
-  file.create("y")
-  expect_silent(assert_path(c("x", "y")))
-})
-
-targets::tar_test("assert_scalar()", {
-  expect_silent(assert_scalar(1))
-  expect_error(assert_scalar(letters), class = "tar_condition_validate")
-})
-
-targets::tar_test("assert_unique()", {
-  expect_silent(assert_unique(letters))
-  expect_error(assert_unique(c("1", "1")), class = "tar_condition_validate")
 })

@@ -71,8 +71,8 @@ tar_jags_rep <- function(
   cue = targets::tar_option_get("cue")
 ) {
   envir <- tar_option_get("envir")
-  assert_chr(jags_files, "jags_files must be a character vector")
-  assert_unique(jags_files, "jags_files must be unique")
+  targets::tar_assert_chr(jags_files, "jags_files must be a character vector")
+  targets::tar_assert_unique(jags_files, "jags_files must be unique")
   output <- match.arg(output)
   name_jags <- produce_jags_names(jags_files)
   name_file <- paste0(name, "_file")
@@ -89,7 +89,11 @@ tar_jags_rep <- function(
     args = list(con = as.symbol(name_file))
   )
   command_batch <- substitute(seq_len(x), env = list(x = batches))
-  command_rep <- tar_tidy_eval(data, envir = envir, tidy_eval = tidy_eval)
+  command_rep <- targets::tar_tidy_eval(
+    data,
+    envir = envir,
+    tidy_eval = tidy_eval
+  )
   command_data <- substitute(
     purrr::map(seq_len(.targets_reps), ~.targets_command),
     env = list(.targets_reps = reps, .targets_command = command_rep)

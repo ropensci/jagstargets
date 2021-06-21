@@ -144,15 +144,15 @@ tar_jags <- function(
   cue = targets::tar_option_get("cue")
 ) {
   envir <- tar_option_get("envir")
-  assert_chr(jags_files)
-  assert_unique(jags_files)
+  targets::tar_assert_chr(jags_files)
+  targets::tar_assert_unique(jags_files)
   lapply(jags_files, assert_jags_file)
-  assert_in(
+  targets::tar_assert_in(
     as.integer(n.cluster),
     as.integer(c(1L, n.chains)),
     msg = "due to R2jags constraints, n.cluster must be 1 or n.chains."
   )
-  name <- deparse_language(substitute(name))
+  name <- targets::tar_deparse_language(substitute(name))
   name_jags <- produce_jags_names(jags_files)
   name_file <- paste0(name, "_file")
   name_lines <- paste0(name, "_lines")
@@ -170,7 +170,7 @@ tar_jags <- function(
     "readLines",
     args = list(con = as.symbol(name_file))
   )
-  command_data <- tar_tidy_eval(
+  command_data <- targets::tar_tidy_eval(
     substitute(data),
     envir = envir,
     tidy_eval = tidy_eval
