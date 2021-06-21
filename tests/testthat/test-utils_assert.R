@@ -12,3 +12,12 @@ targets::tar_test("assert_jags_file()", {
     class = "tar_condition_validate"
   )
 })
+
+targets::tar_test("assert_jags_file() on a directory", {
+  tmp <- tempfile()
+  dir.create(tmp)
+  expect_error(
+    assert_jags_file(tmp),
+    class = "tar_condition_validate"
+  )
+})
