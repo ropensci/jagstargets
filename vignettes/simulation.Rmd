@@ -21,7 +21,6 @@ knitr::opts_chunk$set(
 if (identical(Sys.getenv("NOT_CRAN", unset = "false"), "false")) {
   knitr::opts_chunk$set(eval = FALSE)
 }
-library(R2jags)
 library(dplyr)
 library(targets)
 library(jagstargets)
