@@ -208,8 +208,15 @@ tar_script({
 
 ```{r, eval = FALSE}
 # _targets.R
+# packages needed to define the pipeline:
 library(targets)
 library(jagstargets)
+
+tar_option_set(
+  packages = "dplyr", # packages needed to run the pipeline
+  memory = "transient", # memory efficiency
+  garbage_collection = TRUE # memory efficiency
+)
 
 generate_data <- function (n = 10L) {
   beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
@@ -328,8 +335,15 @@ tar_script({
 
 ```{r, eval = FALSE}
 # _targets.R
+# packages needed to define the pipeline:
 library(targets)
 library(jagstargets)
+
+tar_option_set(
+  packages = "dplyr", # packages needed to run the pipeline
+  memory = "transient", # memory efficiency
+  garbage_collection = TRUE # memory efficiency
+)
 
 generate_data <- function (n = 10L) {
   beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
