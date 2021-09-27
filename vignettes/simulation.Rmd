@@ -26,7 +26,7 @@ library(targets)
 library(jagstargets)
 ```
 
-The [introductory vignette](https://wlandau.github.io/jagstargets/articles/introduction.html) vignette caters to Bayesian data analysis workflows with few datasets to analyze. However, it is sometimes desirable to run one or more Bayesian models repeatedly across many simulated datasets. Examples:
+The [introductory vignette](https://docs.ropensci.org/jagstargets/articles/introduction.html) vignette caters to Bayesian data analysis workflows with few datasets to analyze. However, it is sometimes desirable to run one or more Bayesian models repeatedly across many simulated datasets. Examples:
 
 1. Validate the implementation of a Bayesian model, using simulation to determine how reliably the model estimates the parameters under known data-generating scenarios.
 2. Simulate a randomized controlled experiment to explore frequentist properties such as power and Type I error.

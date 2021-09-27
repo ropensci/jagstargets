@@ -58,7 +58,7 @@ A typical workflow proceeds as follows:
 1. Use the fitted model object to extract posterior draws of parameters and store them in a tidy data frame.
 1. If there are other models to compare, use the fitted model object to compute the deviance information criterion (DIC).
 
-`jagstargets` encapsulates this workflow with the [`tar_jags()`](https://wlandau.github.io/jagstargets/reference/tar_jags.html) function. To use it in a [`targets`](https://docs.ropensci.org/targets/) pipeline, invoke it from the `_targets.R` script of the project.
+`jagstargets` encapsulates this workflow with the [`tar_jags()`](https://docs.ropensci.org/jagstargets/reference/tar_jags.html) function. To use it in a [`targets`](https://docs.ropensci.org/targets/) pipeline, invoke it from the `_targets.R` script of the project.
 
 ```{r, echo = FALSE}
 # Writes the _targets.R file shown in the next code chunk.
@@ -103,7 +103,7 @@ list(
 )
 ```
 
-[`tar_jags()`](https://wlandau.github.io/jagstargets/reference/tar_jags.html) only *defines* the pipeline. It does not actually run JAGS, it declares the targets that will eventually run JAGS. The specific targets are as follows. Run `tar_manifest()` to show specific details about the targets declared.
+[`tar_jags()`](https://docs.ropensci.org/jagstargets/reference/tar_jags.html) only *defines* the pipeline. It does not actually run JAGS, it declares the targets that will eventually run JAGS. The specific targets are as follows. Run `tar_manifest()` to show specific details about the targets declared.
 
 ```{r}
 tar_manifest()

@@ -7,9 +7,9 @@ Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&lab
 [![cran](http://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)
 -->
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![check](https://github.com/wlandau/jagstargets/workflows/check/badge.svg)](https://github.com/wlandau/jagstargets/actions?query=workflow%3Acheck)
-[![codecov](https://codecov.io/gh/wlandau/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/wlandau/jagstargets)
-[![lint](https://github.com/wlandau/jagstargets/workflows/lint/badge.svg)](https://github.com/wlandau/jagstargets/actions?query=workflow%3Alint)
+[![check](https://github.com/ropensci/jagstargets/workflows/check/badge.svg)](https://github.com/ropensci/jagstargets/actions?query=workflow%3Acheck)
+[![codecov](https://codecov.io/gh/ropensci/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/ropensci/jagstargets)
+[![lint](https://github.com/ropensci/jagstargets/workflows/lint/badge.svg)](https://github.com/ropensci/jagstargets/actions?query=workflow%3Alint)
 
 Bayesian data analysis usually incurs long runtimes and cumbersome
 custom code, and the process of prototyping and deploying custom
@@ -44,19 +44,25 @@ required, and there is no need to manually configure branching, so
 ## How to get started
 
 Read the `jagstargets` [introductory
-vignette](https://wlandau.github.io/jagstargets/articles/introduction.html),
-and then use <https://wlandau.github.io/jagstargets/> as a reference
+vignette](https://docs.ropensci.org/jagstargets/articles/introduction.html),
+and then use <https://docs.ropensci.org/jagstargets/> as a reference
 while constructing your own workflows. If you need to analyze large
 collections of simulated datasets, please consult the [simulation
-vignette](https://wlandau.github.io/jagstargets/articles/simulation.html).
+vignette](https://docs.ropensci.org/jagstargets/articles/simulation.html).
 
 ## Installation
 
-Install the GitHub development version to access the latest features and
-patches.
+Install the latest release from CRAN.
 
 ``` r
-remotes::install_github("wlandau/jagstargets")
+install.packages("jagstargets")
+```
+
+Alternatively, install the GitHub development version to access the
+latest features and patches.
+
+``` r
+remotes::install_github("ropensci/jagstargets")
 ```
 
 And if you have not done so already, install JAGS from
@@ -68,13 +74,13 @@ First, write a [`_targets.R`
 file](https://books.ropensci.org/targets/walkthrough.html) that loads
 your packages, defines a function to generate JAGS data, and lists a
 pipeline of targets. The target list can call target factories like
-[`tar_jags()`](https://wlandau.github.io/jagstargets/reference/tar_jags.html)
+[`tar_jags()`](https://docs.ropensci.org/jagstargets/reference/tar_jags.html)
 as well as ordinary targets with
 [`tar_target()`](https://docs.ropensci.org/targets/reference/tar_target.html).
 The following minimal example is simple enough to contain entirely
 within the `_targets.R` file, but for larger projects, you may wish to
 store functions in separate files as in the
-[`targets-keras`](https://github.com/wlandau/targets-keras) example.
+[`targets-stan`](https://github.com/wlandau/targets-stan) example.
 
 ``` r
 # _targets.R
@@ -105,7 +111,7 @@ to check `_targets.R` for correctness, then call
 to run the pipeline. Access the results using
 [`tar_read()`](https://docs.ropensci.org/targets/reference/tar_read.html),
 e.g. `tar_read(tar_read(example_summary_x)`. Visit the [introductory
-vignette](https://wlandau.github.io/jagstargets/articles/introduction.html)
+vignette](https://docs.ropensci.org/jagstargets/articles/introduction.html)
 to read more about this example.
 
 ## How the package works
@@ -121,13 +127,13 @@ abstract away the details of
 [`targets`](https://docs.ropensci.org/targets/) and
 [`R2jags`](https://CRAN.R-project.org/package=R2jags) and make both
 packages easier to use. For details, please read the [introductory
-vignette](https://wlandau.github.io/jagstargets/articles/introduction.html).
+vignette](https://docs.ropensci.org/jagstargets/articles/introduction.html).
 
 ## Help
 
 If you have trouble using `jagstargets`, you can ask for help in the
 [GitHub discussions
-forum](https://github.com/wlandau/jagstargets/discussions/categories/help).
+forum](https://github.com/ropensci/jagstargets/discussions/categories/help).
 Because the purpose of `jagstargets` is to combine
 [`targets`](https://docs.ropensci.org/targets/) and
 [`R2jags`](https://CRAN.R-project.org/package=R2jags), your issue may
@@ -147,10 +153,9 @@ packages are great resources.
 
 Development is a community effort, and we welcome discussion and
 contribution. By participating in this project, you agree to abide by
-the [code of
-conduct](https://github.com/wlandau/jagstargets/blob/main/CODE_OF_CONDUCT.md)
-and the [contributing
-guide](https://github.com/wlandau/jagstargets/blob/main/CONTRIBUTING.md).
+the [code of conduct](hhttps://ropensci.org/code-of-conduct/) and the
+[contributing
+guide](https://github.com/ropensci/jagstargets/blob/main/CONTRIBUTING.md).
 
 ## Citation
 
