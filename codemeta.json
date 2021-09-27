@@ -5,19 +5,21 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "jagstargets",
-  "description": "The 'jagstargets' R package is an extension to\n  'targets' and 'R2jags' for Bayesian data analysis.\n  'jagstargets' makes it super easy to set up useful scalable\n  JAGS pipelines that automatically parallelize the computation\n  and skip expensive steps when the results are already up to date.\n  Minimal custom code is required, and there is no need to manually\n  configure branching, so usage is much easier than 'targets' alone.\n  For the underlying methodology, please refer\n  to the documentation of 'targets'\n  (Landau 2021) <https://github.com/wlandau/targets> and 'JAGS'\n  (Plummer 2003) <https://www.r-project.org/conferences/DSC-2003/Proceedings/Plummer.pdf>.",
+  "description": "Bayesian data analysis usually incurs long runtimes\n  and cumbersome custom code.\n  A pipeline toolkit tailored to Bayesian statisticians,\n  the 'jagstargets' R package is leverages\n  'targets' and 'R2jags' to ease this burden.\n  'jagstargets' makes it super easy to set up scalable\n  JAGS pipelines that automatically parallelize the computation\n  and skip expensive steps when the results are already up to date.\n  Minimal custom code is required, and there is no need to manually\n  configure branching, so usage is much easier than 'targets' alone.\n  For the underlying methodology, please refer\n  to the documentation of 'targets' <doi:10.21105/joss.02959> and 'JAGS'\n  (Plummer 2003) <https://www.r-project.org/conferences/DSC-2003/Proceedings/Plummer.pdf>.",
   "name": "jagstargets: Targets for JAGS Workflows",
-  "codeRepository": "https://github.com/wlandau/jagstargets",
-  "relatedLink": "https://wlandau.github.io/jagstargets/",
-  "issueTracker": "https://github.com/wlandau/jagstargets/issues",
+  "codeRepository": "https://github.com/ropensci/jagstargets",
+  "relatedLink": [
+    "https://docs.ropensci.org/jagstargets/"
+  ],
+  "issueTracker": "https://github.com/ropensci/jagstargets/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.0.0.9000",
+  "version": "0.0.0.9001",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
+  "runtimePlatform": "R version 4.1.0 (2021-05-18)",
   "author": [
     {
       "@type": "Person",
@@ -75,7 +77,7 @@
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
-      "version": ">= 1.28",
+      "version": ">= 1.30",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -86,9 +88,22 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "R.utils",
+      "name": "R.utils",
+      "version": ">= 2.10.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=R.utils"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
       "name": "rmarkdown",
-      "version": ">= 2.1",
+      "version": ">= 2.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -159,9 +174,22 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "digest",
+      "name": "digest",
+      "version": ">= 0.6.25",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=digest"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "fst",
       "name": "fst",
-      "version": ">= 0.9.4",
+      "version": ">= 0.9.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -174,8 +202,14 @@
       "@type": "SoftwareApplication",
       "identifier": "posterior",
       "name": "posterior",
-      "version": ">= 0.1.3",
-      "sameAs": "https://github.com/stan-dev/posterior"
+      "version": ">= 1.0.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=posterior"
     },
     {
       "@type": "SoftwareApplication",
@@ -194,7 +228,7 @@
       "@type": "SoftwareApplication",
       "identifier": "qs",
       "name": "qs",
-      "version": ">= 0.14.1",
+      "version": ">= 0.23.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -220,7 +254,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
-      "version": ">= 0.4.8",
+      "version": ">= 0.4.10",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -231,6 +265,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "rjags",
+      "name": "rjags",
+      "version": ">= 4.10",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rjags"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
@@ -238,21 +285,33 @@
       "@type": "SoftwareApplication",
       "identifier": "targets",
       "name": "targets",
-      "version": ">= 0.0.0.9003",
-      "sameAs": "https://github.com/wlandau/targets"
+      "version": ">= 0.6.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=targets"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "tarchetypes",
       "name": "tarchetypes",
-      "version": ">= 0.0.0.9000",
-      "sameAs": "https://github.com/wlandau/tarchetypes"
+      "version": ">= 0.0.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tarchetypes"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
-      "version": ">= 3.0.4",
+      "version": ">= 3.0.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -275,7 +334,7 @@
       "@type": "SoftwareApplication",
       "identifier": "withr",
       "name": "withr",
-      "version": ">= 2.3.0",
+      "version": ">= 2.1.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -289,10 +348,10 @@
       "identifier": "https://sysreqs.r-hub.io/get/jags"
     }
   ],
-  "readme": "https://github.com/wlandau/jagstargets/blob/main/README.md",
-  "fileSize": "237.789KB",
-  "contIntegration": "https://codecov.io/gh/wlandau/targets",
-  "developmentStatus": "https://www.repostatus.org/#wip",
+  "readme": "https://github.com/ropensci/jagstargets/blob/main/README.md",
+  "fileSize": "257.7KB",
+  "contIntegration": ["https://github.com/ropensci/jagstargets/actions?query=workflow%3Acheck", "https://codecov.io/gh/ropensci/jagstargets", "https://github.com/ropensci/jagstargets/actions?query=workflow%3Alint"],
+  "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": [
     "r",
     "rstats",
@@ -306,5 +365,6 @@
     "make",
     "rstats-package",
     "r-targetopia"
-  ]
+  ],
+  "releaseNotes": "https://github.com/ropensci/jagstargets/blob/master/NEWS.md"
 }

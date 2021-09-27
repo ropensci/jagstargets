@@ -76,6 +76,7 @@ deregister
 dereferenced
 deterministically
 devtools
+dir
 discoverability
 docstring
 Dobbyn
@@ -336,6 +337,7 @@ Plummer
 R2jags
 jags
 JAGS
+saveRDS
 sourceforge
 targetopia
 dic

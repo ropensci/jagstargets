@@ -165,14 +165,14 @@ citation("jagstargets")
 #> To cite package 'jagstargets' in publications use:
 #> 
 #>   William Michael Landau (NA). jagstargets: Targets for JAGS Workflows.
-#>   https://wlandau.github.io/jagstargets/,
-#>   https://github.com/wlandau/jagstargets.
+#>   https://docs.ropensci.org/jagstargets/,
+#>   https://github.com/ropensci/jagstargets.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {jagstargets: Targets for JAGS Workflows},
 #>     author = {William Michael Landau},
-#>     note = {https://wlandau.github.io/jagstargets/, https://github.com/wlandau/jagstargets},
+#>     note = {https://docs.ropensci.org/jagstargets/, https://github.com/ropensci/jagstargets},
 #>   }
 ```

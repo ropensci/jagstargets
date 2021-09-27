@@ -10,7 +10,7 @@ navbar:
   - text: Vignettes
     href: articles/index.html
   - text: targets
-    href: https://wlandau.github.io/targets
+    href: https://docs.ropensci.org/targets
   - text: R2jags
     href: https://CRAN.R-project.org/package=R2jags
   - text: JAGS
@@ -19,7 +19,7 @@ navbar:
     href: news/index.html
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/wlandau/jagstargets
+    href: https://github.com/ropensci/jagstargets
 reference:
 - title: Help
   contents:
