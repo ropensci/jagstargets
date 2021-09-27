@@ -2,6 +2,7 @@
 
 * Replace the `log` argument with `stdout` and `stderr`.
 * Switch meaning of `%||%` and `%|||%` to conform to historical precedent.
+* Complete rOpenSci review.
 
 # jagstargets 0.0.0.9001
 
