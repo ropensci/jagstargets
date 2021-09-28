@@ -316,6 +316,7 @@ details the structure and composition of target objects.
 }
 
 \examples{
+if (requireNamespace("R2jags", quietly = TRUE)) {
 targets::tar_dir({ # tar_dir() runs code from a temporary directory.
 targets::tar_script({
 library(jagstargets)
@@ -338,4 +339,5 @@ list(
 }, ask = FALSE)
 targets::tar_make()
 })
+}
 }

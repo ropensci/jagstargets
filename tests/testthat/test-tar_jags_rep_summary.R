@@ -9,6 +9,8 @@
 targets::tar_test("tar_jags_rep_summary()", {
   skip_on_cran()
   skip_if_not_installed("dplyr")
+  skip_if_not_installed("rjags")
+  skip_if_not_installed("R2jags")
   tar_jags_example_file(path = "a.jags")
   tar_jags_example_file(path = "b.jags")
   targets::tar_script({
@@ -132,6 +134,8 @@ targets::tar_test("tar_jags_rep_summary()", {
 targets::tar_test("tar_jags_rep_summary() with custom summaries", {
   skip_on_cran()
   skip_if_not_installed("dplyr")
+  skip_if_not_installed("rjags")
+  skip_if_not_installed("R2jags")
   tar_jags_example_file(path = "a.jags")
   tar_jags_example_file(path = "b.jags")
   targets::tar_script({

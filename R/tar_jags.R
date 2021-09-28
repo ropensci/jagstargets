@@ -80,6 +80,7 @@
 #'   such as `"feather"` or `"aws_parquet"`. For more on storage formats,
 #'   see the help file of `targets::tar_target()`.
 #' @examples
+#' if (requireNamespace("R2jags", quietly = TRUE)) {
 #' targets::tar_dir({ # tar_dir() runs code from a temporary directory.
 #' targets::tar_script({
 #' library(jagstargets)
@@ -100,6 +101,7 @@
 #' }, ask = FALSE)
 #' targets::tar_make()
 #' })
+#' }
 tar_jags <- function(
   name,
   jags_files,
@@ -143,6 +145,8 @@ tar_jags <- function(
   retrieval = targets::tar_option_get("retrieval"),
   cue = targets::tar_option_get("cue")
 ) {
+  targets::tar_assert_package("rjags")
+  targets::tar_assert_package("R2jags")
   envir <- tar_option_get("envir")
   targets::tar_assert_chr(jags_files)
   targets::tar_assert_unique(jags_files)
@@ -362,6 +366,8 @@ tar_jags_run <- function(
   progress.bar,
   refresh
 ) {
+  targets::tar_assert_package("rjags")
+  targets::tar_assert_package("R2jags")
   tmp <- tempfile()
   dir.create(tmp)
   withr::local_dir(tmp)

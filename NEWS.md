@@ -1,6 +1,7 @@
 # jagstargets 0.0.1
 
 * Complete rOpenSci review.
+* Allow installation/checks to pass without `rjags` or `R2jags` installed (#18, @jeroen).
 
 # jagstargets 0.0.0.9002
 

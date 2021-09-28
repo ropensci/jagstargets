@@ -33,6 +33,7 @@
 #' @inheritSection tar_jags Target objects
 #' @inheritParams tar_jags_rep
 #' @examples
+#' if (requireNamespace("R2jags", quietly = TRUE)) {
 #' targets::tar_dir({ # tar_dir() runs code from a temporary directory.
 #' targets::tar_script({
 #' library(jagstargets)
@@ -55,6 +56,7 @@
 #' }, ask = FALSE)
 #' targets::tar_make()
 #' })
+#' }
 tar_jags_rep_summary <- function(
   name,
   jags_files,
@@ -99,6 +101,8 @@ tar_jags_rep_summary <- function(
   retrieval = targets::tar_option_get("retrieval"),
   cue = targets::tar_option_get("cue")
 ) {
+  targets::tar_assert_package("rjags")
+  targets::tar_assert_package("R2jags")
   lapply(jags_files, assert_jags_file)
   tar_jags_rep(
     name = targets::tar_deparse_language(substitute(name)),

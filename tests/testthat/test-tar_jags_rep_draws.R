@@ -9,6 +9,8 @@
 targets::tar_test("tar_jags_rep_draws()", {
   skip_on_cran()
   skip_if_not_installed("dplyr")
+  skip_if_not_installed("rjags")
+  skip_if_not_installed("R2jags")
   tar_jags_example_file(path = "a.jags")
   tar_jags_example_file(path = "b.jags")
   targets::tar_script({
@@ -127,6 +129,8 @@ targets::tar_test("tar_jags_rep_draws()", {
 })
 
 targets::tar_test("tar_jags_rep_draws() correctly errors if no JAGS file", {
+  skip_if_not_installed("rjags")
+  skip_if_not_installed("R2jags")
   expect_error(
     tar_jags_rep_draws(
       model,

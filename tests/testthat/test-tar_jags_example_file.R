@@ -9,6 +9,8 @@ targets::tar_test("tar_jags_example_file() creates a valid JAGS model file.", {
   data$.join_data <- NULL
   dir <- tempfile()
   dir.create(dir)
+  skip_if_not_installed("rjags")
+  skip_if_not_installed("R2jags")
   msg <- capture.output(
     out <- R2jags::jags(
       data = data,

@@ -265,6 +265,8 @@ tar_jags_rep_run <- function(
   progress.bar = progress.bar,
   refresh = refresh
 ) {
+  targets::tar_assert_package("rjags")
+  targets::tar_assert_package("R2jags")
   out <- purrr::map_dfr(
     .x = data,
     ~tar_jags_rep_run_rep(

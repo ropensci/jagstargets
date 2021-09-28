@@ -17,7 +17,10 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-if (identical(Sys.getenv("NOT_CRAN", unset = "false"), "false")) {
+skip <- identical(Sys.getenv("NOT_CRAN", unset = "false"), "false") ||
+  !requireNamespace("rjags", quietly = TRUE) ||
+  !requireNamespace("R2jags", quietly = TRUE)
+if (skip) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 library(R2jags)

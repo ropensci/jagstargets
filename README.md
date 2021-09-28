@@ -5,7 +5,7 @@
 [![ropensci](https://badges.ropensci.org/425_status.svg)](https://github.com/ropensci/software-review/issues/425)
 [![R
 Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&labelColor=gray)](https://wlandau.github.io/targetopia/)
-[![cran](http://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)
+<!--[![cran](http://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)-->
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/ropensci/jagstargets/workflows/check/badge.svg)](https://github.com/ropensci/jagstargets/actions?query=workflow%3Acheck)
 [![codecov](https://codecov.io/gh/ropensci/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/ropensci/jagstargets)
@@ -52,7 +52,23 @@ vignette](https://docs.ropensci.org/jagstargets/articles/simulation.html).
 
 ## Installation
 
-Install the latest release from CRAN.
+`jagstargets` requires the user to install
+[JAGS](https://mcmc-jags.sourceforge.io/),
+[`rjags`](https://CRAN.R-project.org/package=rjags), and
+[`R2jags`](https://CRAN.R-project.org/package=R2jags) beforehand. You
+can install JAGS from <https://mcmc-jags.sourceforge.io/>, and you can
+install the rest from CRAN.
+
+``` r
+install.packages(c("rjags", "R2jags"))
+#> Installing packages into '/Users/c240390/Library/R/x86_64/4.1/library'
+#> (as 'lib' is unspecified)
+#> 
+#> The downloaded binary packages are in
+#>  /var/folders/k3/q1f45fsn4_13jbn0742d4zj40000gn/T//Rtmpw9rtNY/downloaded_packages
+```
+
+Then, install the latest release from CRAN.
 
 ``` r
 install.packages("jagstargets")
@@ -64,9 +80,6 @@ latest features and patches.
 ``` r
 remotes::install_github("ropensci/jagstargets")
 ```
-
-And if you have not done so already, install JAGS from
-<https://mcmc-jags.sourceforge.io/>.
 
 ## Usage
 
@@ -153,7 +166,7 @@ packages are great resources.
 
 Development is a community effort, and we welcome discussion and
 contribution. By participating in this project, you agree to abide by
-the [code of conduct](hhttps://ropensci.org/code-of-conduct/) and the
+the [code of conduct](https://ropensci.org/code-of-conduct/) and the
 [contributing
 guide](https://github.com/ropensci/jagstargets/blob/main/CONTRIBUTING.md).
 
