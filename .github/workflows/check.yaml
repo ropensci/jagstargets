@@ -79,6 +79,7 @@ jobs:
           sudo -s apt-get install jags
           sudo -s apt-get install libv8-dev
           sudo -s apt-get install libnode-dev
+          sudo -s apt-get install libcurl4-openssl-dev
 
       - name: Install Mac system dependencies
         if: runner.os == 'macOS'
