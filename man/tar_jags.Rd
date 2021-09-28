@@ -56,8 +56,9 @@ as target name suffixes. If \code{jags_files} is a named vector,
 the suffixed will come from \code{names(jags_files)}.}
 
 \item{parameters.to.save}{Model parameters to save, passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{data}{Code to generate the \code{data} list for the JAGS model.
 Optionally include a \code{.join_data} element to join parts of the data
@@ -73,40 +74,49 @@ on the \code{CmdStanFit} object.}
 on the \code{CmdStanFit} object.}
 
 \item{n.cluster}{Number of parallel processes, passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{n.chains}{Number of MCMC chains, passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{n.iter}{Number if iterations (including warmup), passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{n.burnin}{Number of warmup iterations, passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{n.thin}{Thinning interval, passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{jags.module}{Character vector of JAGS modules to load, passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{inits}{Initial values of model parameters, passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{RNGname}{Choice of random number generator, passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{jags.seed}{Seeds to apply to JAGS, passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{stdout}{Character of length 1, file path to write the stdout stream
 of the model when it runs. Set to \code{NULL} to print to the console.
@@ -119,12 +129,14 @@ Set to \code{R.utils::nullfile()} to suppress stderr.
 Does not apply to messages, warnings, or errors.}
 
 \item{progress.bar}{Type of progress bar, passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{refresh}{Frequency for refreshing the progress bar, passed to
-\code{R2jags::jags()}. See the argument documentation of the
-\code{R2jags::jags()} help file for details.}
+\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
+See the argument documentation of the
+\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{draws}{Logical, whether to create a target for posterior draws.
 Saves draws as a compressed \code{posterior::as_draws_df()} \code{tibble}.
