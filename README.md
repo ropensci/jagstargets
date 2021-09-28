@@ -1,11 +1,11 @@
 
 # jagstargets <img src='man/figures/logo.png' align="right" height="139"/>
 
+[![JOSS](https://joss.theoj.org/papers/759f48d9ae7bc57e318e2d0ecc00569e/status.svg)](https://joss.theoj.org/papers/759f48d9ae7bc57e318e2d0ecc00569e)
+[![ropensci](https://badges.ropensci.org/425_status.svg)](https://github.com/ropensci/software-review/issues/425)
 [![R
 Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&labelColor=gray)](https://wlandau.github.io/targetopia/)
-<!--
 [![cran](http://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)
--->
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/ropensci/jagstargets/workflows/check/badge.svg)](https://github.com/ropensci/jagstargets/actions?query=workflow%3Acheck)
 [![codecov](https://codecov.io/gh/ropensci/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/ropensci/jagstargets)
