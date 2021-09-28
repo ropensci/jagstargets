@@ -63,7 +63,7 @@ Suggests:
   testthat (>= 3.0.0),
   tidyr (>= 1.1.2),
   visNetwork (>= 2.0.9)
-SystemRequirements: JAGS 4.x.y (http://mcmc-jags.sourceforge.net)
+SystemRequirements: JAGS 4.x.y (https://mcmc-jags.sourceforge.net)
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)

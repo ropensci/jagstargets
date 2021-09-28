@@ -5,6 +5,8 @@
 # summary output from a JAGS model fit.
 # This test checks if the output is formatted correctly.
 targets::tar_test("tar_jags_df() with dic", {
+  skip_if_not_installed("rjags")
+  skip_if_not_installed("R2jags")
   tmp <- tempfile()
   expect_false(file.exists(tmp))
   tar_jags_example_file(path = tmp)

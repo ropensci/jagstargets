@@ -62,6 +62,45 @@
 #'   `tools::file_path_sans_ext(basename(jags_files))` will be used
 #'   as target name suffixes. If `jags_files` is a named vector,
 #'   the suffixed will come from `names(jags_files)`.
+#' @param parameters.to.save Model parameters to save, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param n.cluster Number of parallel processes, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param n.chains Number of MCMC chains, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param n.iter Number if iterations (including warmup), passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param n.burnin Number of warmup iterations, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param n.thin Thinning interval, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param jags.module Character vector of JAGS modules to load, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param parameters.to.save Model parameters to save, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param inits Initial values of model parameters, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param RNGname Choice of random number generator, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param jags.seed Seeds to apply to JAGS, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param progress.bar Type of progress bar, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
+#' @param refresh Frequency for refreshing the progress bar, passed to
+#'   `R2jags::jags()`. See the argument documentation of the
+#'   `R2jags::jags()` help file for details.
 #' @param draws Logical, whether to create a target for posterior draws.
 #'   Saves draws as a compressed `posterior::as_draws_df()` `tibble`.
 #'   Convenient, but duplicates storage.

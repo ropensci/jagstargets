@@ -26,46 +26,6 @@ tar_jags_run(
 \arguments{
 \item{jags_lines}{Character vector of lines from a JAGS model file.}
 
-\item{parameters.to.save}{character vector of the names of the
-    parameters to save which should be monitored.}
-
-\item{data}{(1) a vector or list of the names of the data objects used by
-    the model, (2) a (named) list of the data objects themselves, or
-  (3) the name of a "dump" format file containing the data objects,
-   which must end in ".txt", see example below for details.}
-
-\item{inits}{a list with \code{n.chains} elements; each element of the
-    list is itself a list of starting values for the \code{BUGS} model,
-    \emph{or} a function creating (possibly random) initial values. If inits is
-    \code{NULL}, \code{JAGS} will generate initial values for parameters.}
-
-\item{n.cluster}{number of clusters to use to run parallel chains.
-    Default equals n.chains.}
-
-\item{n.chains}{number of Markov chains (default: 3)}
-
-\item{n.iter}{number of total iterations per chain (including burn in;
-    default: 2000)}
-
-\item{n.burnin}{length of burn in, i.e. number of iterations to
-    discard at the beginning. Default is \code{n.iter/2}, that is,
-    discarding the first half of the simulations. If n.burnin is 0,
-    \code{jags()} will run 100 iterations for adaption.}
-
-\item{n.thin}{thinning rate. Must be a positive integer.  Set
-    \code{n.thin} > 1 to save memory and computation time if
-    \code{n.iter} is large.  Default is \code{max(1, floor(n.chains *
-    (n.iter-n.burnin) / 1000))} which will only thin if there are at
-    least 2000 simulations.}
-
-\item{jags.module}{the vector of jags modules to be loaded.  Default are \dQuote{glm} and \dQuote{dic}. Input NULL if you don't want to load any jags module.}
-
-\item{RNGname}{the name for random number generator used in JAGS. There are four RNGS
-  supplied by the base moduale in JAGS: \code{Wichmann-Hill}, \code{Marsaglia-Multicarry},
-  \code{Super-Duper}, \code{Mersenne-Twister}}
-
-\item{jags.seed}{random seed for \code{JAGS}, default is 123.  This function is used for jags.parallell() and does not work for jags().  Use set.seed() instead if you want to produce identical result with jags() }
-
 \item{stdout}{Character of length 1, file path to write the stdout stream
 of the model when it runs. Set to \code{NULL} to print to the console.
 Set to \code{R.utils::nullfile()} to suppress stdout.
@@ -75,14 +35,6 @@ Does not apply to messages, warnings, or errors.}
 of the model when it runs. Set to \code{NULL} to print to the console.
 Set to \code{R.utils::nullfile()} to suppress stderr.
 Does not apply to messages, warnings, or errors.}
-
-\item{progress.bar}{type of progress bar. Possible values are \dQuote{text},
-      \dQuote{gui}, and \dQuote{none}. Type \dQuote{text} is displayed
-      on the R console. Type \dQuote{gui} is a graphical progress bar
-      in a new window. The progress bar is suppressed if \code{progress.bar} is
-      \dQuote{none}}
-
-\item{refresh}{refresh frequency for progress bar, default is \code{n.iter/50}}
 }
 \value{
 An \code{R2jags} output object.

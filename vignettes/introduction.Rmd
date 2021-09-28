@@ -22,8 +22,9 @@ skip <- identical(Sys.getenv("NOT_CRAN", unset = "false"), "false") ||
   !requireNamespace("R2jags", quietly = TRUE)
 if (skip) {
   knitr::opts_chunk$set(eval = FALSE)
+} else {
+  library(R2jags)
 }
-library(R2jags)
 library(dplyr)
 library(targets)
 library(jagstargets)

@@ -14,7 +14,7 @@ navbar:
   - text: R2jags
     href: https://CRAN.R-project.org/package=R2jags
   - text: JAGS
-    href: http://mcmc-jags.sourceforge.net
+    href: https://mcmc-jags.sourceforge.net
   - text: News
     href: news/index.html
   right:

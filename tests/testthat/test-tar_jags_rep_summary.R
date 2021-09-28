@@ -172,6 +172,8 @@ targets::tar_test("tar_jags_rep_summary() with custom summaries", {
 targets::tar_test("join to summaries", {
   skip_on_cran()
   skip_if_not_installed("dplyr")
+  skip_if_not_installed("rjags")
+  skip_if_not_installed("R2jags")
   path <- system.file(
     "join_data.jags",
     package = "jagstargets",
@@ -215,6 +217,8 @@ targets::tar_test("join to summaries", {
 })
 
 targets::tar_test("tar_jags_rep_summary() errors if no JAGS file", {
+  skip_if_not_installed("rjags")
+  skip_if_not_installed("R2jags")
   expect_error(
     tar_jags_rep_summary(
       model,
