@@ -5,7 +5,7 @@
 [![ropensci](https://badges.ropensci.org/425_status.svg)](https://github.com/ropensci/software-review/issues/425)
 [![R
 Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&labelColor=gray)](https://wlandau.github.io/targetopia/)
-<!--[![cran](http://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)-->
+<!--[![cran](https://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)-->
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/ropensci/jagstargets/workflows/check/badge.svg)](https://github.com/ropensci/jagstargets/actions?query=workflow%3Acheck)
 [![codecov](https://codecov.io/gh/ropensci/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/ropensci/jagstargets)
@@ -61,11 +61,6 @@ install the rest from CRAN.
 
 ``` r
 install.packages(c("rjags", "R2jags"))
-#> Installing packages into '/Users/c240390/Library/R/x86_64/4.1/library'
-#> (as 'lib' is unspecified)
-#> 
-#> The downloaded binary packages are in
-#>  /var/folders/k3/q1f45fsn4_13jbn0742d4zj40000gn/T//Rtmpw9rtNY/downloaded_packages
 ```
 
 Then, install the latest release from CRAN.
@@ -78,6 +73,7 @@ Alternatively, install the GitHub development version to access the
 latest features and patches.
 
 ``` r
+install.packages("remotes")
 remotes::install_github("ropensci/jagstargets")
 ```
 

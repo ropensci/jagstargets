@@ -38,7 +38,7 @@ Read the `jagstargets` [introductory vignette](https://docs.ropensci.org/jagstar
 
 `jagstargets` requires the user to install [JAGS](https://mcmc-jags.sourceforge.io/), [`rjags`](https://CRAN.R-project.org/package=rjags), and [`R2jags`](https://CRAN.R-project.org/package=R2jags) beforehand. You can install JAGS from <https://mcmc-jags.sourceforge.io/>, and you can install the rest from CRAN.
 
-```{r}
+```{r, eval = FALSE}
 install.packages(c("rjags", "R2jags"))
 ```
 
@@ -51,10 +51,9 @@ install.packages("jagstargets")
 Alternatively, install the GitHub development version to access the latest features and patches.
 
 ```{r, eval = FALSE}
+install.packages("remotes")
 remotes::install_github("ropensci/jagstargets")
 ```
-
-
 
 ## Usage
 
