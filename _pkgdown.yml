@@ -1,4 +1,7 @@
 destination: docs/
+template:
+  params:
+    mathjax: true
 navbar:
   title: jagstargets
   type: default
