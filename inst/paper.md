@@ -24,7 +24,7 @@ affiliations:
 
 # Statement of need
 
-Bayesian statisticians regularly experiment with models to refine, compare, and understand them [@bayesworkflow]. Each fitted model informs subsequent model-building choices, and even for experienced practitioners, the investigation often leads to final models that differ from the ones originally proposed. Fitting a model usually means applying Markov chain Monte Carlo or a similar method to approximate the full joint posterior distribution of the parameters [@bda3]. Flexible probabilistic programming languages such as JAGS have made model specification quick and straightforward [@jags], but computation time is still a bottleneck. A workflow can take several minutes or hours to run, and in subsequent iterations, researchers struggle to keep the results up to date with frequent changes to the models, code, and data.
+Researchers who perform Bayesian statistics regularly experiment with models to refine, compare, and understand them [@bayesworkflow]. Each fitted model informs subsequent model-building choices, and even for experienced practitioners, the investigation often leads to final models that differ from the ones originally proposed. Fitting a model usually means applying Markov chain Monte Carlo or a similar method to approximate the full joint posterior distribution of the parameters [@bda3]. Flexible probabilistic programming languages such as JAGS have made model specification quick and straightforward [@jags], but computation time is still a bottleneck. A workflow can take several minutes or hours to run, and in subsequent iterations, researchers struggle to keep the results up to date with frequent changes to the models, code, and data.
 
 # Summary
 
