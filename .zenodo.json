@@ -1,0 +1,13 @@
+{
+    "description": "", 
+    "license": "other-open", 
+    "title": "The jagstargets R package: a reproducible workflow framework for Bayesian data analysis with JAGS", 
+    "upload_type": "software", 
+    "creators": [
+        {
+            "name": "William Michael Landau",
+            "affiliation": "Eli Lilly and Company"
+        }
+    ], 
+    "access_right": "open"
+}

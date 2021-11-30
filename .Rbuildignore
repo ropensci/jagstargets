@@ -22,6 +22,7 @@
 ^\.RData$
 ^\.Rhistory$
 ^\.Rproj\.user$
+^\.zenodo\.json$
 ^_pkgdown\.yml$
 ^_targets$
 ^_targets\.R$
