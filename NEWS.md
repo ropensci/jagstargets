@@ -1,6 +1,7 @@
-# jagstargets 0.0.1.9000
+# jagstargets 1.0.0
 
 * Add Zenodo and badge.
+* Fix bibliography capitalization.
 
 # jagstargets 0.0.1
 
