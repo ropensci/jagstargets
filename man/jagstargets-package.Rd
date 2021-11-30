@@ -4,7 +4,7 @@
 \name{jagstargets-package}
 \alias{jagstargets-package}
 \alias{jagstargets}
-\title{targets: Targets for JAGS Workflows}
+\title{jagstargets: Targets for JAGS Workflows}
 \description{
 Bayesian data analysis usually incurs long runtimes
 and cumbersome custom code. A pipeline toolkit tailored to

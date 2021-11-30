@@ -9,7 +9,7 @@ Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&lab
 <!--[![cran](https://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)-->
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/ropensci/jagstargets/workflows/check/badge.svg)](https://github.com/ropensci/jagstargets/actions?query=workflow%3Acheck)
-[![codecov](https://codecov.io/gh/ropensci/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/ropensci/jagstargets)
+[![codecov](https://codecov.io/gh/ropensci/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://app.codecov.io/gh/ropensci/jagstargets)
 [![lint](https://github.com/ropensci/jagstargets/workflows/lint/badge.svg)](https://github.com/ropensci/jagstargets/actions?query=workflow%3Alint)
 
 Bayesian data analysis usually incurs long runtimes and cumbersome
@@ -80,10 +80,30 @@ remotes::install_github("ropensci/jagstargets")
 
 ## Usage
 
-First, write a [`_targets.R`
-file](https://books.ropensci.org/targets/walkthrough.html) that loads
-your packages, defines a function to generate JAGS data, and lists a
-pipeline of targets. The target list can call target factories like
+Begin with one or more models: for example, the simple regression model
+below with response variable *y* and covariate *x*.
+
+<center>
+<img src="./man/figures/model.gif">
+</center>
+
+Next, write a JAGS model file for each model like the `model.jags` file
+below.
+
+``` jags
+model {
+  for (i in 1:n) {
+    y[i] ~ dnorm(x[i] * beta, 1)
+  }
+  beta ~ dnorm(0, 1)
+}
+```
+
+To begin a reproducible analysis pipeline with this model, write a
+[`_targets.R` file](https://books.ropensci.org/targets/walkthrough.html)
+that loads your packages, defines a function to generate JAGS data, and
+lists a pipeline of targets. The target list can call target factories
+like
 [`tar_jags()`](https://docs.ropensci.org/jagstargets/reference/tar_jags.html)
 as well as ordinary targets with
 [`tar_target()`](https://docs.ropensci.org/targets/reference/tar_target.html).
@@ -107,7 +127,7 @@ generate_data <- function() {
 list(
   tar_jags(
     example,
-    jags_files = "x.jags", # You provide this file.
+    jags_files = "model.jags", # You provide this file.
     parameters.to.save = "beta",
     data = generate_data()
   )
@@ -174,8 +194,8 @@ citation("jagstargets")
 #> 
 #> To cite package 'jagstargets' in publications use:
 #> 
-#>   William Michael Landau (NA). jagstargets: Targets for JAGS Workflows.
-#>   https://docs.ropensci.org/jagstargets/,
+#>   William Michael Landau (2021). jagstargets: Targets for JAGS
+#>   Workflows. https://docs.ropensci.org/jagstargets/,
 #>   https://github.com/ropensci/jagstargets.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -183,6 +203,8 @@ citation("jagstargets")
 #>   @Manual{,
 #>     title = {jagstargets: Targets for JAGS Workflows},
 #>     author = {William Michael Landau},
-#>     note = {https://docs.ropensci.org/jagstargets/, https://github.com/ropensci/jagstargets},
+#>     year = {2021},
+#>     note = {https://docs.ropensci.org/jagstargets/,
+#> https://github.com/ropensci/jagstargets},
 #>   }
 ```

@@ -1,4 +1,4 @@
-#' targets: Targets for JAGS Workflows
+#' jagstargets: Targets for JAGS Workflows
 #' @docType package
 #' @description Bayesian data analysis usually incurs long runtimes
 #'   and cumbersome custom code. A pipeline toolkit tailored to
