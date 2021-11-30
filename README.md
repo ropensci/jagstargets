@@ -3,6 +3,7 @@
 
 [![JOSS](https://joss.theoj.org/papers/759f48d9ae7bc57e318e2d0ecc00569e/status.svg)](https://joss.theoj.org/papers/759f48d9ae7bc57e318e2d0ecc00569e)
 [![ropensci](https://badges.ropensci.org/425_status.svg)](https://github.com/ropensci/software-review/issues/425)
+[![DOI](https://zenodo.org/badge/321076424.svg)](https://zenodo.org/badge/latestdoi/321076424)
 [![R
 Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&labelColor=gray)](https://wlandau.github.io/targetopia/)
 <!--[![cran](https://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)-->

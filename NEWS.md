@@ -1,3 +1,7 @@
+# jagstargets 0.0.1.9000
+
+* Add Zenodo and badge.
+
 # jagstargets 0.0.1
 
 * Complete rOpenSci review.
