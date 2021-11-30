@@ -1,5 +1,5 @@
 {
-    "description": "", 
+    "description": "Leverages R packages targets and R2jags to simplify pipeline construction for Bayesian workflows.", 
     "license": "other-open", 
     "title": "The jagstargets R package: a reproducible workflow framework for Bayesian data analysis with JAGS", 
     "upload_type": "software", 
