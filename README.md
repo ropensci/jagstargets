@@ -6,10 +6,10 @@
 [![DOI](https://zenodo.org/badge/321076424.svg)](https://zenodo.org/badge/latestdoi/321076424)
 [![R
 Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&labelColor=gray)](https://wlandau.github.io/targetopia/)
-<!--[![cran](https://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)-->
+[![cran](https://www.r-pkg.org/badges/version/jagstargets)](https://cran.r-project.org/package=jagstargets)
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/ropensci/jagstargets/workflows/check/badge.svg)](https://github.com/ropensci/jagstargets/actions?query=workflow%3Acheck)
-[![codecov](https://codecov.io/gh/ropensci/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://app.codecov.io/gh/ropensci/jagstargets)
+[![codecov](https://codecov.io/gh/ropensci/jagstargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://app.codecov.io/gh/ropensci/gittargets)
 [![lint](https://github.com/ropensci/jagstargets/workflows/lint/badge.svg)](https://github.com/ropensci/jagstargets/actions?query=workflow%3Alint)
 
 Bayesian data analysis usually incurs long runtimes and cumbersome
@@ -192,19 +192,23 @@ guide](https://github.com/ropensci/jagstargets/blob/main/CONTRIBUTING.md).
 ``` r
 citation("jagstargets")
 #> 
-#> To cite package 'jagstargets' in publications use:
+#> To cite jagstargets in publications use:
 #> 
-#>   William Michael Landau (2021). jagstargets: Targets for JAGS
-#>   Workflows. https://docs.ropensci.org/jagstargets/,
-#>   https://github.com/ropensci/jagstargets.
+#>   Landau, W. M., (2021). The jagstargets R package: a reproducible
+#>   workflow framework for Bayesian data analysis with JAGS. Journal of
+#>   Open Source Software, 6(68), 3877,
+#>   https://doi.org/10.21105/joss.03877
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
-#>   @Manual{,
-#>     title = {jagstargets: Targets for JAGS Workflows},
+#>   @Article{,
+#>     title = {The jagstargets R package: a reproducible workflow framework for Bayesian data analysis with JAGS},
 #>     author = {William Michael Landau},
+#>     journal = {Journal of Open Source Software},
 #>     year = {2021},
-#>     note = {https://docs.ropensci.org/jagstargets/,
-#> https://github.com/ropensci/jagstargets},
+#>     volume = {6},
+#>     number = {68},
+#>     pages = {3877},
+#>     url = {https://doi.org/10.21105/joss.03877},
 #>   }
 ```

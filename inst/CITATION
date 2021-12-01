@@ -1,0 +1,20 @@
+citHeader("To cite jagstargets in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "The jagstargets R package: a reproducible workflow framework for Bayesian data analysis with JAGS",
+  author   = "William Michael Landau",
+  journal  = "Journal of Open Source Software",
+  year     = 2021,
+  volume   = 6,
+  number   = 68,
+  pages    = 3877,
+  url      = "https://doi.org/10.21105/joss.03877",
+  textVersion = paste(
+    "Landau, W. M., (2021).",
+    "The jagstargets R package:",
+    "a reproducible workflow framework for Bayesian data analysis with JAGS.",
+    "Journal of Open Source Software, 6(68), 3877,",
+    "https://doi.org/10.21105/joss.03877"
+  )
+)

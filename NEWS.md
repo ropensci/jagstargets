@@ -1,3 +1,7 @@
+# jagstargets 1.0.1
+
+* Reference JOSS paper.
+
 # jagstargets 1.0.0
 
 * Add Zenodo and badge.
