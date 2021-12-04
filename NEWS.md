@@ -1,5 +1,9 @@
 # jagstargets 1.0.1
 
+* Adjust logo size for README.
+
+# jagstargets 1.0.1
+
 * Reference JOSS paper.
 
 # jagstargets 1.0.0
