@@ -228,6 +228,7 @@ tar_jags <- function(
     command = quote(._jagstargets_file_50e43091),
     packages = character(0),
     format = "file",
+    repository = "local",
     error = error,
     memory = memory,
     garbage_collection = garbage_collection,
