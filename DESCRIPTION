@@ -48,7 +48,7 @@ Imports:
   rjags (>= 4.10),
   rlang (>= 0.4.10),
   stats,
-  targets (>= 0.6.0),
+  targets (>= 0.11.0),
   tarchetypes (>= 0.0.1),
   tibble (>= 3.0.1),
   tools,

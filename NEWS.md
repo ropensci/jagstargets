@@ -1,3 +1,7 @@
+# jagstargets 1.0.1.9000
+
+* Support the `repository` argument for `targets` >= 0.11.0.
+
 # jagstargets 1.0.1
 
 * Adjust logo size for README.
