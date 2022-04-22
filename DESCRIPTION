@@ -13,7 +13,7 @@ Description: Bayesian data analysis usually incurs long runtimes
   For the underlying methodology, please refer
   to the documentation of 'targets' <doi:10.21105/joss.02959> and 'JAGS'
   (Plummer 2003) <https://www.r-project.org/conferences/DSC-2003/Proceedings/Plummer.pdf>.
-Version: 1.0.1.9000
+Version: 1.0.2
 License: MIT + file LICENSE
 URL: https://docs.ropensci.org/jagstargets/, https://github.com/ropensci/jagstargets
 BugReports: https://github.com/ropensci/jagstargets/issues
@@ -48,8 +48,8 @@ Imports:
   rjags (>= 4.10),
   rlang (>= 0.4.10),
   stats,
-  targets (>= 0.11.0),
-  tarchetypes (>= 0.0.1),
+  targets (>= 0.12.0),
+  tarchetypes (>= 0.6.0),
   tibble (>= 3.0.1),
   tools,
   utils,
