@@ -1,4 +1,4 @@
-# jagstargets 1.0.1.9000
+# jagstargets 1.0.2
 
 * Support the `repository` argument for `targets` >= 0.11.0.
 
