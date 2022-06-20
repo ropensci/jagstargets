@@ -1,3 +1,7 @@
+# jagstargets 1.0.2.9000
+
+* Append a `.data_hash` column to target outputs to aid in model comparisons across the same datasets.
+
 # jagstargets 1.0.2
 
 * Support the `repository` argument for `targets` >= 0.11.0.
