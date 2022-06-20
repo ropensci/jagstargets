@@ -28,7 +28,7 @@ tar_jags_df <- function(
   summary_args = NULL
 ) {
   out <- match.arg(output)
-  switch(
+  out <- switch(
     output,
     draws = tar_jags_df_draws(fit),
     summary = tar_jags_df_summary(
@@ -40,6 +40,8 @@ tar_jags_df <- function(
     ),
     dic = tar_jags_df_dic(fit)
   )
+  out$.data <- digest::digest(data, algo = "xxhash64")
+  out
 }
 
 tar_jags_df_draws <- function(fit) {

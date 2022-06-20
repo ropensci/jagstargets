@@ -70,7 +70,7 @@ tar_script({
   library(jagstargets)
   options(crayon.enabled = FALSE)
   tar_option_set(memory = "transient", garbage_collection = TRUE)
-  generate_data <- function (n = 10L) {
+  generate_data <- function(n = 10L) {
     beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
     x <- seq(from = -1, to = 1, length.out = n)
     y <- stats::rnorm(n, beta[1] + x * beta[2], 1)
@@ -104,7 +104,7 @@ options(crayon.enabled = FALSE)
 # Use computer memory more sparingly:
 tar_option_set(memory = "transient", garbage_collection = TRUE)
 
-generate_data <- function (n = 10L) {
+generate_data <- function(n = 10L) {
   beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
   x <- seq(from = -1, to = 1, length.out = n)
   y <- stats::rnorm(n, beta[1] + x * beta[2], 1)
@@ -172,7 +172,7 @@ tar_script({
     memory = "transient",
     garbage_collection = TRUE
   )
-  generate_data <- function (n = 10L) {
+  generate_data <- function(n = 10L) {
     beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
     x <- seq(from = -1, to = 1, length.out = n)
     y <- stats::rnorm(n, beta[1] + x * beta[2], 1)
@@ -222,7 +222,7 @@ tar_option_set(
   garbage_collection = TRUE # memory efficiency
 )
 
-generate_data <- function (n = 10L) {
+generate_data <- function(n = 10L) {
   beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
   x <- seq(from = -1, to = 1, length.out = n)
   y <- stats::rnorm(n, beta[1] + x * beta[2], 1)
@@ -281,7 +281,7 @@ tar_read(coverage)
 ```{r}
 lines <- "model {
   for (i in 1:n) {
-    y[i] ~ dnorm(beta[1] + x[i] * x[i] * beta[2], 1) # Regress on x^2 instead of x.
+    y[i] ~ dnorm(beta[1] + x[i] * x[i] * beta[2], 1) # Regress on x^2, not x.
   }
   for (i in 1:2) {
     beta[i] ~ dnorm(0, 1)
@@ -302,7 +302,7 @@ tar_script({
     memory = "transient",
     garbage_collection = TRUE
   )
-  generate_data <- function (n = 10L) {
+  generate_data <- function(n = 10L) {
     beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
     x <- seq(from = -1, to = 1, length.out = n)
     y <- stats::rnorm(n, beta[1] + x * beta[2], 1)
@@ -349,7 +349,7 @@ tar_option_set(
   garbage_collection = TRUE # memory efficiency
 )
 
-generate_data <- function (n = 10L) {
+generate_data <- function(n = 10L) {
   beta <- stats::rnorm(n = 2, mean = 0, sd = 1)
   x <- seq(from = -1, to = 1, length.out = n)
   y <- stats::rnorm(n, beta[1] + x * beta[2], 1)

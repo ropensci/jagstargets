@@ -80,7 +80,7 @@ targets::tar_test("tar_jags_df() with dic", {
   # dic
   dic <- tar_jags_df(out, data = data, "dic")
   expect_equal(nrow(dic), 1)
-  expect_equal(sort(colnames(dic)), sort(c("dic", "pD")))
+  expect_equal(sort(colnames(dic)), sort(c(".data", "dic", "pD")))
   # invalid output
   expect_error(tar_jags_df(out, "nope"))
 })
