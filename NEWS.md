@@ -1,4 +1,4 @@
-# jagstargets 1.0.2.9000
+# jagstargets 1.0.3
 
 * Append a `.dataset_id` column to target outputs to aid in model comparisons across the same datasets.
 
