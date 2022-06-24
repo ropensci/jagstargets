@@ -57,26 +57,37 @@ targets::tar_test("tar_jags_rep_summary()", {
   rownames(exp) <- NULL
   expect_equal(out, exp)
   # The pipeline produces correctly formatted output.
+  # data
   capture.output(targets::tar_make(callr_function = NULL))
   meta <- tar_meta(starts_with("model_data_"))
   expect_equal(nrow(meta), 2L)
   expect_equal(targets::tar_read(model_file_x), "a.jags")
   expect_equal(targets::tar_read(model_file_y), "b.jags")
   out <- targets::tar_read(model_data)
+  dataset_ids <- c(
+    out[[1]][[1]]$.dataset_id,
+    out[[1]][[2]]$.dataset_id,
+    out[[2]][[1]]$.dataset_id,
+    out[[2]][[2]]$.dataset_id
+  )
+  expect_equal(length(unique(dataset_ids)), 4)
   expect_equal(length(out), 2L)
   out <- out[[2]]
   expect_equal(length(out), 2L)
   out <- out[[2]]
   expect_true(is.list(out))
-  expect_equal(length(out), 4L)
+  expect_equal(length(out), 5L)
   expect_equal(out$n, 10L)
   expect_equal(length(out$x), 10L)
   expect_equal(length(out$y), 10L)
   expect_true(is.numeric(out$x))
   expect_true(is.numeric(out$y))
+  # model
   out1 <- targets::tar_read(model_x)
   out2 <- targets::tar_read(model_y)
   out <- targets::tar_read(model)
+  expect_equal(unique(table(out$.dataset_id)), 2)
+  expect_equal(length(unique(out$.dataset_id)), 4)
   expect_true("beta" %in% out$variable)
   expect_true(all(c("mean", "q5") %in% colnames(out)))
   expect_equal(sort(unique(out$.file)), sort(unique(c("a.jags", "b.jags"))))

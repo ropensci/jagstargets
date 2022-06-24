@@ -40,7 +40,7 @@ tar_jags_df <- function(
     ),
     dic = tar_jags_df_dic(fit)
   )
-  out$.data_hash <- digest::digest(data, algo = "xxhash64")
+  out$.dataset_id <- data$.dataset_id
   out
 }
 

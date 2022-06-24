@@ -96,7 +96,7 @@ tar_jags_rep <- function(
     tidy_eval = tidy_eval
   )
   command_data <- substitute(
-    purrr::map(seq_len(.targets_reps), ~.targets_command),
+    jagstargets::tar_jags_rep_data_batch(.targets_reps, .targets_command),
     env = list(.targets_reps = reps, .targets_command = command_rep)
   )
   args <- list(
@@ -234,6 +234,27 @@ tar_jags_rep <- function(
   out
 }
 
+#' @title Generate a batch of data
+#' @export
+#' @keywords internal
+#' @description Not a user-side function. Do not invoke directly.
+#' @return A list of JAGS datasets containing data and dataset IDs.
+#' @param reps Positive integer of length 1, number of reps to run.
+#' @param command R code to run to generate one dataset.
+#' @examples
+#' tar_jags_rep_data_batch(2, tar_jags_example_data())
+tar_jags_rep_data_batch <- function(reps, command) {
+  envir <- parent.frame()
+  command <- substitute(command)
+  purrr::map(seq_len(reps), ~tar_jags_rep_data_rep(.x, command, envir))
+}
+
+tar_jags_rep_data_rep <- function(rep, command, envir) {
+  out <- eval(command, envir = envir)
+  out$.dataset_id <- paste0(targets::tar_name(), "_", rep)
+  out
+}
+
 #' @title Run a batch of iterations for a jags model
 #'   and return only strategic output.
 #' @export
@@ -331,6 +352,7 @@ tar_jags_rep_run_rep <- function(
   refresh
 ) {
   jags_data <- data
+  jags_data$.dataset_id <- NULL
   jags_data$.join_data <- NULL
   fit <- tar_jags_run(
     jags_lines = jags_lines,
