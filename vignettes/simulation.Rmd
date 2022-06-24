@@ -276,7 +276,7 @@ tar_read(coverage)
 
 ## Multiple models
 
-`tar_jags_rep_mcmc_summary()` and similar functions allow you to supply multiple jags models. If you do, each model will share the the same collection of datasets. Below, we add a new `model2.jags` file to the `jags_files` argument of `tar_jags_rep_mcmc_summary()`. In the coverage summary below, we group by `.name` to compute a coverage statistic for each model.
+`tar_jags_rep_mcmc_summary()` and similar functions allow you to supply multiple jags models. If you do, each model will share the the same collection of datasets, and the `.dataset_id` column of the output allows for custom analyses that compare different models against each other. Below, we add a new `model2.jags` file to the `jags_files` argument of `tar_jags_rep_mcmc_summary()`. In the coverage summary below, we group by `.name` to compute a coverage statistic for each model.
 
 ```{r}
 lines <- "model {
