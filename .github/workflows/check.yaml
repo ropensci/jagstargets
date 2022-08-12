@@ -47,6 +47,10 @@ jobs:
         run: C:\JAGS-4.3.0.exe /S
         shell: cmd
 
+      - name: Install Mac system dependencies
+        if: runner.os == 'macOS'
+        run: brew install jags
+
       - name: Install Linux system dependencies
         if: runner.os == 'Linux'
         run: |
