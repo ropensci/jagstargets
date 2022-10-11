@@ -1,6 +1,6 @@
 # jagstargets 1.0.3.9000
 
-
+* Migrate docs away from deprecated `targets::tar_path()`.
 
 # jagstargets 1.0.3
 
