@@ -380,10 +380,10 @@ tar_jags_rep_run_rep <- function(
   progress.bar,
   refresh
 ) {
+  seed <- jags_data$.seed + 1L
   jags_data <- data
   jags_data$.dataset_id <- NULL
   jags_data$.join_data <- NULL
-  seed <- jags_data$.seed + 1L
   jags_data$.seed <- NULL
   fit <- tar_jags_run(
     jags_lines = jags_lines,
