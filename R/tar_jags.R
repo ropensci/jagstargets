@@ -431,6 +431,7 @@ tar_jags_run <- function(
   writeLines(jags_lines, file)
   envir <- environment()
   requireNamespace("coda")
+  withr::local_seed(jags.seed)
   if (!is.null(stdout)) {
     withr::local_output_sink(new = stdout, append = TRUE)
   }

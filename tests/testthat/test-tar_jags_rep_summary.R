@@ -249,3 +249,77 @@ targets::tar_test("tar_jags_rep_summary() errors if no JAGS file", {
     class = "tar_condition_validate"
   )
 })
+
+targets::tar_test("tar_jags_rep_summary() seed resilience", {
+  skip_on_cran()
+  skip_if_not_installed("dplyr")
+  skip_if_not_installed("rjags")
+  skip_if_not_installed("R2jags")
+  tar_jags_example_file(path = "a.jags")
+  targets::tar_script({
+    list(
+      tar_jags_rep_summary(
+        model,
+        jags_files = c(x = "a.jags"),
+        data = tar_jags_example_data(),
+        parameters.to.save = "beta",
+        variables = "beta",
+        stdout = R.utils::nullfile(),
+        stderr = R.utils::nullfile(),
+        refresh = 0,
+        n.iter = 2e3,
+        n.burnin = 1e3,
+        n.thin = 1,
+        n.chains = 4,
+        batches = 2,
+        reps = 2,
+        combine = TRUE
+      )
+    )
+  })
+  targets::tar_make(callr_function = NULL)
+  data1 <- tar_read(model_data)
+  expect_equal(length(data1), 2L)
+  model1 <- tar_read(model_x)
+  targets::tar_script({
+    list(
+      tar_jags_rep_summary(
+        model,
+        jags_files = c(x = "a.jags"),
+        data = tar_jags_example_data(),
+        parameters.to.save = "beta",
+        variables = "beta",
+        stdout = R.utils::nullfile(),
+        stderr = R.utils::nullfile(),
+        refresh = 0,
+        n.iter = 2e3,
+        n.burnin = 1e3,
+        n.thin = 1,
+        n.chains = 4,
+        batches = 1,
+        reps = 4,
+        combine = TRUE
+      )
+    )
+  })
+  targets::tar_make(callr_function = NULL)
+  data2 <- tar_read(model_data)
+  expect_equal(length(data2), 1L)
+  model2 <- tar_read(model_x)
+  data_list1 <- list(
+    data1[[1]][[1]],
+    data1[[1]][[2]],
+    data1[[2]][[1]],
+    data1[[2]][[2]]
+  )
+  for (index in seq_len(4)) {
+    data_list1[[index]]$.dataset_id <- NULL
+    data2[[1]][[index]]$.dataset_id <- NULL
+  }
+  expect_equal(data_list1, data2[[1]])
+  for (field in c(".dataset_id", ".rep")) {
+    model1[[field]] <- NULL
+    model2[[field]] <- NULL
+  }
+  expect_equal(model1, model2)
+})
