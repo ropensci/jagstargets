@@ -1,4 +1,4 @@
-# jagstargets 1.0.3.9000
+# jagstargets 1.0.4
 
 * Migrate docs away from deprecated `targets::tar_path()`.
 * Implement resilient reps-specific seeds in the `tar_jags_rep*()` functions.
