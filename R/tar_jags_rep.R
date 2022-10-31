@@ -1,6 +1,14 @@
 #' @title Tidy output from multiple MCMCs per model.
 #' @keywords internal
 #' @description Internal function. Users should not invoke directly.
+#' @section Seeds:
+#'   Rep-specific random number generator seeds for the data and models
+#'   are automatically set based on the batch, rep,
+#'   parent target name, and `tar_option_get("seed")`. This ensures
+#'   the rep-specific seeds do not change when you change the batching
+#'   configuration (e.g. 40 batches of 10 reps each vs 20 batches of 20
+#'   reps each). Each data seed is in the `.seed` list element of the output,
+#'   and each JAGS seed is in the .seed column of each JAGS model output.
 #' @return `tar_jags_rep(name = x, jags_files = "y.jags")`
 #'   returns a list of `targets::tar_target()` objects:
 #'   * `x_file_y`: reproducibly track the jags model file.
@@ -12,6 +20,8 @@
 #'     Suppressed if `combine` is `FALSE`.
 #' @inheritParams tar_jags
 #' @inheritParams tar_jags_rep_run
+#' @param jags.seed The `jags.seed` argument of the `tar_jags_rep*()`
+#'   functions is deprecated. See the "Seeds" section for details.
 #' @param batches Number of batches. Each batch runs a model `reps` times.
 #' @param reps Number of replications per batch. Ideally, each rep
 #'   should produce its own random dataset using the code
@@ -50,7 +60,7 @@ tar_jags_rep <- function(
     "Super-Duper",
     "Mersenne-Twister"
   ),
-  jags.seed = 1,
+  jags.seed = NULL,
   stdout = NULL,
   stderr = NULL,
   progress.bar = "text",
@@ -71,6 +81,7 @@ tar_jags_rep <- function(
   retrieval = targets::tar_option_get("retrieval"),
   cue = targets::tar_option_get("cue")
 ) {
+  tar_deprecate_jags_seed(jags.seed)
   envir <- tar_option_get("envir")
   targets::tar_assert_chr(jags_files, "jags_files must be a character vector")
   targets::tar_assert_unique(jags_files, "jags_files must be unique")
@@ -96,8 +107,16 @@ tar_jags_rep <- function(
     tidy_eval = tidy_eval
   )
   command_data <- substitute(
-    jagstargets::tar_jags_rep_data_batch(.targets_reps, .targets_command),
-    env = list(.targets_reps = reps, .targets_command = command_rep)
+    jagstargets::tar_jags_rep_data_batch(
+      .targets_reps,
+      .targets_batch,
+      .targets_command
+    ),
+    env = list(
+      .targets_reps = reps,
+      .targets_batch = sym_batch,
+      .targets_command = command_rep
+    )
   )
   args <- list(
     call_ns("jagstargets", "tar_jags_rep_run"),
@@ -119,7 +138,6 @@ tar_jags_rep <- function(
     jags.module = jags.module,
     inits = inits,
     RNGname = RNGname,
-    jags.seed = jags.seed,
     stdout = stdout,
     stderr = stderr,
     progress.bar = progress.bar,
@@ -240,18 +258,32 @@ tar_jags_rep <- function(
 #' @description Not a user-side function. Do not invoke directly.
 #' @return A list of JAGS datasets containing data and dataset IDs.
 #' @param reps Positive integer of length 1, number of reps to run.
+#' @param batch Positive integer of length 1, index of the current batch.
 #' @param command R code to run to generate one dataset.
 #' @examples
-#' tar_jags_rep_data_batch(2, tar_jags_example_data())
-tar_jags_rep_data_batch <- function(reps, command) {
+#' tar_jags_rep_data_batch(2, 1, tar_jags_example_data())
+tar_jags_rep_data_batch <- function(reps, batch, command) {
   envir <- parent.frame()
   command <- substitute(command)
-  purrr::map(seq_len(reps), ~tar_jags_rep_data_rep(.x, command, envir))
+  purrr::map(
+    seq_len(reps),
+    ~tar_jags_rep_data_rep(.x, reps, batch, command, envir)
+  )
 }
 
-tar_jags_rep_data_rep <- function(rep, command, envir) {
-  out <- eval(command, envir = envir)
+tar_jags_rep_data_rep <- function(rep, reps, batch, command, envir) {
+  name <- targets::tar_definition()$pedigree$parent
+  seed <- produce_seed_rep(name = name, batch = batch, rep = rep, reps = reps)
+  out <- if_any(
+    anyNA(seed),
+    eval(command, envir = envir),
+    withr::with_seed(
+      seed = seed,
+      code = eval(command, envir = envir)
+    )
+  )
   out$.dataset_id <- paste0(targets::tar_name(), "_", rep)
+  out$.seed <- as.integer(seed)
   out
 }
 
@@ -285,7 +317,6 @@ tar_jags_rep_run <- function(
   jags.module = jags.module,
   inits = inits,
   RNGname = RNGname,
-  jags.seed = jags.seed,
   stdout = stdout,
   stderr = stderr,
   progress.bar = progress.bar,
@@ -314,7 +345,6 @@ tar_jags_rep_run <- function(
       jags.module = jags.module,
       inits = inits,
       RNGname = RNGname,
-      jags.seed = jags.seed,
       stdout = stdout,
       stderr = stderr,
       progress.bar = progress.bar,
@@ -345,7 +375,6 @@ tar_jags_rep_run_rep <- function(
   jags.module,
   inits,
   RNGname,
-  jags.seed,
   stdout,
   stderr,
   progress.bar,
@@ -354,6 +383,8 @@ tar_jags_rep_run_rep <- function(
   jags_data <- data
   jags_data$.dataset_id <- NULL
   jags_data$.join_data <- NULL
+  seed <- jags_data$.seed + 1L
+  jags_data$.seed <- NULL
   fit <- tar_jags_run(
     jags_lines = jags_lines,
     parameters.to.save = parameters.to.save,
@@ -366,7 +397,7 @@ tar_jags_rep_run_rep <- function(
     n.thin = n.thin,
     jags.module = jags.module,
     RNGname = RNGname,
-    jags.seed = jags.seed,
+    jags.seed = seed,
     stdout = stdout,
     stderr = stderr,
     progress.bar = progress.bar,
@@ -381,5 +412,20 @@ tar_jags_rep_run_rep <- function(
     summary_args = summary_args
   )
   out$.rep <- digest::digest(runif(1), algo = "xxhash32")
+  out$.seed <- seed
   out
+}
+
+tar_deprecate_jags_seed <- function(seed) {
+  if (is.null(seed)) {
+    return()
+  }
+  targets::tar_warn_deprecate(
+    "The jags.seed argument of the tar_jags_rep*() functions is deprecated. ",
+    "Rep-specific seeds for the data and models are now automatically set ",
+    "based on the batch, rep, parent target name, and ",
+    "tar_option_get(\"seed\"). The data seed is in the `.seed` element ",
+    "of each data list, and the JAGS seed is in the .seed column ",
+    "of the JAGS model output."
+  )
 }

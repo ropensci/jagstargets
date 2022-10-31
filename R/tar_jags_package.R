@@ -13,7 +13,7 @@
 #' @seealso <https://docs.ropensci.org/jagstargets/>, [tar_jags()]
 #' @aliases jagstargets
 #' @importFrom coda mcmc mcmc.list
-#' @importFrom digest digest
+#' @importFrom digest digest digest2int
 #' @importFrom fst read_fst
 #' @importFrom posterior summarize_draws
 #' @importFrom purrr map map_dbl map_dfr
@@ -27,7 +27,7 @@
 #'   tar_deparse_language tar_deparse_safe
 #'   tar_cue tar_dir tar_load tar_name tar_option_get
 #'   tar_read tar_script tar_target tar_target_raw tar_test
-#'   tar_throw_validate tar_tidy_eval
+#'   tar_throw_validate tar_tidy_eval tar_warn_deprecate
 #' @importFrom tarchetypes tar_combine tar_map
 #' @importFrom tibble as_tibble tibble
 #' @importFrom tools file_path_sans_ext

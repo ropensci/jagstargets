@@ -6,6 +6,7 @@
 #' @details The MCMC targets use `R2jags::jags()` if `n.cluster` is `1` and
 #'   `R2jags::jags.parallel()` otherwise. Most arguments to `tar_jags()`
 #'   are forwarded to these functions.
+#' @inheritSection tar_jags_rep Seeds
 #' @return `tar_jags_rep_dic()` returns list of target objects.
 #'   See the "Target objects" section for
 #'   background.
@@ -78,7 +79,7 @@ tar_jags_rep_dic <- function(
     "Super-Duper",
     "Mersenne-Twister"
   ),
-  jags.seed = 123,
+  jags.seed = NULL,
   stdout = NULL,
   stderr = NULL,
   progress.bar = "text",

@@ -4,3 +4,16 @@ list_nonempty <- function(list) {
   })
   list[!index]
 }
+
+produce_seed_rep <- function(name, batch, rep, reps) {
+  seed <- if_any(
+    "seed" %in% names(formals(targets::tar_option_set)),
+    targets::tar_option_get("seed"),
+    0L
+  )
+  if (anyNA(seed)) {
+    return(NA_integer_)
+  }
+  scalar <- paste(name, rep + reps * (batch - 1))
+  digest::digest2int(as.character(scalar), seed = seed)
+}

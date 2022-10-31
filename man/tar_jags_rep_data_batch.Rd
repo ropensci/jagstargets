@@ -4,10 +4,12 @@
 \alias{tar_jags_rep_data_batch}
 \title{Generate a batch of data}
 \usage{
-tar_jags_rep_data_batch(reps, command)
+tar_jags_rep_data_batch(reps, batch, command)
 }
 \arguments{
 \item{reps}{Positive integer of length 1, number of reps to run.}
+
+\item{batch}{Positive integer of length 1, index of the current batch.}
 
 \item{command}{R code to run to generate one dataset.}
 }
@@ -18,6 +20,6 @@ A list of JAGS datasets containing data and dataset IDs.
 Not a user-side function. Do not invoke directly.
 }
 \examples{
-tar_jags_rep_data_batch(2, tar_jags_example_data())
+tar_jags_rep_data_batch(2, 1, tar_jags_example_data())
 }
 \keyword{internal}

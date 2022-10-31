@@ -24,7 +24,6 @@ tar_jags_rep_run(
   jags.module = jags.module,
   inits = inits,
   RNGname = RNGname,
-  jags.seed = jags.seed,
   stdout = stdout,
   stderr = stderr,
   progress.bar = progress.bar,
@@ -98,11 +97,6 @@ See the argument documentation of the
 \code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
 \item{RNGname}{Choice of random number generator, passed to
-\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
-See the argument documentation of the
-\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
-
-\item{jags.seed}{Seeds to apply to JAGS, passed to
 \code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
 See the argument documentation of the
 \code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}

@@ -67,7 +67,7 @@ targets::tar_test("tar_jags_rep_dic()", {
   expect_equal(length(out), 2L)
   out <- out[[2]]
   expect_true(is.list(out))
-  expect_equal(length(out), 5L)
+  expect_equal(length(out), 6L)
   expect_equal(out$n, 10L)
   expect_equal(length(out$x), 10L)
   expect_equal(length(out$y), 10L)

@@ -20,7 +20,7 @@ tar_jags_rep_dic(
   jags.module = c("glm", "dic"),
   inits = NULL,
   RNGname = c("Wichmann-Hill", "Marsaglia-Multicarry", "Super-Duper", "Mersenne-Twister"),
-  jags.seed = 123,
+  jags.seed = NULL,
   stdout = NULL,
   stderr = NULL,
   progress.bar = "text",
@@ -114,10 +114,8 @@ See the argument documentation of the
 See the argument documentation of the
 \code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
 
-\item{jags.seed}{Seeds to apply to JAGS, passed to
-\code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
-See the argument documentation of the
-\code{R2jags::jags()} and \code{R2jags::jags.parallel()} help files for details.}
+\item{jags.seed}{The \code{jags.seed} argument of the \verb{tar_jags_rep*()}
+functions is deprecated. See the "Seeds" section for details.}
 
 \item{stdout}{Character of length 1, file path to write the stdout stream
 of the model when it runs. Set to \code{NULL} to print to the console.
@@ -323,6 +321,17 @@ The MCMC targets use \code{R2jags::jags()} if \code{n.cluster} is \code{1} and
 \code{R2jags::jags.parallel()} otherwise. Most arguments to \code{tar_jags()}
 are forwarded to these functions.
 }
+\section{Seeds}{
+
+Rep-specific random number generator seeds for the data and models
+are automatically set based on the batch, rep,
+parent target name, and \code{tar_option_get("seed")}. This ensures
+the rep-specific seeds do not change when you change the batching
+configuration (e.g. 40 batches of 10 reps each vs 20 batches of 20
+reps each). Each data seed is in the \code{.seed} list element of the output,
+and each JAGS seed is in the .seed column of each JAGS model output.
+}
+
 \section{Target objects}{
 
 Most \code{stantargets} functions are target factories,
