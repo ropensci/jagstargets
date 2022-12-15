@@ -23,7 +23,9 @@
 #'   arguments `data` and `draws` and returns a data frame. Here,
 #'   `data` is the JAGS data list supplied to the model, and `draws`
 #'   is a data frame with one column per model parameter and one row
-#'   per posterior sample. See the simulation-based calibration discussion
+#'   per posterior sample. Any arguments other than `data` and `draws`
+#'   must have valid default values because `jagstargets` will not
+#'   populate them. See the simulation-based calibration discussion
 #'   thread at <https://github.com/ropensci/jagstargets/discussions/31>
 #'   for an example.
 tar_jags_df <- function(
