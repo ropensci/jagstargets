@@ -74,8 +74,9 @@ supplied to \code{data}.}
 arguments \code{data} and \code{draws} and returns a data frame. Here,
 \code{data} is the JAGS data list supplied to the model, and \code{draws}
 is a data frame with one column per model parameter and one row
-per posterior sample. For an extended example, see the simulation-based
-calibration (SBC) section of the simulation vignette.}
+per posterior sample. See the simulation-based calibration discussion
+thread at \url{https://github.com/ropensci/jagstargets/discussions/31}
+for an example.}
 
 \item{combine}{Logical, whether to create a target to
 combine all the model results
