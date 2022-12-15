@@ -103,9 +103,6 @@ tar_jags_rep_summary <- function(
   retrieval = targets::tar_option_get("retrieval"),
   cue = targets::tar_option_get("cue")
 ) {
-  targets::tar_assert_package("rjags")
-  targets::tar_assert_package("R2jags")
-  lapply(jags_files, assert_jags_file)
   tar_jags_rep(
     name = targets::tar_deparse_language(substitute(name)),
     jags_files = jags_files,

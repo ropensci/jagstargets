@@ -128,6 +128,54 @@ targets::tar_test("tar_jags_rep_draws()", {
   expect_equal(sort(out), sort(exp))
 })
 
+targets::tar_test("tar_jags_rep_draws() with transform", {
+  skip_on_cran()
+  skip_if_not_installed("dplyr")
+  skip_if_not_installed("rjags")
+  skip_if_not_installed("R2jags")
+  tar_jags_example_file(path = "a.jags")
+  tar_jags_example_file(path = "b.jags")
+  targets::tar_script({
+    this_transform <- function(data, draws) {
+      out <- utils::head(draws, n = 1)
+      out$truth <- data$.join_data$beta
+      out
+    }
+    list(
+      tar_jags_rep_draws(
+        model,
+        jags_files = c(x = "a.jags", y = "b.jags"),
+        data = tar_jags_example_data(),
+        parameters.to.save = "beta",
+        stdout = R.utils::nullfile(),
+        stderr = R.utils::nullfile(),
+        refresh = 0,
+        n.iter = 2e3,
+        n.burnin = 1e3,
+        n.thin = 1,
+        n.chains = 4,
+        batches = 2,
+        reps = 2,
+        combine = TRUE,
+        transform = this_transform
+      )
+    )
+  })
+  network <- targets::tar_network(callr_function = NULL)
+  edges <- network$edges
+  edges <- edges[edges$from == "this_transform", ]
+  expect_equal(sort(edges$to), sort(c("model_x", "model_y")))
+  targets::tar_make(callr_function = NULL)
+  out <- targets::tar_read(model)
+  expect_equal(nrow(out), 8)
+  expect_true(all(c("beta", "truth") %in% colnames(out)))
+  data <- tar_read(model_data)
+  truth <- unname(unlist(lapply(data, function(x) {
+    unlist(lapply(x, function(y) y$.join_data$beta))
+  })))
+  expect_equal(out$truth, rep(truth, times = 2))
+})
+
 targets::tar_test("tar_jags_rep_draws() correctly errors if no JAGS file", {
   skip_if_not_installed("rjags")
   skip_if_not_installed("R2jags")

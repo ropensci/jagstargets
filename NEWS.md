@@ -1,6 +1,6 @@
 # jagstargets 1.0.4.9000
 
-
+* Add a `transform` argument to `tar_jags_rep()` to support simulation-based calibration.
 
 # jagstargets 1.0.4
 

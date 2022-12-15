@@ -31,7 +31,7 @@
 #' @importFrom tarchetypes tar_combine tar_map
 #' @importFrom tibble as_tibble tibble
 #' @importFrom tools file_path_sans_ext
-#' @importFrom utils capture.output
+#' @importFrom utils capture.output head
 #' @importFrom withr local_dir local_message_sink local_output_sink
 #'   local_seed
 NULL

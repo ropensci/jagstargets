@@ -65,6 +65,7 @@ tar_jags_rep_draws <- function(
   data = list(),
   batches = 1L,
   reps = 1L,
+  transform = NULL,
   combine = FALSE,
   n.cluster = 1,
   n.chains = 3,
@@ -100,9 +101,6 @@ tar_jags_rep_draws <- function(
   retrieval = targets::tar_option_get("retrieval"),
   cue = targets::tar_option_get("cue")
 ) {
-  targets::tar_assert_package("rjags")
-  targets::tar_assert_package("R2jags")
-  lapply(jags_files, assert_jags_file)
   tar_jags_rep(
     name = targets::tar_deparse_language(substitute(name)),
     jags_files = jags_files,
@@ -111,6 +109,7 @@ tar_jags_rep_draws <- function(
     batches = batches,
     reps = reps,
     output = "draws",
+    transform = substitute(transform),
     combine = combine,
     n.cluster = n.cluster,
     n.chains = n.chains,

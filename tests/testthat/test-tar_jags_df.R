@@ -35,7 +35,7 @@ targets::tar_test("tar_jags_df() with dic", {
   expect_true(all(cols %in% colnames(draws)))
   expect_equal(nrow(draws), 300L)
   # summary
-  summary <- tar_jags_df(out, data = data, "summary")
+  summary <- tar_jags_df(out, data = data, output = "summary")
   expect_true(
     all(c("variable", "mean", "sd", "q5", ".join_data") %in% colnames(summary))
   )

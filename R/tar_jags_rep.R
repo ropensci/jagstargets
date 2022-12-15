@@ -46,6 +46,7 @@ tar_jags_rep <- function(
   variables = NULL,
   summaries = NULL,
   summary_args = NULL,
+  transform = NULL,
   combine = TRUE,
   n.cluster = 1,
   n.chains = 3,
@@ -81,11 +82,15 @@ tar_jags_rep <- function(
   retrieval = targets::tar_option_get("retrieval"),
   cue = targets::tar_option_get("cue")
 ) {
+  targets::tar_assert_package("rjags")
+  targets::tar_assert_package("R2jags")
   tar_deprecate_jags_seed(jags.seed)
   envir <- tar_option_get("envir")
   targets::tar_assert_chr(jags_files, "jags_files must be a character vector")
   targets::tar_assert_unique(jags_files, "jags_files must be unique")
+  lapply(jags_files, assert_jags_file)
   output <- match.arg(output)
+  assert_transform(transform)
   name_jags <- produce_jags_names(jags_files)
   name_file <- paste0(name, "_file")
   name_lines <- paste0(name, "_lines")
@@ -128,6 +133,7 @@ tar_jags_rep <- function(
     variables = variables,
     summaries = summaries,
     summary_args = summary_args,
+    transform = transform,
     reps = reps,
     output = output,
     n.cluster = n.cluster,
@@ -307,6 +313,7 @@ tar_jags_rep_run <- function(
   variables = NULL,
   summaries = NULL,
   summary_args = NULL,
+  transform = NULL,
   reps,
   output,
   n.cluster = n.cluster,
@@ -335,6 +342,7 @@ tar_jags_rep_run <- function(
       variables = variables,
       summaries = summaries,
       summary_args = summary_args,
+      transform = transform,
       reps = reps,
       output = output,
       n.cluster = n.cluster,
@@ -365,6 +373,7 @@ tar_jags_rep_run_rep <- function(
   variables,
   summaries,
   summary_args,
+  transform,
   reps,
   output,
   n.cluster,
@@ -409,7 +418,8 @@ tar_jags_rep_run_rep <- function(
     output = output,
     variables = variables,
     summaries = summaries,
-    summary_args = summary_args
+    summary_args = summary_args,
+    transform = transform
   )
   out$.rep <- digest::digest(runif(1), algo = "xxhash32")
   out$.seed <- seed
