@@ -81,7 +81,7 @@ remotes::install_github("ropensci/jagstargets")
 ## Usage
 
 Begin with one or more models: for example, the simple regression model
-below with response variable *y* and covariate *x*.
+below with response variable $y$ and covariate $x$.
 
 <center>
 <img src="./man/figures/model.gif">
@@ -160,6 +160,10 @@ packages easier to use. For details, please read the [introductory
 vignette](https://docs.ropensci.org/jagstargets/articles/introduction.html).
 
 ## Help
+
+Please read the `targets` help guide at
+<https://books.ropensci.org/targets/help.html> to learn how to ask for
+help.
 
 If you have trouble using `jagstargets`, you can ask for help in the
 [GitHub discussions
