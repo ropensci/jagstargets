@@ -1,5 +1,5 @@
 Package: jagstargets
-Title: Targets for JAGS Workflows
+Title: Targets for JAGS Pipelines
 Description: Bayesian data analysis usually incurs long runtimes
   and cumbersome custom code.
   A pipeline toolkit tailored to Bayesian statisticians,
