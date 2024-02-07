@@ -26,17 +26,17 @@ navbar:
 reference:
 - title: Help
   contents:
-  - '`jagstargets-package`'
+  - 'jagstargets-package'
 - title: Examples
   contents:
-  - '`tar_jags_example_data`'
-  - '`tar_jags_example_file`'
+  - 'tar_jags_example_data'
+  - 'tar_jags_example_file'
 - title: MCMC
   contents:
-  - '`tar_jags`'
-  - '`tar_jags_rep_dic`'
-  - '`tar_jags_rep_draws`'
-  - '`tar_jags_rep_summary`'
+  - 'tar_jags'
+  - 'tar_jags_rep_dic'
+  - 'tar_jags_rep_draws'
+  - 'tar_jags_rep_summary'
 articles:
   - title: MCMC
     desc: >
