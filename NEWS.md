@@ -1,6 +1,7 @@
-# jagstargets 1.1.0.9000
+# jagstargets 1.1.0.9001 (development)
 
-
+* Add the new `description` arguments of `tar_target()` (`targets >= 1.5.1.9001).
+* Append model file information to the target descriptions using `tar_map()` (`tarchetypes` >= 0.7.12.9001).
 
 # jagstargets 1.1.0
 

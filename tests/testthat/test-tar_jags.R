@@ -26,7 +26,7 @@ targets::tar_test("tar_jags()", {
         parameters.to.save = "beta",
         n.iter = 2e3,
         n.burnin = 1e3,
-       data = test_data()
+        data = test_data()
       )
     )
   })

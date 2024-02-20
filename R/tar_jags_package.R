@@ -1,5 +1,4 @@
 #' jagstargets: Targets for JAGS Workflows
-#' @docType package
 #' @description Bayesian data analysis usually incurs long runtimes
 #'   and cumbersome custom code. A pipeline toolkit tailored to
 #'   Bayesian statisticians, the `jagstargets` R package leverages
@@ -30,6 +29,7 @@
 #'   tar_throw_validate tar_tidy_eval tar_warn_deprecate
 #' @importFrom tarchetypes tar_combine tar_map
 #' @importFrom tibble as_tibble tibble
+#' @importFrom tidyselect any_of
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils capture.output head
 #' @importFrom withr local_dir local_message_sink local_output_sink

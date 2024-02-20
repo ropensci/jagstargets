@@ -42,7 +42,8 @@ tar_jags_rep_summary(
   resources = targets::tar_option_get("resources"),
   storage = targets::tar_option_get("storage"),
   retrieval = targets::tar_option_get("retrieval"),
-  cue = targets::tar_option_get("cue")
+  cue = targets::tar_option_get("cue"),
+  description = targets::tar_option_get("description")
 )
 }
 \arguments{
@@ -157,7 +158,7 @@ when interpreting \code{command} and \code{pattern}. If \code{TRUE}, you can use
 the values of global objects.}
 
 \item{packages}{Character vector of packages to load right before
-the target builds or the output data is reloaded for
+the target runs or the output data is reloaded for
 downstream targets. Use \code{tar_option_set()} to set packages
 globally for all subsequent targets you define.}
 
@@ -235,14 +236,17 @@ and the latter conserves local storage.}
 \item{garbage_collection}{Logical, whether to run \code{base::gc()}
 just before the target runs.}
 
-\item{deployment}{Character of length 1, only relevant to
-\code{\link[targets:tar_make_clustermq]{tar_make_clustermq()}} and \code{\link[targets:tar_make_future]{tar_make_future()}}. If \code{"worker"},
-the target builds on a parallel worker. If \code{"main"},
-the target builds on the host machine / process managing the pipeline.}
+\item{deployment}{Character of length 1. If \code{deployment} is
+\code{"main"}, then the target will run on the central controlling R process.
+Otherwise, if \code{deployment} is \code{"worker"} and you set up the pipeline
+with distributed/parallel computing, then
+the target runs on a parallel worker. For more on distributed/parallel
+computing in \code{targets}, please visit
+\url{https://books.ropensci.org/targets/crew.html}.}
 
 \item{priority}{Numeric of length 1 between 0 and 1. Controls which
 targets get deployed first when multiple competing targets are ready
-simultaneously. Targets with priorities closer to 1 get built earlier
+simultaneously. Targets with priorities closer to 1 get dispatched earlier
 (and polled earlier in \code{\link[targets:tar_make_future]{tar_make_future()}}).}
 
 \item{resources}{Object returned by \code{tar_resources()}
@@ -286,7 +290,7 @@ is completely unnecessary if \code{format} is \code{"file"}.
 Must be one of the following values:
 \itemize{
 \item \code{"main"}: the target's dependencies are loaded on the host machine
-and sent to the worker before the target builds.
+and sent to the worker before the target runs.
 \item \code{"worker"}: the worker loads the targets dependencies.
 \item \code{"none"}: the dependencies are not loaded at all.
 This choice is almost never recommended. It is only for
@@ -296,6 +300,15 @@ explicitly from another language.
 
 \item{cue}{An optional object from \code{tar_cue()} to customize the
 rules that decide whether the target is up to date.}
+
+\item{description}{Character of length 1, a custom free-form human-readable
+text description of the target. Descriptions appear as target labels
+in functions like \code{\link[targets:tar_manifest]{tar_manifest()}} and \code{\link[targets:tar_visnetwork]{tar_visnetwork()}},
+and they let you select subsets of targets for the \code{names} argument of
+functions like \code{\link[targets:tar_make]{tar_make()}}. For example,
+\code{tar_manifest(names = tar_described_as(starts_with("survival model")))}
+lists all the targets whose descriptions start with the character
+string \code{"survival model"}.}
 }
 \value{
 \code{tar_jags_rep_summary()} returns list of target objects.

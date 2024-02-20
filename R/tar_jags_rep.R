@@ -80,7 +80,8 @@ tar_jags_rep <- function(
   resources = targets::tar_option_get("resources"),
   storage = targets::tar_option_get("storage"),
   retrieval = targets::tar_option_get("retrieval"),
-  cue = targets::tar_option_get("cue")
+  cue = targets::tar_option_get("cue"),
+  description = targets::tar_option_get("description")
 ) {
   targets::tar_assert_package("rjags")
   targets::tar_assert_package("R2jags")
@@ -163,7 +164,8 @@ tar_jags_rep <- function(
     garbage_collection = garbage_collection,
     deployment = "main",
     priority = priority,
-    cue = cue
+    cue = cue,
+    description = description
   )
   target_lines <- targets::tar_target_raw(
     name = name_lines,
@@ -174,7 +176,8 @@ tar_jags_rep <- function(
     garbage_collection = garbage_collection,
     deployment = "main",
     priority = priority,
-    cue = cue
+    cue = cue,
+    description = description
   )
   target_batch <- targets::tar_target_raw(
     name = name_batch,
@@ -185,7 +188,8 @@ tar_jags_rep <- function(
     garbage_collection = garbage_collection,
     deployment = "main",
     priority = priority,
-    cue = cue
+    cue = cue,
+    description = description
   )
   target_data <- targets::tar_target_raw(
     name = name_data,
@@ -201,7 +205,8 @@ tar_jags_rep <- function(
     garbage_collection = garbage_collection,
     deployment = deployment,
     priority = priority,
-    cue = cue
+    cue = cue,
+    description = description
   )
   target_mcmc <- targets::tar_target_raw(
     name = name,
@@ -218,7 +223,8 @@ tar_jags_rep <- function(
     resources = resources,
     storage = storage,
     retrieval = retrieval,
-    cue = cue
+    cue = cue,
+    description = description
   )
   out <- list(target_file, target_lines, target_mcmc)
   out <- list_nonempty(out)
@@ -229,7 +235,8 @@ tar_jags_rep <- function(
   )
   out <- tarchetypes::tar_map(
     values = values,
-    names = ._jagstargets_name_50e43091,
+    names = tidyselect::any_of("._jagstargets_name_50e43091"),
+    descriptions = tidyselect::any_of("._jagstargets_file_50e43091"),
     unlist = TRUE,
     out
   )
@@ -252,7 +259,8 @@ tar_jags_rep <- function(
       resources = resources,
       storage = "main",
       retrieval = "main",
-      cue = cue
+      cue = cue,
+      description = description
     )
   }
   out

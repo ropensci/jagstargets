@@ -18,7 +18,7 @@ targets::tar_test("tar_jags_rep_summary()", {
       tar_jags_rep_summary(
         model,
         jags_files = c(x = "a.jags", y = "b.jags"),
-       data = tar_jags_example_data(),
+        data = tar_jags_example_data(),
         parameters.to.save = "beta",
         variables = "beta",
         stdout = R.utils::nullfile(),

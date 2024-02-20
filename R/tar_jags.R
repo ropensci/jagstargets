@@ -144,7 +144,8 @@ tar_jags <- function(
   resources = targets::tar_option_get("resources"),
   storage = targets::tar_option_get("storage"),
   retrieval = targets::tar_option_get("retrieval"),
-  cue = targets::tar_option_get("cue")
+  cue = targets::tar_option_get("cue"),
+  description = targets::tar_option_get("description")
 ) {
   targets::tar_assert_package("rjags")
   targets::tar_assert_package("R2jags")
@@ -234,7 +235,8 @@ tar_jags <- function(
     garbage_collection = garbage_collection,
     deployment = "main",
     priority = priority,
-    cue = cue
+    cue = cue,
+    description = description
   )
   target_object_lines <- targets::tar_target_raw(
     name = name_lines,
@@ -245,7 +247,8 @@ tar_jags <- function(
     garbage_collection = garbage_collection,
     deployment = "main",
     priority = priority,
-    cue = cue
+    cue = cue,
+    description = description
   )
   target_object_data <- targets::tar_target_raw(
     name = name_data,
@@ -259,7 +262,8 @@ tar_jags <- function(
     garbage_collection = garbage_collection,
     deployment = deployment,
     priority = priority,
-    cue = cue
+    cue = cue,
+    description = description
   )
   target_object_mcmc <- targets::tar_target_raw(
     name = name_mcmc,
@@ -275,7 +279,8 @@ tar_jags <- function(
     resources = resources,
     storage = storage,
     retrieval = retrieval,
-    cue = cue
+    cue = cue,
+    description = description
   )
   target_object_draws <- targets::tar_target_raw(
     name = name_draws,
@@ -288,7 +293,8 @@ tar_jags <- function(
     garbage_collection = garbage_collection,
     deployment = deployment,
     priority = priority,
-    cue = cue
+    cue = cue,
+    description = description
   )
   target_object_summary <- targets::tar_target_raw(
     name = name_summary,
@@ -301,7 +307,8 @@ tar_jags <- function(
     garbage_collection = garbage_collection,
     deployment = deployment,
     priority = priority,
-    cue = cue
+    cue = cue,
+    description = description
   )
   target_object_dic <- targets::tar_target_raw(
     name = name_dic,
@@ -314,7 +321,8 @@ tar_jags <- function(
     garbage_collection = garbage_collection,
     deployment = deployment,
     priority = priority,
-    cue = cue
+    cue = cue,
+    description = description
   )
   out <- list(
     target_object_file,
@@ -331,7 +339,8 @@ tar_jags <- function(
   )
   out <- tarchetypes::tar_map(
     values = values,
-    names = ._jagstargets_name_50e43091,
+    names = tidyselect::any_of("._jagstargets_name_50e43091"),
+    descriptions = tidyselect::any_of("._jagstargets_file_50e43091"),
     unlist = TRUE,
     out
   )
