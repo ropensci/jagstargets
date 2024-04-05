@@ -429,7 +429,7 @@ tar_jags_rep_run_rep <- function(
     summary_args = summary_args,
     transform = transform
   )
-  out$.rep <- digest::digest(runif(1), algo = "xxhash32")
+  out$.rep <- secretbase::siphash13(runif(1))
   out$.seed <- seed
   out
 }

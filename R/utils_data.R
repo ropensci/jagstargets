@@ -15,5 +15,5 @@ produce_seed_rep <- function(name, batch, rep, reps) {
     return(NA_integer_)
   }
   scalar <- paste(name, rep + reps * (batch - 1))
-  digest::digest2int(as.character(scalar), seed = seed)
+  targets::tar_seed_create(as.character(scalar), global_seed = seed)
 }
