@@ -1,4 +1,8 @@
-# jagstargets 1.2.0.9000
+# jagstargets 1.2.0.9000 (development)
+
+
+
+# jagstargets 1.2.0
 
 ## Invalidating changes
 
