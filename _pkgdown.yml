@@ -5,24 +5,19 @@ template:
 navbar:
   title: jagstargets
   type: default
-  left:
-  - icon: fa-home fa-lg
-    href: index.html
-  - text: Functions
-    href: reference/index.html
-  - text: Vignettes
-    href: articles/index.html
-  - text: targets
-    href: https://docs.ropensci.org/targets
-  - text: R2jags
-    href: https://CRAN.R-project.org/package=R2jags
-  - text: JAGS
-    href: https://mcmc-jags.sourceforge.net
-  - text: News
-    href: news/index.html
-  right:
-  - icon: fa-github fa-lg
-    href: https://github.com/ropensci/jagstargets
+  components:
+    targets:
+      text: targets
+      href: https://docs.ropensci.org/targets
+    R2jags:
+      text: R2jags
+      href: https://CRAN.R-project.org/package=R2jags
+    JAGS:
+      text: JAGS
+      href: https://mcmc-jags.sourceforge.net
+  structure:
+    left: [home, reference, articles, targets, R2jags, JAGS, news]
+    right: [search, github]
 reference:
 - title: Help
   contents:
