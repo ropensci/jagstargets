@@ -1,7 +1,6 @@
 destination: docs/
 template:
-  params:
-    mathjax: true
+  math-rendering: mathjax
 navbar:
   title: jagstargets
   type: default
@@ -17,7 +16,7 @@ navbar:
       href: https://mcmc-jags.sourceforge.net
   structure:
     left: [home, reference, articles, targets, R2jags, JAGS, news]
-    right: [search, github]
+    right: [search, github, lightswitch]
 reference:
 - title: Help
   contents:
