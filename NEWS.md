@@ -1,6 +1,6 @@
 # jagstargets 1.2.1
 
-* Return `pV` instead of `pD` in DIC info (#35).
+* Return `pV` instead of `pD` in DIC info (#35, @giabaio).
 
 # jagstargets 1.2.0
 
