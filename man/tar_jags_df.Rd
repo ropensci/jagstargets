@@ -23,7 +23,7 @@ tar_jags_df(
 to return: \code{"draws"} for MCMC samples (which could take up a lot of space)
 \code{"summary"} for lightweight posterior summary statistics,
 and \code{"dic"} for the overall deviance information criterion
-and effective number of parameters}
+and effective number of parameters.}
 
 \item{variables}{Character vector of model parameter names.
 The output posterior summaries are restricted to these variables.}

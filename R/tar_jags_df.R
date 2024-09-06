@@ -12,7 +12,7 @@
 #'   to return: `"draws"` for MCMC samples (which could take up a lot of space)
 #'   `"summary"` for lightweight posterior summary statistics,
 #'   and `"dic"` for the overall deviance information criterion
-#'   and effective number of parameters
+#'   and effective number of parameters.
 #' @param summaries List of summary functions passed to `...` in
 #'   `posterior::summarize_draws()` through `$summary()`
 #'   on the `CmdStanFit` object.
@@ -115,6 +115,6 @@ join_data_scalar <- function(text, data) {
 tar_jags_df_dic <- function(fit) {
   tibble::tibble(
     dic = fit$BUGSoutput$DIC,
-    pD = fit$BUGSoutput$pD
+    pV = fit$BUGSoutput$pV
   )
 }

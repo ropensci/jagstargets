@@ -79,7 +79,7 @@ supplied to \code{data}.}
 to return: \code{"draws"} for MCMC samples (which could take up a lot of space)
 \code{"summary"} for lightweight posterior summary statistics,
 and \code{"dic"} for the overall deviance information criterion
-and effective number of parameters}
+and effective number of parameters.}
 
 \item{variables}{Character vector of model parameter names.
 The output posterior summaries are restricted to these variables.}
@@ -209,6 +209,8 @@ for details for instructions.
 See the cloud storage section of
 \url{https://books.ropensci.org/targets/data.html}
 for details for instructions.
+\item A character string from \code{\link[targets:tar_repository_cas]{tar_repository_cas()}} for content-addressable
+storage.
 }
 
 Note: if \code{repository} is not \code{"local"} and \code{format} is \code{"file"}

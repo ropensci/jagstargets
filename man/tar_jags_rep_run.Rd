@@ -70,7 +70,7 @@ for an example.}
 to return: \code{"draws"} for MCMC samples (which could take up a lot of space)
 \code{"summary"} for lightweight posterior summary statistics,
 and \code{"dic"} for the overall deviance information criterion
-and effective number of parameters}
+and effective number of parameters.}
 
 \item{n.cluster}{Number of parallel processes, passed to
 \code{R2jags::jags()} or \code{R2jags::jags.parallel()}.
