@@ -15,6 +15,7 @@
 #' @importFrom fst read_fst
 #' @importFrom posterior summarize_draws
 #' @importFrom purrr map map_dbl map_dfr
+#' @importFrom qs2 qs_save
 #' @importFrom rlang expr quo_squash
 #' @importFrom secretbase siphash13
 #' @importFrom stats rnorm runif

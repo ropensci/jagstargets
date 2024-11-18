@@ -1,6 +1,6 @@
 # jagstargets 1.2.2
 
-* Suggest `qs2`.
+* Use `qs2`.
 
 # jagstargets 1.2.1
 
