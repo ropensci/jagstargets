@@ -20,6 +20,8 @@ A list of JAGS datasets containing data and dataset IDs.
 Not a user-side function. Do not invoke directly.
 }
 \examples{
+if (identical(Sys.getenv("TAR_JAGS_EXAMPLES"), "true")) {
 tar_jags_rep_data_batch(2, 1, tar_jags_example_data())
+}
 }
 \keyword{internal}

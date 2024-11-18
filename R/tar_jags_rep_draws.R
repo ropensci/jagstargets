@@ -34,7 +34,7 @@
 #' @inheritSection tar_jags Target objects
 #' @inheritParams tar_jags_rep
 #' @examples
-#' if (requireNamespace("R2jags", quietly = TRUE)) {
+#' if (identical(Sys.getenv("TAR_JAGS_EXAMPLES"), "true")) {
 #' targets::tar_dir({ # tar_dir() runs code from a temporary directory.
 #' targets::tar_script({
 #' library(jagstargets)

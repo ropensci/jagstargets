@@ -275,7 +275,9 @@ tar_jags_rep <- function(
 #' @param batch Positive integer of length 1, index of the current batch.
 #' @param command R code to run to generate one dataset.
 #' @examples
+#' if (identical(Sys.getenv("TAR_JAGS_EXAMPLES"), "true")) {
 #' tar_jags_rep_data_batch(2, 1, tar_jags_example_data())
+#' }
 tar_jags_rep_data_batch <- function(reps, batch, command) {
   envir <- parent.frame()
   command <- substitute(command)

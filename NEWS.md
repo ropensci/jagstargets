@@ -1,6 +1,6 @@
-# jagstargets 1.2.1.9000 (development)
+# jagstargets 1.2.2
 
-
+* Suggest `qs2`.
 
 # jagstargets 1.2.1
 
