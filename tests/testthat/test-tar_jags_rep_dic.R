@@ -7,10 +7,7 @@
 # checks that the pipeline is correctly constructed
 # and the output is correctly formatted.
 targets::tar_test("tar_jags_rep_dic()", {
-  skip_if_not_installed("rjags")
-  skip_if_not_installed("R2jags")
-  skip_on_cran()
-  skip_if_not_installed("dplyr")
+  skips()
   tar_jags_example_file(path = "a.jags")
   tar_jags_example_file(path = "b.jags")
   targets::tar_script({
@@ -129,8 +126,7 @@ targets::tar_test("tar_jags_rep_dic()", {
 })
 
 targets::tar_test("tar_jags_rep_dic() errors correctly if no JAGS file", {
-  skip_if_not_installed("rjags")
-  skip_if_not_installed("R2jags")
+  skips()
   expect_error(
     tar_jags_rep_dic(
       model,

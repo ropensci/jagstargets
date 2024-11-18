@@ -20,7 +20,7 @@ targets::tar_test("list_nonempty() removes empty list elements", {
 })
 
 targets::tar_test("produce_seed_rep()", {
-  skip_on_cran()
+  skips()
   skip_if(!("seed" %in% names(formals(targets::tar_option_set))))
   on.exit(targets::tar_option_reset())
   targets::tar_option_set(seed = 0L)

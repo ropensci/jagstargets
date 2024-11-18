@@ -7,10 +7,7 @@
 # This test checks that the pipeline is correctly constructed
 # and the output is correctly formatted.
 targets::tar_test("tar_jags()", {
-  skip_on_cran()
-  skip_if_not_installed("dplyr")
-  skip_if_not_installed("rjags")
-  skip_if_not_installed("R2jags")
+  skips()
   tar_jags_example_file(path = "a.jags")
   tar_jags_example_file(path = "b.jags")
   targets::tar_script({
@@ -153,10 +150,7 @@ targets::tar_test("tar_jags()", {
 })
 
 targets::tar_test("tar_jags() can produced user-defined MCMC summaries", {
-  skip_on_cran()
-  skip_if_not_installed("dplyr")
-  skip_if_not_installed("rjags")
-  skip_if_not_installed("R2jags")
+  skips()
   tar_jags_example_file(path = "a.jags")
   tar_jags_example_file(path = "b.jags")
   targets::tar_script({
@@ -188,6 +182,7 @@ targets::tar_test("tar_jags() can produced user-defined MCMC summaries", {
 })
 
 targets::tar_test("tar_jags() errors is no JAGS file", {
+  skips()
   expect_error(
     tar_jags(
       model,
