@@ -1,3 +1,7 @@
+# jagstargets 1.2.3
+
+* Add R-multiverse topic.
+
 # jagstargets 1.2.2
 
 * Use `qs2`.
